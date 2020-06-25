@@ -1,0 +1,812 @@
+<template>
+    <div>
+        <!-- Bnner Section -->
+        <section class="banner-section-three" v-if="sliders.length > 0">
+            <div class="banner-carousel-two owl-carousel owl-theme" >
+                <div class="slide-item" v-for="slide in sliders" :style="`background-image: url(${$root.asset(slide.image)});`">
+                    <div class="auto-container">
+                        <div class="content-box clearfix">
+                            <div class="inner-box">
+                                <h4 class="title" >{{slide.subtitle}}</h4>
+                                <h2>{{slide.title}}</h2>
+                                <div class="text">
+                                    {{slide.content}}
+                                </div>
+                                <div class="link-box"><a href="about.html">View Details</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-box">
+                <div class="auto-container">
+                    <div class=" clearfix" style="position: relative; padding: 35px 0;">
+                        <ul class="social-links clearfix">
+                            <li v-for="socmed in socialMedia">
+                                <a :href="socmed.link" target="_BLANK">
+                                    <span :class="socmed.icon_class"></span> {{socmed.name}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Bnner Section -->
+
+        <!-- Specialize Section -->
+        <section class="specialize-section-two">
+            <div class="auto-container">
+                <div class="row">
+                    <!-- Title Column -->
+                    <div class="title-column col-xl-5 col-lg-12 col-md-12 col-sm-12  wow fadeInUp animated">
+                        <div class="inner-column">
+                            <div class="sec-title">
+                                <span class="float-text">Prefered</span>
+                                <h2>Prefered Products</h2>
+                            </div>
+
+                            <div class="text-box">
+                                <h4>{{preferedTitle}}</h4>
+                                <div v-html="preferedContent"></div>
+                            </div>
+                            <div class="link-box">
+                                <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel Column -->
+                    <div class="carousel-column col-xl-7 col-lg-12 col-md-12 col-sm-12">
+                        <div class="inner-column" >
+                            <div class="carousel-outer">
+                                <ul class="image-carousel owl-carousel owl-theme">
+                                    <li v-for="prefered in preferedProduct">
+                                        <a href="/product" class="lightbox-image" :title="prefered.tb_product.name">
+                                            <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
+                                        </a>
+                                    </li>
+                                    <li v-for="prefered in preferedProduct">
+                                        <a href="/product" class="lightbox-image" :title="prefered.tb_product.name">
+                                            <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
+                                        </a>
+                                    </li>
+                                </ul>
+                                
+                                <ul class="thumbs-carousel owl-carousel owl-theme">
+                                    <li class="thumb-box" v-for="prefered in preferedProduct">
+                                        <figure>
+                                            <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name">
+                                        </figure>
+                                        <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
+                                    </li>
+                                    <li class="thumb-box" v-for="prefered in preferedProduct">
+                                        <figure><img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name"></figure>
+                                        <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Specialize Section -->
+
+        <!-- Process Section -->
+        <section class="process-section" style="background-image: url(assets/images/background/8.jpg);">
+            <div class="auto-container">
+                <div class="sec-title light">
+                    <span class="float-text">HOW WE WORK</span>
+                    <h2>Proven Process</h2>
+                </div>
+                <div class="row">
+                    <!-- Process Block -->
+                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <span class="count">01</span>
+                            <h4><a href="service-detail.html">Concept</a></h4>
+                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
+                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Process Block -->
+                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <span class="count">02</span>
+                            <h4><a href="service-detail.html">Idea</a></h4>
+                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
+                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Process Block -->
+                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <span class="count">03</span>
+                            <h4><a href="service-detail.html">Design</a></h4>
+                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
+                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Process Block -->
+                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <span class="count">04</span>
+                            <h4><a href="service-detail.html">excecution</a></h4>
+                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
+                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Process Section -->
+
+        <section class="fun-fact-section">
+            <div class="outer-box" style="background-image: url(assets/images/background/3.jpg);">
+                <div class="auto-container">
+                    <div class="fact-counter">
+                        <div class="row">
+                            <!--Column-->
+                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                                <div class="count-box counted">
+                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="14">14</span></div>
+                                    <h4 class="counter-title">Years of <br>Experience</h4>
+                                </div>
+                            </div>
+    
+                            <!--Column-->
+                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInUp;">
+                                <div class="count-box counted">
+                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="237">237</span></div>
+                                    <h4 class="counter-title">Project <br>Taken</h4>
+                                </div>
+                            </div>
+    
+                            <!--Column-->
+                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-delay="800ms" style="visibility: visible; animation-delay: 800ms; animation-name: fadeInUp;">
+                                <div class="count-box counted">
+                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="11">11</span>K</div>
+                                    <h4 class="counter-title">Twitter <br> Follower</h4>
+                                </div>
+                            </div>
+    
+                            <!--Column-->
+                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-delay="1200ms" style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">
+                                <div class="count-box counted">
+                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="12">12</span></div>
+                                    <h4 class="counter-title">Awards<br>won</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Section -->
+        <section class="projects-section">
+            <div class="auto-container">
+                <div class="sec-title text-right">
+                    <span class="float-text">Trending</span>
+                    <h2>Trend Product</h2>
+                </div>
+            </div>
+            
+            <div class="inner-container">
+                <div class="projects-carousel owl-carousel owl-theme">
+                    <!-- Project Block -->
+                    <div class="project-block">
+                        <div class="image-box">
+                            <figure class="image"><img src="assets/images/gallery/1.jpg" alt=""></figure>
+                            <div class="overlay-box">
+                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <div class="btn-box">
+                                    <a href="assets/images/gallery/1.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                </div>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Block -->
+                    <div class="project-block">
+                        <div class="image-box">
+                            <figure class="image"><img src="assets/images/gallery/2.jpg" alt=""></figure>
+                            <div class="overlay-box">
+                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <div class="btn-box">
+                                    <a href="assets/images/gallery/2.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                </div>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Block -->
+                    <div class="project-block">
+                        <div class="image-box">
+                            <figure class="image"><img src="assets/images/gallery/3.jpg" alt=""></figure>
+                            <div class="overlay-box">
+                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <div class="btn-box">
+                                    <a href="assets/images/gallery/3.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                </div>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Block -->
+                    <div class="project-block">
+                        <div class="image-box">
+                            <figure class="image"><img src="assets/images/gallery/4.jpg" alt=""></figure>
+                            <div class="overlay-box">
+                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <div class="btn-box">
+                                    <a href="assets/images/gallery/4.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                </div>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Block -->
+                    <div class="project-block">
+                        <div class="image-box">
+                            <figure class="image"><img src="assets/images/gallery/5.jpg" alt=""></figure>
+                            <div class="overlay-box">
+                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <div class="btn-box">
+                                    <a href="assets/images/gallery/5.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                </div>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Block -->
+                    <div class="project-block">
+                        <div class="image-box">
+                            <figure class="image"><img src="assets/images/gallery/3.jpg" alt=""></figure>
+                            <div class="overlay-box">
+                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <div class="btn-box">
+                                    <a href="assets/images/gallery/3.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                </div>
+                                <span class="tag">Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Project Section -->
+
+        <!-- Testimonial Section Two-->
+        <section class="testimonial-section-two">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <span class="float-text">Testimonial</span>
+                    <h2>What Clients Says</h2>
+                </div>
+
+                <div class="testimonial-carousel-two owl-carousel owl-theme">
+                    <!-- Testimonial block two -->
+                    <div class="testimonial-block-two">
+                        <div class="inner-box">
+                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
+                            <div class="info-box">
+                                <div class="thumb"><img src="assets/images/resource/thumb-2.jpg" alt=""></div>
+                                <h5 class="name">Elena Gomes</h5>
+                                <span class="date">July 28 - 2018</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial block two -->
+                    <div class="testimonial-block-two">
+                        <div class="inner-box">
+                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
+                            <div class="info-box">
+                                <div class="thumb"><img src="assets/images/resource/thumb-3.jpg" alt=""></div>
+                                <h5 class="name">Aliza Norka</h5>
+                                <span class="date">July 28 - 2018</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial block two -->
+                    <div class="testimonial-block-two">
+                        <div class="inner-box">
+                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
+                            <div class="info-box">
+                                <div class="thumb"><img src="assets/images/resource/thumb-2.jpg" alt=""></div>
+                                <h5 class="name">Elena Gomes</h5>
+                                <span class="date">July 28 - 2018</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial block two -->
+                    <div class="testimonial-block-two">
+                        <div class="inner-box">
+                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
+                            <div class="info-box">
+                                <div class="thumb"><img src="assets/images/resource/thumb-3.jpg" alt=""></div>
+                                <h5 class="name">Aliza Norka</h5>
+                                <span class="date">July 28 - 2018</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Testimonial Section Two-->
+
+        <!--Clients Section-->
+        <section class="clients-section style-two">
+            <div class="auto-container">
+                <div class="sponsors-outer">
+                    <!--Sponsors Carousel-->
+                    <ul class="sponsors-carousel owl-carousel owl-theme">
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/1.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/2.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/3.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/4.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/5.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/1.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/2.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/3.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/4.png" alt=""></a></figure></li>
+                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/5.png" alt=""></a></figure></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Clients Section-->
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="outer-box" style="background-image: url(assets/images/background/9.jpg);">
+                <div class="auto-container">
+                    <div class="row">
+                        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="sec-title light">
+                                    <span class="float-text">See Video</span>
+                                    <h2>Campaign Video</h2>
+                                </div>
+                                <span class="title">We Give You The Best</span>
+                                <div class="text">Present all the speakers and participants in GenesisExpo`s beautiful layouts. Choose your favorite variant of layout and create your own. You can create also single speaker profile with all relevant information.</div> 
+                            </div>
+                        </div>
+
+                        <!-- Video Column -->
+                        <div class="video-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="video-box">
+                                    <figure class="image"><img src="assets/images/resource/video-img.jpg" alt="">
+                                        <a href="https://www.youtube.com/watch?v=Fvae8nxzVz4" class="link" data-fancybox="gallery" data-caption=""><span class="icon fa fa-play"></span></a>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Video Section -->
+
+        <!-- FAQ Section -->
+        <section class="faq-section"> 
+            <div class="auto-container">
+                <div class="row">
+                    <!-- Image Column -->
+                    <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <div class="image-box">
+                                <figure class="image"><img src="assets/images/resource/faq-img.jpg" alt=""></figure>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-column col-lg-6 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <div class="sec-title">
+                                <span class="float-text">some FAQ’s</span>
+                                <h2>Frequality Asked Questions</h2>
+                            </div>
+                            <ul class="accordion-box">
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <div class="acc-btn">Do you do the design and the execution yourselves? <div class="icon fa fa-plus-square"></div></div>
+                                    <div class="acc-content">
+                                        <div class="content">
+                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <!--Block-->
+                                <li class="accordion block active-block">
+                                    <div class="acc-btn active">Do you give Contra and After sales service? <div class="icon fa fa-plus-square"></div></div>
+                                    <div class="acc-content current">
+                                        <div class="content">
+                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <div class="acc-btn">Will you be able to give a quote, if given the floor plan? <div class="icon fa fa-plus-square"></div></div>
+                                    <div class="acc-content">
+                                        <div class="content">
+                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <div class="acc-btn">At what stage an interior designing work could be started?<div class="icon fa fa-plus-square"></div></div>
+                                    <div class="acc-content">
+                                        <div class="content">
+                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <!--Block-->
+                                <li class="accordion block">
+                                    <div class="acc-btn">Do you charge for giving a Proposal?<div class="icon fa fa-plus-square"></div></div>
+                                    <div class="acc-content">
+                                        <div class="content">
+                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End FAQ Section -->
+
+        <!-- App Section -->
+        <section class="app-section">
+            <div class="outer-box">
+                <div class="auto-container">
+                    <div class="row">
+                        <!-- Title Column -->
+                        <div class="title-column col-lg-4 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <h1 style="font-size: 28pt !important;">visualizer</h1>
+                            </div>
+                        </div>
+
+                        <!-- Image Column -->
+                        <div class="image-column col-lg-4 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="image-box wow zoomInLeft">
+                                    <figure class="image"><img src="assets/images/resource/mobile-app.png" alt=""></figure>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Column -->
+                        <div class="content-column col-lg-4 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <h3>Let's <br> Visualize Your Room</h3>
+                                <div class="text">
+                                    <button class="btn btn-primary">Visualize Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End App Section -->
+
+        <!-- News Section Two -->
+        <section class="news-section-two">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <span class="float-text">Blogs</span>
+                    <h2>News & Articals</h2>
+                </div>
+
+                <div class="row">
+                    <div class="column col-lg-5 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <!-- News Block -->
+                            <div class="news-block-three">
+                                <div class="inner-box">
+                                    <div class="image-box">
+                                        <figure class="image"><img src="assets/images/resource/news-8.jpg" alt=""></figure>
+                                        <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
+                                    </div>
+                                    <div class="content-box">
+                                        <h3><a href="blog-detail.html">Design is thinking Make Visual</a></h3>
+                                        <ul class="info">
+                                            <li>06 June 2018,</li>
+                                            <li><a href="blog-detail-2.html">John Smith</a></li>
+                                            <li><a href="blog-detail-2.html">3 Commets</a></li>
+                                        </ul>
+                                        <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language of technical terms to learn before you can converse with the experts. </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+
+                    <div class="column col-lg-7 col-md-12 col-sm-12">
+                        <div class="news-block-four">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="assets/images/resource/news-9.jpg" alt=""></figure>
+                                    <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
+                                </div>
+                                <div class="content-box">
+                                    <h3><a href="blog-detail.html">In Good Taste: Mark Finlay Architects & Interiors.</a></h3>
+                                    <ul class="info">
+                                        <li><a href="blog-detail-2.html">John Smith</a></li>
+                                        <li><a href="blog-detail-2.html">06 June 2018</a></li>
+                                    </ul>
+                                    <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="news-block-four">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="assets/images/resource/news-10.jpg" alt=""></figure>
+                                    <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
+                                </div>
+                                <div class="content-box">
+                                    <h3><a href="blog-detail.html">The Lexury Apartment of sepcial interiors.</a></h3>
+                                    <ul class="info">
+                                        <li><a href="blog-detail-2.html">John Smith</a></li>
+                                        <li><a href="blog-detail-2.html">06 June 2018</a></li>
+                                    </ul>
+                                    <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="news-block-four">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="assets/images/resource/news-11.jpg" alt=""></figure>
+                                    <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
+                                </div>
+                                <div class="content-box">
+                                    <h3><a href="blog-detail.html">The Business metting room interior in the rank.</a></h3>
+                                    <ul class="info">
+                                        <li><a href="blog-detail-2.html">John Smith</a></li>
+                                        <li><a href="blog-detail-2.html">06 June 2018</a></li>
+                                    </ul>
+                                    <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End News Section Two -->
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="inner-container">
+                <div class="sec-title">
+                    <span class="float-text">informaer</span>
+                    <h2>Contact Us</h2>
+                </div>
+
+                <div class="row">
+                    <!-- Info Column -->
+                    <div class="info-column col-lg-4 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <h4>Need Support</h4>
+                            <ul class="contact-info">
+                                <li>Complax interprice company, 882 <br> street Latrobe, PA 15786</li>
+                                <li>+88 169 787 5256 <br>+88 165 358 5678</li>
+                                <li><a href="#">support@contra.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Form Column -->
+                    <div class="form-column col-lg-8 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <!-- Contact Form -->
+                            <div class="contact-form">
+                                <form method="post" action="http://expert-themes.com/html/contra/sendemail.php">
+                                    <div class="row">
+                                        <div class="form-group col-lg-6 col-md-12">
+                                            <input type="text" name="username" placeholder="Name" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12">
+                                            <input type="text" name="phone" placeholder="Phone" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12">
+                                            <input type="text" name="company" placeholder="Company" required>
+                                        </div>
+                                        
+                                        <div class="form-group col-lg-6 col-md-12">
+                                            <input type="email" name="email" placeholder="Email" required>
+                                        </div>
+
+                                        <div class="form-group col-lg-12 col-md-12">
+                                            <textarea name="message" placeholder="Massage"></textarea>
+                                        </div>
+                                        
+                                        <div class="form-group col-lg-12 col-md-12">
+                                            <button class="theme-btn btn-style-three" type="submit" name="submit-form">Submit</button>
+                                        </div> 
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Contact Section -->
+    </div>
+</template>
+
+<script>
+    import ApiFrame from "../services/api/content.js"
+    export default {
+        data() {
+            return {
+                sliders: [],
+                socialMedia: [],
+                preferedTitle: '',
+                preferedContent: '',
+                preferedProduct: []
+            }
+        },
+        methods: {
+            initialFrame() {
+                ApiFrame.getFrame('home')
+                .then(async _responseHttp => {
+                    console.log(_responseHttp)
+                    this.sliders = _responseHttp.data.content.tb_banners
+                    this.preferedTitle = _responseHttp.data.content.tb_static_content.prefered_title
+                    this.preferedContent = _responseHttp.data.content.tb_static_content.prefered_content
+                    this.preferedProduct = await _responseHttp.data.content_prefered
+                })
+                .finally(() => {
+                    if(this.preferedProduct.length > 0) {
+                        this.owlPreferedInit()
+                    }
+                    this.owlBannerInit()
+                })
+                ApiFrame.getSocial_Media()
+                .then(_responseHttp => {
+                    this.socialMedia = _responseHttp.data
+                })
+            },
+            owlPreferedInit() {
+                if ($('.image-carousel').length && $('.thumbs-carousel').length) {
+                    
+                    var $sync1 = $(".image-carousel"),
+                        $sync2 = $(".thumbs-carousel"),
+                        flag = false,
+                        duration = 500;
+                        $sync1.owlCarousel({
+                            loop:false, items: 1, 
+                            margin: 0, 
+                            nav: false,
+                            navText: [ '<span class="icon fa fa-angle-left"></span>', '<span class="icon fa fa-angle-right"></span>' ],
+                            dots: false,
+                            autoplay: true,
+                            autoplayTimeout: 5000
+                        }).on('changed.owl.carousel', function (e) {
+                            if (!flag) {
+                                flag = false;
+                                $sync2.trigger('to.owl.carousel', [e.item.index, duration, true]);
+                                flag = false;
+                            }
+                        });
+
+                        $sync2.owlCarousel({
+                            loop:false,
+                            margin: 20,
+                            items: 1,
+                            nav: true,
+                            navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+                            dots: false,
+                            center: false,
+                            autoplay: true,
+                            mouseDrag:true,
+                            touchDrag:true,
+                            autoplayTimeout: 5000,
+                            responsive: {
+                                0:{
+                                    items:2,
+                                    autoWidth: false
+                                },
+                                400:{
+                                    items:2,
+                                    autoWidth: false
+                                },
+                                600:{
+                                    items:3,
+                                    autoWidth: false
+                                },
+                                800:{
+                                    items:4,
+                                    autoWidth: false
+                                },
+                                1024:{
+                                    items:4,
+                                    autoWidth: false
+                                }
+                            },
+                        }).on('click', '.owl-item', function () {
+                            $sync1.trigger('to.owl.carousel', [$(this).index(), duration, true]);
+                        }).on('changed.owl.carousel', function (e) {
+                            if (!flag) {
+                                flag = true;
+                                $sync1.trigger('to.owl.carousel', [e.item.index, duration, true]);
+                                flag = false;
+                            }
+                        });
+                }
+            },
+            owlBannerInit() {
+                if ($('.banner-carousel-two').length) {
+                    $('.banner-carousel-two').owlCarousel({
+                        animateOut: 'fadeOut',
+                        animateIn: 'fadeIn',
+                        loop:true,
+                        margin:30,
+                        nav:true,
+                        smartSpeed: 15000,
+                        mouseDrag:false,
+                        touchDrag:false,
+                        autoHeight: true,
+                        autoplay: true,
+                        autoplayTimeout:10000,
+                        navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+                        responsive:{
+                            0: { items:1 },
+                            600: { items:1 },
+                            1024: { items:1 },
+                        }
+                    });
+                }
+            }
+        },
+        // LIFECYLCE
+        beforeCreate() {},
+        created() {},
+        beforeMount() {
+        },
+        mounted() {
+            this.initialFrame()
+            // this.owlInit()
+        }
+    }
+</script>

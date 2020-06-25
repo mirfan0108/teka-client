@@ -1,0 +1,380 @@
+<template>
+    <div>
+        <!--Page Title-->
+        <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+            <div class="auto-container">
+                <div class="inner-container clearfix">
+                    <div class="title-box">
+                        <h1>Products</h1>
+                        <span class="title">Our Quality Products</span>
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="/">Home</a></li>
+                        <li>Products</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+        <!--Sidebar Page Container-->
+        <div class="sidebar-page-container">
+            <div class="auto-container">
+                <div class="row clearfix">
+                    <div class="content-side col-xl-9 col-lg-8 col-md-12">
+                        <div class="our-shop">
+                            <div class="row clearfix">
+                                <div class="shop-item col-xl-4 col-lg-6 col-md-6 col-sm-12" v-for="product in products">
+                                    <div class="inner-box">
+                                        <div class="image">
+                                            <img :src="$root.asset(product.image)" :alt="product.name" />
+                                            <div class="overlay-box">
+                                                <ul class="cart-option">
+                                                    <li><a href="shop-single.html"><span class="fa fa-hand-o-up "></span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="lower-content">
+                                            <h3><a href="shop-single.html">{{product.tb_construction.name}} - {{product.name}}</a></h3>
+                                            <div class="clearfix">
+                                                <div class="pull-left">
+                                                    <a class="add-cart" href="shop-single.html"><span class="fa fa-eye"></span>Visualize Now</a>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!--Post Share Options-->
+                            <div class="styled-pagination">
+                                <ul class="clearfix">
+                                    <li class="prev-post">
+                                        <a href="#"><span class="fa fa-long-arrow-left"></span> Prev</a>
+                                    </li>
+                                    <li v-for="page in pager" :class="currentPage == page ? 'active' : ''">
+                                        <a href="javascript:void(0)" @click.prevent="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li class="next-post"><a href="#"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!--Sidebar Side-->
+                    <div class="sidebar-side col-xl-3 col-lg-4 col-md-12">
+                        <aside class="sidebar">
+                            
+                            <!-- Search -->
+                            <div class="sidebar-widget search-box">
+                                <div class="form-group">
+                                    <input type="search" v-model="search" name="search-field" value="" placeholder="Search ..." required>
+                                    <button type="submit"><span class="icon fa fa-search"></span></button>
+                                </div>
+                            </div>
+                            
+                            <!--Filter Widget-->
+                            
+                            <div class="sidebar-widget sidebar-blog-category">
+                                <div class="sidebar-title">
+                                    <h3>Filter</h3>
+                                    <div class="separater"></div>
+                                </div>
+                                <ul class="accordion-box">
+                                    <li class="accordion block" hidden >
+                                        <div class="acc-btn" id="close-accordion">Filter</div>
+                                        <div class="acc-content">
+                                            <div class="content">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="accordion block">
+                                        <div class="acc-btn" @click.prevent="accordionSetter('construction')">Construction <div class="icon fa fa-plus-square"></div></div>
+                                        <div class="acc-content">
+                                            <div class="content" style="padding: 0; padding-bottom: 10px;">
+                                                <ul class="cat-list">
+                                                    <li :class="constructionSelected == 0 ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterConstruction(0)">All </span></a>
+                                                    </li>
+                                                    <li v-for="construction in contructions" :class="constructionSelected == construction.id ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterConstruction(construction.id)">{{construction.name}} </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="accordion block">
+                                        <div class="acc-btn" @click.prevent="accordionSetter('specie')">Species <div class="icon fa fa-plus-square"></div></div>
+                                        <div class="acc-content">
+                                            <div class="content" style="padding: 0; padding-bottom: 10px;">
+                                                <ul class="cat-list">
+                                                    <li :class="specieSelected == 0 ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterSpecie(0)">All </span></a>
+                                                    </li>
+                                                    <li v-for="specie in species" :class="specieSelected == specie.id ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterSpecie(specie.id)">{{specie.name}} </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="accordion block">
+                                        <div class="acc-btn" @click.prevent="accordionSetter('construction')">Color <div class="icon fa fa-plus-square"></div></div>
+                                        <div class="acc-content">
+                                            <div class="content" style="padding: 0; padding-bottom: 10px;">
+                                                <ul class="cat-list">
+                                                    <li :class="colorSelected == 0 ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterColor(0)">All </span></a>
+                                                    </li>
+                                                    <li :class="colorSelected == 1 ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterColor(1)">Light </span></a>
+                                                    </li>
+                                                    <li :class="colorSelected == 2 ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterColor(2)">Medium Dark </span></a>
+                                                    </li>
+                                                    <li :class="colorSelected == 3 ? 'clearfix active' : 'clearfix'" >
+                                                        <a href="javascript:void(0)" @click.prevent="filterColor(3)">Dark </span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="accordion block">
+                                        <div class="acc-btn" @click.prevent="accordionSetter('construction')">Size <div class="icon fa fa-plus-square"></div></div>
+                                        <div class="acc-content">
+                                            <div class="content" style="padding: 0; padding-bottom: 10px;">
+                                                <div class="sidebar-title">
+                                                    <!-- <h3>Size</h3> -->
+                                                    <div class="separater"></div>
+                                                </div>
+                                                <div class="range-slider-one clearfix">
+                                                    <div class="size-width-slider" style="margin-bottom: 0;"></div>
+                                                    <div class="clearfix">
+                                                        
+                                                        <div class="pull-left">
+                                                            <div class="title">Width :</div>
+                                                            <div class="input" style="margin-bottom: 20px;">
+                                                                <input type="text" class="size-width" name="field-name" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sidebar-title">
+                                                    <!-- <h3>Size</h3> -->
+                                                    <div class="separater"></div>
+                                                </div>
+                                                <div class="range-slider-one clearfix">
+                                                    <div class="size-length-slider" style="margin-bottom: 0;"></div>
+                                                    <div class="clearfix">
+                                                        <div class="pull-left">
+                                                            <div class="title">Length :</div>
+                                                            <div class="input" style="margin-bottom: 20px;">
+                                                                <input type="text" class="size-length" name="field-name" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="sidebar-title">
+                                                    <!-- <h3>Size</h3> -->
+                                                    <div class="separater"></div>
+                                                </div>
+                                                <div class="range-slider-one clearfix">
+                                                    <div class="size-thickness-slider" style="margin-bottom: 0;"></div>
+                                                    <div class="clearfix">
+                                                        
+                                                        <div class="pull-left">
+                                                            <div class="title">Thickness :</div>
+                                                            <div class="input" style="margin-bottom: 20px;">
+                                                                <input type="text" class="size-thickness" name="field-name" readonly>
+                                                            </div>
+                                                        </div><br><br>
+                                                        <div class="pull-right">
+                                                            <a href="javascript:void(0)" class="theme-btn btn-style-one" @click.prevent="fetchProduct()">Filtter</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                            </div>
+                            <div class="sidebar-widget related-posts">
+                                <div class="sidebar-title">
+                                    <h3>Popular Products</h3>
+                                    <div class="separater"></div>
+                                </div>
+                                <div class="post">
+                                    <figure class="post-thumb"><a href="shop-single.html"><img src="assets/images/resource/products/prod-thumb-1.jpg" alt=""></a></figure>
+                                    <h4><a href="shop-single.html">Woo Album #4</a></h4>
+                                    <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
+                                    <div class="price">$9.00</div>
+                                </div>
+                                <div class="post">
+                                    <figure class="post-thumb"><a href="shop-single.html"><img src="assets/images/resource/products/prod-thumb-2.jpg" alt=""></a></figure>
+                                    <h4><a href="shop-single.html">Happy Ninja</a></h4>
+                                    <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
+                                    <div class="price">$ 18.00</div>
+                                </div>
+                                <div class="post">
+                                    <figure class="post-thumb"><a href="shop-single.html"><img src="assets/images/resource/products/prod-thumb-3.jpg" alt=""></a></figure>
+                                    <h4><a href="shop-single.html">Ninja Silhouette</a></h4>
+                                    <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
+                                    <div class="price">$20.00</div>
+                                </div>
+                            </div>  
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End Sidebar Page Container-->
+    </div>
+</template>
+
+<script>
+    import ApiProduct from "../services/api/product.js"
+    export default {
+        data() {
+            return {
+                products: [],
+                contructions: [],
+                species: [],
+                pager: [],
+                totalProduct: 0,
+                currentPage: 1,
+
+                // FILTER
+                specieSelected: 0,
+                constructionSelected: 0,
+                search: '',
+                rangeWidth: '',
+                rangeThickness: '',
+                rangeLength: '',
+                colorSelected: 0,
+
+                // ACCORDION
+                accordion: ''
+            }
+        },
+        beforeCreate() {},
+        created() {},
+        beforeMount() {
+        },
+        mounted() {
+            this.fetchProduct()
+            this.fetchSpecies()
+            this.fetchConstruction()
+            this.initSlider()
+        },
+
+        methods: {
+            initSlider() {
+                if($('.size-width-slider').length){
+                    $( ".size-width-slider" ).slider({
+                        range: true,
+                        min: 0,
+                        max: 1000,
+                        values: [ 40, 1000 ],
+                        slide: ( event, ui ) => {
+                            this.sizeWidth_Start = ui.values[ 0 ]
+                            this.sizeWidth_End = ui.values[ 1 ]
+                            $( "input.size-width" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                            this.rangeWidth = ui.values[ 0 ]+"-"+ui.values[ 1 ]
+                        }
+
+                    });
+                    $( "input.size-width" ).val( $( ".size-width-slider" ).slider( "values", 0 ) + " - " + $( ".size-width-slider" ).slider( "values", 1 ) );	
+                    
+                }
+
+                if($('.size-length-slider').length){
+                    $( ".size-length-slider" ).slider({
+                        range: true,
+                        min: 0,
+                        max: 1000,
+                        values: [ 40, 1000 ],
+                        slide: ( event, ui ) => {
+                            this.rangeLength = ui.values[ 0 ]+"-"+ui.values[ 1 ]
+                            $( "input.size-length" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                        }
+
+                    });
+                    $( "input.size-length" ).val( $( ".size-length-slider" ).slider( "values", 0 ) + " - " + $( ".size-length-slider" ).slider( "values", 1 ) );	
+                    
+                }
+
+                if($('.size-thickness-slider').length){
+                    $( ".size-thickness-slider" ).slider({
+                        range: true,
+                        min: 0,
+                        max: 1000,
+                        values: [ 40, 1000 ],
+                        slide: ( event, ui ) => {
+                            this.rangeThickness = ui.values[ 0 ]+"-"+ui.values[ 1 ]
+                            $( "input.size-thickness" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                        }
+
+                    });
+                    $( "input.size-thickness" ).val( $( ".size-thickness-slider" ).slider( "values", 0 ) + " - " + $( ".size-thickness-slider" ).slider( "values", 1 ) );	
+                    
+                }
+            },
+            fetchProduct() {
+                ApiProduct.getProduct( 
+                    this.currentPage, 
+                    this.search, 
+                    this.specieSelected, 
+                    this.constructionSelected,
+                    this.rangeWidth,
+                    this.rangeThickness,
+                    this.rangeLength,
+                    this.colorSelected
+                )
+                .then(_responseHtml => {
+                    this.products = _responseHtml.data.rows
+                    this.pager = this.$root.paginationCreator(_responseHtml.data.count)
+                })
+                .catch((err) => console.log(err))
+                .finally(() => {})
+            },
+            fetchSpecies() {
+                ApiProduct.getSpecies()
+                .then(_responseHtml => {
+                    this.species = _responseHtml.data
+                })
+            },
+            fetchConstruction() {
+                ApiProduct.getConstruction()
+                .then(_responseHtml => {
+                    this.contructions = _responseHtml.data
+                })
+            },
+            setPage(page) {
+                this.currentPage = page
+            },
+            filterSpecie(selected) {
+                this.specieSelected = selected
+                this.fetchProduct()
+            },
+            filterColor(selected) {
+                this.colorSelected = selected
+                this.fetchProduct()
+            },
+            filterConstruction(selected) {
+                this.constructionSelected = selected
+                this.fetchProduct()
+            },
+            accordionSetter(setter) {
+                if(this.accordion != setter) {
+                    this.accordion = setter
+                } else {
+                    this.accordion = ''
+                    $("#close-accordion").click()
+                }
+            }
+        }
+    }
+</script>
