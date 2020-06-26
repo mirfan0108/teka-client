@@ -79,11 +79,11 @@
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
-                                        <img :src="$root.asset(lang.country_flag)" alt="flag" width="30">
+                                        {{lang.country_code}}
                                     </a>
                                     <ul>
                                         <li v-for="lang in langs">
-                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_lang}}</a>
+                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_code}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -219,11 +219,11 @@
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
-                                        <img :src="$root.asset(lang.country_flag)" alt="flag" width="30">
+                                        {{lang.country_code}}
                                     </a>
                                     <ul>
                                         <li v-for="lang in langs">
-                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_lang}}</a>
+                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_code}}</a>
                                         </li>
                                     </ul>
                                 </li>

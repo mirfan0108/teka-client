@@ -96,6 +96,10 @@ module.exports = {
         new VueLoaderPlugin(),
         new CopyPlugin([
             {
+                from: './node_modules/aos/dist/aos.css',
+                to: './assets/css'
+            },
+            {
                 from: './src/assets',
                 to: './assets'
             },  {

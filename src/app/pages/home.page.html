@@ -36,11 +36,11 @@
         <!-- End Bnner Section -->
 
         <!-- Specialize Section -->
-        <section class="specialize-section-two">
-            <div class="auto-container">
-                <div class="row">
+        <section class="specialize-section-two" >
+            <div class="auto-container" >
+                <div class="row" >
                     <!-- Title Column -->
-                    <div class="title-column col-xl-5 col-lg-12 col-md-12 col-sm-12  wow fadeInUp animated">
+                    <div class="title-column col-xl-5 col-lg-12 col-md-12 col-sm-12 " data-aos="fade-right">
                         <div class="inner-column">
                             <div class="sec-title">
                                 <span class="float-text">Prefered</span>
@@ -58,7 +58,7 @@
                     </div>
                     
                     <!-- Carousel Column -->
-                    <div class="carousel-column col-xl-7 col-lg-12 col-md-12 col-sm-12">
+                    <div class="carousel-column col-xl-7 col-lg-12 col-md-12 col-sm-12" data-aos="fade-left">
                         <div class="inner-column" >
                             <div class="carousel-outer">
                                 <ul class="image-carousel owl-carousel owl-theme">
@@ -97,7 +97,7 @@
 
         <!-- Process Section -->
         <section class="process-section" style="background-image: url(assets/images/background/8.jpg);">
-            <div class="auto-container">
+            <div class="auto-container" data-aos="fade-up">
                 <div class="sec-title light">
                     <span class="float-text">HOW WE WORK</span>
                     <h2>Proven Process</h2>
@@ -676,6 +676,7 @@
 
 <script>
     import ApiFrame from "../services/api/content.js"
+    import AOS from 'aos';
     export default {
         data() {
             return {
@@ -688,6 +689,7 @@
         },
         methods: {
             initialFrame() {
+                AOS.init();
                 ApiFrame.getFrame('home')
                 .then(async _responseHttp => {
                     console.log(_responseHttp)
