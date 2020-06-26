@@ -7,6 +7,7 @@ import AboutPage from "@/app/pages/about.page.html"
 import GalleryPage from "@/app/pages/gallery.page.html"
 import ContactPage from "@/app/pages/contact.page.html"
 import ProductPage from "@/app/pages/product.page.html"
+import StartPage from "@/app/pages/starter.page.html"
 // END PAGES
 
 // START IMPORT
@@ -59,11 +60,19 @@ const router = new VueRouter({
               ]
             },
           ]
-        }
+        },
+        {
+          path: "/business",
+          name: 'starter.page.html',
+          component: StartPage
+        },
     ]
 })
 
-
+router.beforeEach((to, from, next) => {
+  if (to.name != 'starter.page.html' && !sessionStorage.getItem('__STARTER')) next({ name: 'starter.page.html' })
+  else next()
+})
 var app = new Vue({
     el: "#app",
     router: router,

@@ -1,0 +1,41 @@
+<template>
+    <div>
+        <!-- Preloader -->
+        <div class="preloader"></div>
+
+        <!-- Coming Soon -->
+        <section class="coming-soon" style="background-image:url(assets/images/background/3.jpg)">
+            <div class="auto-container">
+                <div class="content">
+                    <div class="content-inner">
+                        <div class="logo"><a href="index.html"><img src="assets/images/logo-white.png" alt="" width="200"/></a></div>
+                        <h2>Welcome</h2>
+                        <!-- <div class="time-counter"><div class="time-countdown clearfix" data-countdown="2020/9/19"></div></div> -->
+                        <div class="text">Please Choose ! </div>
+                        <!--Emailed Form-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button @click.prevent="setStarter('setter')" class="theme-btn btn-style-one" style="width: 40%; margin-bottom: 20px;">Home Owner</button>
+                            </div>
+                            <div class="col-md-12">
+                                <button @click.prevent="setStarter('setter')" class="theme-btn btn-style-one" style="width: 40%;">Professionals</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Coming Soon -->
+    </div>
+</template>
+
+<script>
+    export default {
+        methods: {
+            setStarter(setter) {
+                sessionStorage.setItem('__STARTER', setter)
+                window.location.href = "/"
+            }
+        }
+    }
+</script>
