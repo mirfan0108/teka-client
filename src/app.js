@@ -70,8 +70,8 @@ var app = new Vue({
     data() {
       return {
         base_url: path => ROOT_PATH + "/" + (path || ""),
-
         asset: path => process.env.ASSETS +"/"+ path,
+        lang: lang => sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2, 
         paginationCreator: totalItem => {
           let counter = 1
           let pager = [1]

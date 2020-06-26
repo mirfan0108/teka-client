@@ -19,26 +19,73 @@
                         <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
                                 <li :class="$root.$router.history.current.name == 'home.page.html' ? 'current' : ''">
-                                    <a href="/">Home</a>
+                                    <a href="/">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Beranda' : 
+                                            $root.lang() == 2 ? 'Home' : 
+                                            $root.lang() == 3 ? 'Zuhause' : ''
+                                        }}
+                                    </a>
                                 </li>
                                 <li :class="$root.$router.history.current.name == 'about.page.html' ? 'current' : ''">
-                                    <a href="/about" >About Us</a>
+                                    <a href="/about" >
+                                        {{ 
+                                            $root.lang() == 1 ? 'Kenapa Kami' : 
+                                            $root.lang() == 2 ? 'Why Us' : 
+                                            $root.lang() == 3 ? 'warum wir' : ''
+                                        }}
+                                    </a>
                                 </li>
                                 <li :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
-                                    <a href="javascript:void(0)">Products</a>
+                                    <a href="javascript:void(0)">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Produk' : 
+                                            $root.lang() == 2 ? 'Product' : 
+                                            $root.lang() == 3 ? 'Produkt' : ''
+                                        }}
+                                    </a>
                                     <ul>
-                                        <li><a href="/product">All</a></li>
+                                        <li>
+                                            <a href="/product">
+                                                {{ 
+                                                    $root.lang() == 1 ? 'Semua' : 
+                                                    $root.lang() == 2 ? 'All' : 
+                                                    $root.lang() == 3 ? 'Alles' : ''
+                                                }}
+                                            </a>
+                                        </li>
                                         <li v-for="construction in constructions">
                                             <a href="#">{{construction.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li :class="$root.$router.history.current.name == 'gallery.page.html' ? 'current' : ''">
-                                    <a href="/gallery">Galleries</a>
+                                    <a href="/gallery">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Galeri Proyek' : 
+                                            $root.lang() == 2 ? 'Project Gallery' : 
+                                            $root.lang() == 3 ? 'Projektgalerie' : ''
+                                        }}
+                                    </a>
                                 </li>
-                                <li ><a href="#">Articles</a></li>
                                 <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
-                                    <a href="/contact-us">Contact</a>
+                                    <a href="/contact-us">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Kontak' : 
+                                            $root.lang() == 2 ? 'Contact' : 
+                                            $root.lang() == 3 ? 'Kontakt' : ''
+                                        }}
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
+                                        <img :src="$root.asset(lang.country_flag)" alt="flag" width="30">
+                                    </a>
+                                    <ul>
+                                        <li v-for="lang in langs">
+                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_lang}}</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <!-- <li class="dropdown has-mega-menu"><a href="#">Pages</a>
                                     <div class="mega-menu">
@@ -112,26 +159,73 @@
                         <div class="navbar-collapse show collapse clearfix">
                             <ul class="navigation clearfix">
                                 <li :class="$root.$router.history.current.name == 'home.page.html' ? 'current' : ''">
-                                    <a href="/">Home</a>
+                                    <a href="/">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Beranda' : 
+                                            $root.lang() == 2 ? 'Home' : 
+                                            $root.lang() == 3 ? 'Zuhause' : ''
+                                        }}
+                                    </a>
                                 </li>
                                 <li :class="$root.$router.history.current.name == 'about.page.html' ? 'current' : ''">
-                                    <a href="/about" >About Us</a>
+                                    <a href="/about" >
+                                        {{ 
+                                            $root.lang() == 1 ? 'Kenapa Kami' : 
+                                            $root.lang() == 2 ? 'Why Us' : 
+                                            $root.lang() == 3 ? 'warum wir' : ''
+                                        }}
+                                    </a>
                                 </li>
                                 <li :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
-                                    <a href="javascript:void(0)">Products</a>
+                                    <a href="javascript:void(0)">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Produk' : 
+                                            $root.lang() == 2 ? 'Product' : 
+                                            $root.lang() == 3 ? 'Produkt' : ''
+                                        }}
+                                    </a>
                                     <ul>
-                                        <li><a href="/product">All</a></li>
+                                        <li>
+                                            <a href="/product">
+                                                {{ 
+                                                    $root.lang() == 1 ? 'Semua' : 
+                                                    $root.lang() == 2 ? 'All' : 
+                                                    $root.lang() == 3 ? 'Alles' : ''
+                                                }}
+                                            </a>
+                                        </li>
                                         <li v-for="construction in constructions">
                                             <a href="#">{{construction.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li :class="$root.$router.history.current.name == 'gallery.page.html' ? 'current' : ''">
-                                    <a href="/gallery">Galleries</a>
+                                    <a href="/gallery">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Galeri Proyek' : 
+                                            $root.lang() == 2 ? 'Project Gallery' : 
+                                            $root.lang() == 3 ? 'Projektgalerie' : ''
+                                        }}
+                                    </a>
                                 </li>
-                                <li ><a href="#">Articles</a></li>
                                 <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
-                                    <a href="/contact-us">Contact</a>
+                                    <a href="/contact-us">
+                                        {{ 
+                                            $root.lang() == 1 ? 'Kontak' : 
+                                            $root.lang() == 2 ? 'Contact' : 
+                                            $root.lang() == 3 ? 'Kontakt' : ''
+                                        }}
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
+                                        <img :src="$root.asset(lang.country_flag)" alt="flag" width="30">
+                                    </a>
+                                    <ul>
+                                        <li v-for="lang in langs">
+                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_lang}}</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul> 
                         </div>
@@ -147,7 +241,8 @@
     export default {
         data() {
             return {
-                constructions: []
+                constructions: [],
+                langs: []
             }
         },
         beforeMount() {},
@@ -156,6 +251,17 @@
             .then(_responseHttp => {
                 this.constructions = _responseHttp.data
             })
+
+            ApiFrame.getLang()
+            .then(_responseHttp => {
+                this.langs = _responseHttp.data
+            })
+        },
+        methods: {
+            setLang(lang) {
+                sessionStorage.setItem('_LANG', lang)
+                window.location.reload()
+            }
         }
         
     }

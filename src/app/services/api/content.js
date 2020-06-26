@@ -3,7 +3,7 @@ const ENV = process.env.BASE_API
 
 class Content {
     static getFrame(page) {
-        let lang = localStorage.getItem('_LANG') ?  localStorage.getItem('_LANG') : 2
+        let lang = sessionStorage.getItem('_LANG') ?  sessionStorage.getItem('_LANG') : 2
         return axios.get(`${ENV}/content/page/${page}/lang/${lang}`)
     }
 
@@ -12,6 +12,10 @@ class Content {
     }
     static getConstruction() {
         return axios.get(`${ENV}/menu/product-construction`)
+    }
+
+    static getLang() {
+        return axios.get(`${ENV}/content/lang`)
     }
 
     static getBanner(lang) {
