@@ -68,6 +68,19 @@
                                         }}
                                     </a>
                                 </li>
+                                <li class="dropdown">
+                                    <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
+                                        {{toTitleCase(lang.country_name)}}
+                                    </a>
+                                    <ul>
+                                        <li v-for="lang in langs">
+                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)">
+                                                <img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> 
+                                                {{toTitleCase(lang.country_name)}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
                                     <a href="/contact-us">
                                         {{ 
@@ -77,16 +90,7 @@
                                         }}
                                     </a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
-                                        {{lang.country_code}}
-                                    </a>
-                                    <ul>
-                                        <li v-for="lang in langs">
-                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_code}}</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                
                                 <!-- <li class="dropdown has-mega-menu"><a href="#">Pages</a>
                                     <div class="mega-menu">
                                         <div class="mega-menu-bar row clearfix">
@@ -208,6 +212,19 @@
                                         }}
                                     </a>
                                 </li>
+                                <li class="dropdown">
+                                    <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
+                                        {{toTitleCase(lang.country_name)}}
+                                    </a>
+                                    <ul>
+                                        <li v-for="lang in langs">
+                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)">
+                                                <img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> 
+                                                {{toTitleCase(lang.country_name)}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
                                     <a href="/contact-us">
                                         {{ 
@@ -217,16 +234,7 @@
                                         }}
                                     </a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" v-for="lang in langs" v-if="$root.lang() == lang.id">
-                                        {{lang.country_code}}
-                                    </a>
-                                    <ul>
-                                        <li v-for="lang in langs">
-                                            <a href="#" v-if="$root.lang() != lang.id" @click.prevent="setLang(lang.id)"><img :src="$root.asset(lang.country_flag)" alt="flag" width="30"> {{lang.country_code}}</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                
                             </ul> 
                         </div>
                     </nav>
@@ -261,6 +269,14 @@
             setLang(lang) {
                 sessionStorage.setItem('_LANG', lang)
                 window.location.reload()
+            },
+            toTitleCase(text) {
+                var sentence = text.toLowerCase().split(" ");
+                let result = ''
+                for(var i = 0; i< sentence.length; i++){
+                    result += sentence[i][0].toUpperCase() + sentence[i].slice(1)+ ' '
+                }
+                return result
             }
         }
         
