@@ -7,6 +7,10 @@ class Product {
         return axios.get(`${ENV}/products/all${queries}`)
     }
 
+    static getDetail_Product(id) {
+        return axios.get(`${ENV}/products/detail/${id}`)
+    }
+
     static getSpecies() {
         return axios.get(`${ENV}/products/species`)
     }

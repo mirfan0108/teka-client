@@ -30,15 +30,15 @@
                                             <img :src="$root.asset(product.image)" :alt="product.name" />
                                             <div class="overlay-box">
                                                 <ul class="cart-option">
-                                                    <li><a href="shop-single.html"><span class="fa fa-hand-o-up "></span></a></li>
+                                                    <li><a :href="'/product/'+product.id"><span class="fa fa-hand-o-up "></span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="lower-content">
-                                            <h3><a href="shop-single.html">{{product.tb_construction.name}} - {{product.name}}</a></h3>
+                                            <h3><a :href="'/product/'+product.id">{{product.tb_construction.name}} - {{product.name}}</a></h3>
                                             <div class="clearfix">
                                                 <div class="pull-left">
-                                                    <a class="add-cart" href="shop-single.html"><span class="fa fa-eye"></span>Visualize Now</a>
+                                                    <a class="add-cart" href="#"><span class="fa fa-eye"></span>Visualize Now</a>
                                                 </div>
                                             </div>
                                             
@@ -208,11 +208,11 @@
                                 </div>
                                 <div class="post" v-for="product in products" >
                                     <figure class="post-thumb" >
-                                        <a href="shop-single.html">
+                                        <a :href="'/product/'+product.id">
                                             <img :src="$root.asset(product.image)" alt="">
                                         </a>
                                     </figure>
-                                    <h4><a href="javascript:void(0)">{{product.name}}</a></h4>
+                                    <h4><a :href="'/product/'+product.id">{{product.name}}</a></h4>
                                     <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
                                     <div class="price" >{{product.tb_construction.name}}</div>
                                     <hr>
@@ -232,6 +232,7 @@
     import ApiProduct from "../services/api/product.js"
     export default {
         data() {
+            let _construc = this.$root.$router.history.current.query.construction ? this.$root.$router.history.current.query.construction : 0
             return {
                 products: [],
                 contructions: [],
@@ -242,7 +243,7 @@
 
                 // FILTER
                 specieSelected: 0,
-                constructionSelected: 0,
+                constructionSelected: _construc,
                 search: '',
                 rangeWidth: '',
                 rangeThickness: '',

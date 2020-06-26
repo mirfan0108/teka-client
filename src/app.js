@@ -7,6 +7,7 @@ import AboutPage from "@/app/pages/about.page.html"
 import GalleryPage from "@/app/pages/gallery.page.html"
 import ContactPage from "@/app/pages/contact.page.html"
 import ProductPage from "@/app/pages/product.page.html"
+import ProductDetailPage from "@/app/pages/product.detail.page.html"
 import StartPage from "@/app/pages/starter.page.html"
 // END PAGES
 
@@ -56,6 +57,12 @@ const router = new VueRouter({
                   name: 'product.page.html',
                   component: ProductPage
                 },
+                {
+                  path: "/product/:id",
+                  name: 'product.detail.page.html',
+                  component: ProductDetailPage,
+                  props: true
+                },
                 
               ]
             },
@@ -84,9 +91,9 @@ var app = new Vue({
         paginationCreator: totalItem => {
           let counter = 1
           let pager = [1]
-          if(totalItem > 6) {
+          if(totalItem > 12) {
               for (let index = 1; index < totalItem; index++) {
-                  if(index != 0 && (index % 6 == 0)) {
+                  if(index != 0 && (index % 12 == 0)) {
                       counter ++
                       pager.push(counter)
                   }

@@ -4,7 +4,7 @@
             <div class="main-box clearfix">
                 <div class="logo-box">
                     <div class="logo">
-                        <a href="/"><img src="assets/images/logo.png" alt="teka logo"  width="200"></a>
+                        <a href="/"><img src="/assets/images/logo.png" alt="teka logo"  width="200"></a>
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
                                             </a>
                                         </li>
                                         <li v-for="construction in constructions">
-                                            <a href="#">{{construction.name}}</a>
+                                            <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -154,7 +154,7 @@
             <div class="auto-container clearfix">
                 <!--Logo-->
                 <div class="logo pull-left">
-                    <a href="/" title=""><img src="assets/images/logo.png" alt="teka logo" width="150"></a>
+                    <a href="/" title=""><img src="/assets/images/logo.png" alt="teka logo" width="150"></a>
                 </div>
                 <!--Right Col-->
                 <div class="pull-right">
@@ -199,7 +199,7 @@
                                             </a>
                                         </li>
                                         <li v-for="construction in constructions">
-                                            <a href="#">{{construction.name}}</a>
+                                            <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
