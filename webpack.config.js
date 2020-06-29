@@ -100,10 +100,6 @@ module.exports = {
                 to: './assets/css'
             },
             {
-                from: './node_modules/image-to-base64/image-to-base64.min.js',
-                to: './assets/js'
-            },
-            {
                 from: './src/assets',
                 to: './assets'
             },  {
