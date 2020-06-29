@@ -19,6 +19,10 @@ class Product {
         return axios.get(`${ENV}/products/construction`)
     }
 
+    static getBlob(image) {
+        return axios.get(`http://localhost:8000/blob/${image}`)
+    }
+
 }
 
 export default Product
