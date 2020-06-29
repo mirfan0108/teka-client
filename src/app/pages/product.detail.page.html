@@ -121,11 +121,11 @@
                                                         <td>
                                                             <span v-for="(thickness, index) in details.tb_size_thicknesses">
                                                                 {{
-                                                                    $root.lang() != 1 ? $root.convertToInch(thickness.size_thickness) : thickness.size_thickness
+                                                                    $root.lang() == 2 ? $root.convertToInch(thickness.size_thickness) : thickness.size_thickness
                                                                 }} 
                                                                 {{
                                                                     details.tb_size_thicknesses[index+1] ? ' / ' : 
-                                                                    $root.lang() != 1 ? ' inch' : ' mm'
+                                                                    $root.lang() == 2 ? ' inch' : ' mm'
                                                                 }}
                                                             </span>
                                                         </td>
@@ -135,12 +135,12 @@
                                                         <td>
                                                             <span v-for="(wd, index) in details.tb_size_widths">
                                                                 {{
-                                                                    $root.lang() != 1 ? $root.convertToInch(wd.size_width) : wd.size_width
+                                                                    $root.lang() == 2 ? $root.convertToInch(wd.size_width) : wd.size_width
                                                                     
                                                                 }} 
                                                                 {{
                                                                     details.tb_size_widths[index+1] ? ' / ' :
-                                                                    $root.lang() != 1 ? ' inch': ' mm'
+                                                                    $root.lang() == 2 ? ' inch': ' mm'
                                                                 }}
                                                             </span>
                                                         </td>
@@ -150,11 +150,11 @@
                                                         <td>
                                                             <span v-for="(leng, index) in details.tb_size_lengths">
                                                                 {{
-                                                                    $root.lang() != 1 ? $root.convertToInch(leng.size_length) : leng.size_length
+                                                                    $root.lang() == 2 ? $root.convertToInch(leng.size_length) : leng.size_length
                                                                 }} 
                                                                 {{
                                                                     details.tb_size_lengths[index+1] ? ' / ' : 
-                                                                    $root.lang() != 1 ? ' inch': ' mm'
+                                                                    $root.lang() == 2 ? ' inch': ' mm'
                                                                 }}
                                                             </span>
                                                         </td>
@@ -185,7 +185,8 @@
                                             <a href="#" class="theme-btn btn-style-one" style="width: 100%;">Visualize</a>
                                         </div>
                                         <div >
-                                            <a @click.prevent="getTechnicalSheets()" href="#" class="theme-btn btn-style-one" style="width: 100%;">Technical Sheet</a>
+                                            <button v-if="!onDownloads" @click.prevent="getTechnicalSheets()" class="theme-btn btn-style-one" style="width: 100%">{{onDownloads ? 'Please Wait...':'Technical Sheet'}}</button>
+                                            <button v-if="onDownloads" style="width: 100%;" disabled>Please Wait...</button>
                                         </div>
                                     </div>
                                 </div>
@@ -228,7 +229,8 @@
         data() {
             return {
                 products: [],
-                details: {}
+                details: {},
+                onDownloads: false,
             }
         },
         mounted() {
@@ -251,6 +253,7 @@
                 })
             },
             async getTechnicalSheets() {
+                this.onDownloads = true
                 let dataBase64
                 ApiProduct.getBlob(this.details.image)
                 .then(_resp => {
@@ -261,18 +264,18 @@
                     let _width = ''
                     let _length = ''
                     this.details.tb_size_thicknesses.map((_val, index) => {
-                        thickness += this.$root.lang() != 1 ? this.$root.convertToInch(_val.size_thickness) : _val.size_thickness
-                        thickness += this.details.tb_size_thicknesses[index + 1] ? ' /' : this.$root.lang() != 1 ? ' inch' : ' mm'
+                        thickness += this.$root.lang() == 2 ? this.$root.convertToInch(_val.size_thickness) : _val.size_thickness
+                        thickness += this.details.tb_size_thicknesses[index + 1] ? ' /' : this.$root.lang() == 2 ? ' inch' : ' mm'
                     })
 
                     this.details.tb_size_widths.map((_val, index) => {
-                        _width += this.$root.lang() != 1 ? this.$root.convertToInch(_val.size_width) : _val.size_width
-                        _width += this.details.tb_size_widths[index + 1] ? ' /' : this.$root.lang() != 1 ? ' inch' : ' mm'
+                        _width += this.$root.lang() == 2 ? this.$root.convertToInch(_val.size_width) : _val.size_width
+                        _width += this.details.tb_size_widths[index + 1] ? ' /' : this.$root.lang() == 2 ? ' inch' : ' mm'
                     })
 
                     this.details.tb_size_lengths.map((_val, index) => {
-                        _length += this.$root.lang() != 1 ? this.$root.convertToInch(_val.size_length) : _val.size_length
-                        _length += this.details.tb_size_lengths[index + 1] ? ' /' : this.$root.lang() != 1 ? ' inch' : ' mm'
+                        _length += this.$root.lang() == 2 ? this.$root.convertToInch(_val.size_length) : _val.size_length
+                        _length += this.details.tb_size_lengths[index + 1] ? ' /' : this.$root.lang() == 2 ? ' inch' : ' mm'
                     })
 
                     let criteria = ''
@@ -421,6 +424,9 @@
                         }
                     };
                     pdfMake.createPdf(docDefinition).download(filename);
+                    setTimeout(() => {
+                        this.onDownloads = false
+                    }, 500)
                 })
             }
         }
