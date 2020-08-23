@@ -9,6 +9,7 @@ import ContactPage from "@/app/pages/contact.page.html"
 import ProductPage from "@/app/pages/product.page.html"
 import ProductDetailPage from "@/app/pages/product.detail.page.html"
 import StartPage from "@/app/pages/starter.page.html"
+import ProjectDetailPage from "@/app/pages/project.detail.page.html"
 // END PAGES
 
 // START IMPORT
@@ -63,7 +64,12 @@ const router = new VueRouter({
                   component: ProductDetailPage,
                   props: true
                 },
-                
+                {
+                  path: "/gallery/:id",
+                  name: 'project.detail.page.html',
+                  component: ProjectDetailPage,
+                  props: true
+                },
               ]
             },
           ]
@@ -77,8 +83,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.name != 'starter.page.html' && !sessionStorage.getItem('__STARTER')) next({ name: 'starter.page.html' })
-  else next()
+  to.name != 'starter.page.html' && !sessionStorage.getItem('__STARTER') ? next({ name: 'starter.page.html' }) : next()
 })
 var app = new Vue({
     el: "#app",

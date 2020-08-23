@@ -12,7 +12,11 @@
                                 <div class="text">
                                     {{slide.content}}
                                 </div>
-                                <div class="link-box"><a href="about.html">View Details</a></div>
+                                <div class="link-box"><a href="/about">
+                                    {{
+                                        $root.lang() == 1 ? 'Lihat Detail' : $root.lang() == 3 ? 'Im Detail sehen' : 'View Detail'
+                                    }}
+                                </a></div>
                             </div>
                         </div>
                     </div>
@@ -35,7 +39,7 @@
         </section>
         <!-- End Bnner Section -->
 
-        <!-- Specialize Section -->
+        <!-- Specialize Most Liked Section -->
         <section class="specialize-section-two" >
             <div class="auto-container" >
                 <div class="row" >
@@ -43,8 +47,16 @@
                     <div class="title-column col-xl-5 col-lg-12 col-md-12 col-sm-12 " data-aos="fade-right">
                         <div class="inner-column">
                             <div class="sec-title">
-                                <span class="float-text">Prefered</span>
-                                <h2>Prefered Products</h2>
+                                <span class="float-text">
+                                    {{
+                                        $root.lang() == 1 ? 'Disukai' : $root.lang() == 3 ? 'Bevorzugt' : 'Preferred'
+                                    }}
+                                </span>
+                                <h2>
+                                    {{
+                                        $root.lang() == 1 ? 'Produk yang Disukai' : $root.lang() == 3 ? 'Bevorzugtes Produkt' : 'Preferred Product'
+                                    }}
+                                </h2>
                             </div>
 
                             <div class="text-box">
@@ -52,7 +64,12 @@
                                 <div v-html="preferedContent"></div>
                             </div>
                             <div class="link-box">
-                                <a href="#">Read More <i class="fa fa-angle-double-right"></i></a>
+                                <a href="/product">
+                                    {{
+                                        $root.lang() == 1 ? 'Selengkapnya' : $root.lang() == 3 ? 'Weiterlesen' : 'Read More'
+                                    }}
+                                    <i class="fa fa-angle-double-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -93,7 +110,7 @@
 
             </div>
         </section>
-        <!-- End Specialize Section -->
+        <!-- End Specialize Most Liked Section -->
 
         <!-- Process Section -->
         <section class="process-section" style="background-image: url(assets/images/background/8.jpg);">
@@ -189,167 +206,78 @@
             </div>
         </section>
 
-        <!-- Project Section -->
+        <!-- Trend Project Section -->
         <section class="projects-section">
             <div class="auto-container">
                 <div class="sec-title text-right">
-                    <span class="float-text">Trending</span>
-                    <h2>Trend Product</h2>
+                    <span class="float-text">
+                        {{
+                            $root.lang() == 1 ? 'Tren Saat Ini' : $root.lang() == 3 ? 'gerade angesagt' : 'Trending Now'
+                        }}
+                    </span>
+                    <h2>
+                        {{
+                            $root.lang() == 1 ? 'Produk Tren' : $root.lang() == 3 ? 'Trendprodukt' : 'Trend Product'
+                        }}
+                    </h2>
                 </div>
             </div>
             
             <div class="inner-container">
                 <div class="projects-carousel owl-carousel owl-theme">
                     <!-- Project Block -->
-                    <div class="project-block">
+                    <div class="project-block" v-for="tren in trends">
                         <div class="image-box">
-                            <figure class="image"><img src="assets/images/gallery/1.jpg" alt=""></figure>
+                            <figure class="image"><img :src="$root.asset(tren.image)" alt=""></figure>
                             <div class="overlay-box">
-                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
+                                <h4><a :href="'/product/'+tren.tb_product.id">{{tren.tb_product.name}}</a></h4>
                                 <div class="btn-box">
-                                    <a href="assets/images/gallery/1.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
+                                    <a :href="$root.asset(tren.image)" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                    <a :href="'/product/'+tren.tb_product.id"><i class="fa fa-external-link"></i></a>
                                 </div>
-                                <span class="tag">Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Block -->
-                    <div class="project-block">
-                        <div class="image-box">
-                            <figure class="image"><img src="assets/images/gallery/2.jpg" alt=""></figure>
-                            <div class="overlay-box">
-                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                                <div class="btn-box">
-                                    <a href="assets/images/gallery/2.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                                </div>
-                                <span class="tag">Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Block -->
-                    <div class="project-block">
-                        <div class="image-box">
-                            <figure class="image"><img src="assets/images/gallery/3.jpg" alt=""></figure>
-                            <div class="overlay-box">
-                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                                <div class="btn-box">
-                                    <a href="assets/images/gallery/3.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                                </div>
-                                <span class="tag">Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Block -->
-                    <div class="project-block">
-                        <div class="image-box">
-                            <figure class="image"><img src="assets/images/gallery/4.jpg" alt=""></figure>
-                            <div class="overlay-box">
-                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                                <div class="btn-box">
-                                    <a href="assets/images/gallery/4.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                                </div>
-                                <span class="tag">Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Block -->
-                    <div class="project-block">
-                        <div class="image-box">
-                            <figure class="image"><img src="assets/images/gallery/5.jpg" alt=""></figure>
-                            <div class="overlay-box">
-                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                                <div class="btn-box">
-                                    <a href="assets/images/gallery/5.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                                </div>
-                                <span class="tag">Architecture</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Block -->
-                    <div class="project-block">
-                        <div class="image-box">
-                            <figure class="image"><img src="assets/images/gallery/3.jpg" alt=""></figure>
-                            <div class="overlay-box">
-                                <h4><a href="project-detail.html">Laxury Home <br>Project</a></h4>
-                                <div class="btn-box">
-                                    <a href="assets/images/gallery/3.jpg" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
-                                    <a href="project-detail.html"><i class="fa fa-external-link"></i></a>
-                                </div>
-                                <span class="tag">Architecture</span>
+                                <span class="tag">{{tren.tb_product.name}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!--End Project Section -->
+        <!--End Trend Project Section -->
 
         <!-- Testimonial Section Two-->
         <section class="testimonial-section-two">
             <div class="auto-container">
                 <div class="sec-title">
-                    <span class="float-text">Testimonial</span>
-                    <h2>What Clients Says</h2>
+                    <span class="float-text">
+                        {{
+                            $root.lang() == 2 ? 'Testimonial' :
+                            $root.lang() == 1 ? 'kesaksian' :
+                            $root.lang() == 3 ? 'Zeugnis' : ''
+                        }}
+                    </span>
+                    <h2>
+                        {{
+                            $root.lang() == 2 ? 'What Clients Says' :
+                            $root.lang() == 1 ? 'Apa Kata Klien' :
+                            $root.lang() == 3 ? 'Was Kunden sagen' : ''
+                        }}
+                    </h2>
                 </div>
 
                 <div class="testimonial-carousel-two owl-carousel owl-theme">
                     <!-- Testimonial block two -->
-                    <div class="testimonial-block-two">
+                    <div class="testimonial-block-two" v-for="testi in testimonies">
                         <div class="inner-box">
-                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
+                            <div class="text">
+                                {{testi.testimoni}}
+                            </div>
                             <div class="info-box">
-                                <div class="thumb"><img src="assets/images/resource/thumb-2.jpg" alt=""></div>
-                                <h5 class="name">Elena Gomes</h5>
-                                <span class="date">July 28 - 2018</span>
+                                <div class="thumb"><img :src="$root.asset(testi.image)" alt=""></div>
+                                <h5 class="name">{{testi.client_name}}</h5>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Testimonial block two -->
-                    <div class="testimonial-block-two">
-                        <div class="inner-box">
-                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
-                            <div class="info-box">
-                                <div class="thumb"><img src="assets/images/resource/thumb-3.jpg" alt=""></div>
-                                <h5 class="name">Aliza Norka</h5>
-                                <span class="date">July 28 - 2018</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial block two -->
-                    <div class="testimonial-block-two">
-                        <div class="inner-box">
-                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
-                            <div class="info-box">
-                                <div class="thumb"><img src="assets/images/resource/thumb-2.jpg" alt=""></div>
-                                <h5 class="name">Elena Gomes</h5>
-                                <span class="date">July 28 - 2018</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial block two -->
-                    <div class="testimonial-block-two">
-                        <div class="inner-box">
-                            <div class="text">I got an excellent design for my future home, from cooperation i was very pleased, everything was done at the highest level.Boldly I recommend to all this company.</div>
-                            <div class="info-box">
-                                <div class="thumb"><img src="assets/images/resource/thumb-3.jpg" alt=""></div>
-                                <h5 class="name">Aliza Norka</h5>
-                                <span class="date">July 28 - 2018</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -359,18 +287,10 @@
         <section class="clients-section style-two">
             <div class="auto-container">
                 <div class="sponsors-outer">
-                    <!--Sponsors Carousel-->
                     <ul class="sponsors-carousel owl-carousel owl-theme">
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/1.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/2.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/3.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/4.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/5.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/1.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/2.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/3.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/4.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/5.png" alt=""></a></figure></li>
+                        <li class="slide-item" v-for="dt in partners"><figure class="image-box">
+                            <a :href="dt.link" target="_BLANK"><img :src="$root.asset(dt.logo)" :alt="dt.partner_name"></a></figure>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -379,17 +299,21 @@
 
         <!-- Video Section -->
         <section class="video-section">
-            <div class="outer-box" style="background-image: url(assets/images/background/9.jpg);">
+            <div class="outer-box" style="background-image: url(/assets/images/background/9.jpg);">
                 <div class="auto-container">
                     <div class="row">
                         <div class="content-column col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-column">
                                 <div class="sec-title light">
-                                    <span class="float-text">See Video</span>
-                                    <h2>Campaign Video</h2>
+                                    <span class="float-text">
+                                        {{
+                                            $root.lang() == 1 ? 'Lihat Video' : $root.lang() == 3 ? 'Siehe Video' : 'See Video'
+                                        }}
+                                    </span>
+                                    <h2>{{video_title}}</h2>
                                 </div>
-                                <span class="title">We Give You The Best</span>
-                                <div class="text">Present all the speakers and participants in GenesisExpo`s beautiful layouts. Choose your favorite variant of layout and create your own. You can create also single speaker profile with all relevant information.</div> 
+                                <span class="title">{{video_subtitle}}</span>
+                                <div class="text">{{video_summary}}</div> 
                             </div>
                         </div>
 
@@ -397,8 +321,8 @@
                         <div class="video-column col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-column">
                                 <div class="video-box">
-                                    <figure class="image"><img src="assets/images/resource/video-img.jpg" alt="">
-                                        <a href="https://www.youtube.com/watch?v=Fvae8nxzVz4" class="link" data-fancybox="gallery" data-caption=""><span class="icon fa fa-play"></span></a>
+                                    <figure class="image"><img src="/assets/images/resource/video-img.jpg" alt="">
+                                        <a :href="video_link" class="link" data-fancybox="gallery" data-caption=""><span class="icon fa fa-play"></span></a>
                                     </figure>
                                 </div>
                             </div>
@@ -417,7 +341,7 @@
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column">
                             <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/faq-img.jpg" alt=""></figure>
+                                <figure class="image"><img src="/assets/images/resource/faq-img.jpg" alt=""></figure>
                             </div>
                         </div>
                     </div>
@@ -425,59 +349,30 @@
                     <div class="accordion-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column">
                             <div class="sec-title">
-                                <span class="float-text">some FAQ’s</span>
-                                <h2>Frequality Asked Questions</h2>
+                                <span class="float-text">
+                                    {{
+                                        $root.lang() == 1 ? 'Beberapa FAQ' : $root.lang() == 3 ? 'einige FAQs' : 'some FAQ’s'
+                                    }}
+                                </span>
+                                <h2>
+                                    {{
+                                        $root.lang() == 1 ? 'Pertanyaan yang diajukan tentang Freality' : $root.lang() == 3 ? 'Häufig gestellte Fragen' : 'Frequality Asked Questions'
+                                    }}
+                                </h2>
                             </div>
                             <ul class="accordion-box">
                                 <!--Block-->
-                                <li class="accordion block">
-                                    <div class="acc-btn">Do you do the design and the execution yourselves? <div class="icon fa fa-plus-square"></div></div>
+                                <li class="accordion block" v-for="faq in faqs">
+                                    <div class="acc-btn">{{faq.question}} <div class="icon fa fa-plus-square"></div></div>
                                     <div class="acc-content">
                                         <div class="content">
-                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div>
+                                            <div class="text">
+                                                {{faq.answere}}
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
 
-                                <!--Block-->
-                                <li class="accordion block active-block">
-                                    <div class="acc-btn active">Do you give Contra and After sales service? <div class="icon fa fa-plus-square"></div></div>
-                                    <div class="acc-content current">
-                                        <div class="content">
-                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
-                                        </div>
-                                    </div>
-                                </li>
-                                
-                                <!--Block-->
-                                <li class="accordion block">
-                                    <div class="acc-btn">Will you be able to give a quote, if given the floor plan? <div class="icon fa fa-plus-square"></div></div>
-                                    <div class="acc-content">
-                                        <div class="content">
-                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <!--Block-->
-                                <li class="accordion block">
-                                    <div class="acc-btn">At what stage an interior designing work could be started?<div class="icon fa fa-plus-square"></div></div>
-                                    <div class="acc-content">
-                                        <div class="content">
-                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <!--Block-->
-                                <li class="accordion block">
-                                    <div class="acc-btn">Do you charge for giving a Proposal?<div class="icon fa fa-plus-square"></div></div>
-                                    <div class="acc-content">
-                                        <div class="content">
-                                            <div class="text">We give a Contra for a Period of 5 years and promise to rectify any fault arising out of faulty workmanship at our cost. However the guarantee does not hold good for mishandling and breakable items.</div> 
-                                        </div>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -494,7 +389,7 @@
                         <!-- Title Column -->
                         <div class="title-column col-lg-4 col-md-12 col-sm-12">
                             <div class="inner-column">
-                                <h1 style="font-size: 28pt !important;">visualizer</h1>
+                                <h1 style="font-size: 28pt !important;">{{promo_section_title}}</h1>
                             </div>
                         </div>
 
@@ -502,7 +397,7 @@
                         <div class="image-column col-lg-4 col-md-12 col-sm-12">
                             <div class="inner-column">
                                 <div class="image-box wow zoomInLeft">
-                                    <figure class="image"><img src="assets/images/resource/mobile-app.png" alt=""></figure>
+                                    <figure class="image"><img :src="$root.asset(promo_img)" alt="Promo Image"></figure>
                                 </div>
                             </div>
                         </div>
@@ -510,9 +405,9 @@
                         <!-- Content Column -->
                         <div class="content-column col-lg-4 col-md-12 col-sm-12">
                             <div class="inner-column">
-                                <h3>Let's <br> Visualize Your Room</h3>
+                                <h3>{{promo_section_subtitle}} <br> {{promo_section_caption}}</h3>
                                 <div class="text">
-                                    <button class="btn btn-primary">Visualize Now</button>
+                                    <!-- <button class="btn btn-primary">Visualize Now</button> -->
                                 </div>
                             </div>
                         </div>
@@ -522,112 +417,45 @@
         </section>
         <!--End App Section -->
 
-        <!-- News Section Two -->
-        <section class="news-section-two">
-            <div class="auto-container">
-                <div class="sec-title">
-                    <span class="float-text">Blogs</span>
-                    <h2>News & Articals</h2>
-                </div>
-
-                <div class="row">
-                    <div class="column col-lg-5 col-md-12 col-sm-12">
-                        <div class="inner-column">
-                            <!-- News Block -->
-                            <div class="news-block-three">
-                                <div class="inner-box">
-                                    <div class="image-box">
-                                        <figure class="image"><img src="assets/images/resource/news-8.jpg" alt=""></figure>
-                                        <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                                    </div>
-                                    <div class="content-box">
-                                        <h3><a href="blog-detail.html">Design is thinking Make Visual</a></h3>
-                                        <ul class="info">
-                                            <li>06 June 2018,</li>
-                                            <li><a href="blog-detail-2.html">John Smith</a></li>
-                                            <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                        </ul>
-                                        <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language of technical terms to learn before you can converse with the experts. </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>    
-
-                    <div class="column col-lg-7 col-md-12 col-sm-12">
-                        <div class="news-block-four">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="assets/images/resource/news-9.jpg" alt=""></figure>
-                                    <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                                </div>
-                                <div class="content-box">
-                                    <h3><a href="blog-detail.html">In Good Taste: Mark Finlay Architects & Interiors.</a></h3>
-                                    <ul class="info">
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">06 June 2018</a></li>
-                                    </ul>
-                                    <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="news-block-four">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="assets/images/resource/news-10.jpg" alt=""></figure>
-                                    <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                                </div>
-                                <div class="content-box">
-                                    <h3><a href="blog-detail.html">The Lexury Apartment of sepcial interiors.</a></h3>
-                                    <ul class="info">
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">06 June 2018</a></li>
-                                    </ul>
-                                    <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="news-block-four">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image"><img src="assets/images/resource/news-11.jpg" alt=""></figure>
-                                    <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                                </div>
-                                <div class="content-box">
-                                    <h3><a href="blog-detail.html">The Business metting room interior in the rank.</a></h3>
-                                    <ul class="info">
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">06 June 2018</a></li>
-                                    </ul>
-                                    <div class="text">When you enter into any new area of science, you almost always find yourself with a baffling new language.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End News Section Two -->
-
         <!-- Contact Section -->
         <section class="contact-section">
             <div class="inner-container">
                 <div class="sec-title">
-                    <span class="float-text">informaer</span>
-                    <h2>Contact Us</h2>
+                    <span class="float-text">
+                        {{
+                            $root.lang() == 1 ? 'Informasi' : 
+                            $root.lang() == 2 ? 'Information'  : 
+                            $root.lang() == 3 ? 'Information' : ''
+                        }}
+                    </span>
+                    <h2>
+                        {{
+                            $root.lang() == 1 ? 'Hubungi Kami' : 
+                            $root.lang() == 2 ? 'Contact Us' : 
+                            $root.lang() == 3 ? 'Kontaktiere uns' : '' 
+                        }}
+                    </h2>
                 </div>
 
                 <div class="row">
                     <!-- Info Column -->
                     <div class="info-column col-lg-4 col-md-12 col-sm-12">
                         <div class="inner-column">
-                            <h4>Need Support</h4>
+                            <h4>
+                                {{
+                                    $root.lang() == 1 ? 'Butuh Bantuan' : 
+                                    $root.lang() == 2 ? 'Need Support' :
+                                    $root.lang() == 3 ? 'Brauche Unterstützung' : ''
+                                }}
+                            </h4>
                             <ul class="contact-info">
-                                <li>Complax interprice company, 882 <br> street Latrobe, PA 15786</li>
-                                <li>+88 169 787 5256 <br>+88 165 358 5678</li>
-                                <li><a href="#">support@contra.com</a></li>
+                                <li>
+                                    {{
+                                        address
+                                    }}
+                                </li>
+                                <li>{{phone}}</li>
+                                <li><a :href="'mailto:'+email">{{email}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -637,18 +465,19 @@
                         <div class="inner-column">
                             <!-- Contact Form -->
                             <div class="contact-form">
-                                <form method="post" action="http://expert-themes.com/html/contra/sendemail.php">
+                                <form method="post" >
                                     <div class="row">
                                         <div class="form-group col-lg-6 col-md-12">
-                                            <input type="text" name="username" placeholder="Name" required>
+                                            <input type="text" name="username" 
+                                            :placeholder="$root.lang() == 1 ? 'Nama Lengkap' : $root.lang() == 3 ? 'Vollständiger Name' : 'Full Name'" required>
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12">
-                                            <input type="text" name="phone" placeholder="Phone" required>
+                                            <input type="text" name="phone" :placeholder="$root.lang() == 1 ? 'Telepon' : $root.lang() == 3 ? 'Telefon' : 'Phone'" required>
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12">
-                                            <input type="text" name="company" placeholder="Company" required>
+                                            <input type="text" name="company" :placeholder="$root.lang() == 1 ? 'Perusahaan' : $root.lang() == 3 ? 'Unternehmen' : 'Company'" required>
                                         </div>
                                         
                                         <div class="form-group col-lg-6 col-md-12">
@@ -656,11 +485,11 @@
                                         </div>
 
                                         <div class="form-group col-lg-12 col-md-12">
-                                            <textarea name="message" placeholder="Massage"></textarea>
+                                            <textarea name="message" :placeholder="$root.lang() == 1 ? 'Pesan' : $root.lang() == 3 ? 'Botschaft' : 'Message'"></textarea>
                                         </div>
                                         
                                         <div class="form-group col-lg-12 col-md-12">
-                                            <button class="theme-btn btn-style-three" type="submit" name="submit-form">Submit</button>
+                                            <button class="theme-btn btn-style-three" type="submit" name="submit-form">{{$root.lang() == 1 ? 'Kirim' : $root.lang() == 3 ? 'Einreichen' : 'Submit'}}</button>
                                         </div> 
                                     </div>
                                 </form>
@@ -684,30 +513,144 @@
                 socialMedia: [],
                 preferedTitle: '',
                 preferedContent: '',
-                preferedProduct: []
+                preferedProduct: [],
+                faqs: [],
+                testimonies: [],
+                address: '',
+                email: '',
+                phone: '',
+                video_title: '',
+                video_subtitle: '',
+                video_summary: '',
+                video_link: '',
+
+                promo_section_title: '',
+                promo_section_subtitle: '',
+                promo_section_caption: '',
+                promo_img: '',
+
+                trends: [],
+                partners: [],
+
+                en_ : [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+                id_ : [ '<span class="fa fa-long-arrow-left"></span> Kembali', 'Selanjutnya<span class="fa fa-long-arrow-right"></span>' ],
+                deu_: [ '<span class="fa fa-long-arrow-left"></span> Bisherige', 'Nächster<span class="fa fa-long-arrow-right"></span>' ]
             }
         },
         methods: {
-            initialFrame() {
+            async initialFrame() {
                 AOS.init();
-                ApiFrame.getFrame('home')
-                .then(async _responseHttp => {
-                    console.log(_responseHttp)
-                    this.sliders = _responseHttp.data.content.tb_banners
-                    this.preferedTitle = _responseHttp.data.content.tb_static_content.prefered_title
-                    this.preferedContent = _responseHttp.data.content.tb_static_content.prefered_content
-                    this.preferedProduct = await _responseHttp.data.content_prefered
-                })
-                .finally(() => {
-                    if(this.preferedProduct.length > 0) {
-                        this.owlPreferedInit()
-                    }
-                    this.owlBannerInit()
-                })
+                this.partners = await ApiFrame.getPartner()
+                let _content = await ApiFrame.getFrame('home')
+                this.sliders = await _content.content.tb_banners
+                this.preferedTitle = await _content.content.tb_static_content.prefered_title
+                this.preferedContent = await _content.content.tb_static_content.prefered_content
+                this.preferedProduct = await _content.content_prefered
+                this.faqs = await _content.content.tb_faqs
+                this.testimonies = await _content.content.tb_testimonis
+                this.address = await _content.content.tb_profile.tb_addresses[0].address
+                this.phone = await _content.content.tb_profile.phone
+                this.email = await  _content.content.tb_profile.email
+                this.video_title = await _content.content.tb_static_content.video_title
+                this.video_subtitle = await _content.content.tb_static_content.video_subtitle
+                this.video_summary = await _content.content.tb_static_content.video_summary
+                this.video_link = await _content.content.tb_static_content.video_link
+                this.promo_section_title = await _content.content.tb_static_content.promo_section_title
+                this.promo_section_subtitle = await _content.content.tb_static_content.promo_section_subtitle
+                this.promo_section_caption = await _content.content.tb_static_content.promo_section_caption
+                this.promo_img = await _content.content.tb_static_content.promo_section_image
+                this.trends = await _content.content_trend
+                
                 ApiFrame.getSocial_Media()
                 .then(_responseHttp => {
                     this.socialMedia = _responseHttp.data
                 })
+            },
+            owlTrendInit() {
+                if ($('.projects-carousel').length) {
+                    $('.projects-carousel').owlCarousel({
+                        loop:true,
+                        margin:0,
+                        nav:true,
+                        smartSpeed: 700,
+                        autoplay: true,
+                        navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            600:{
+                                items:2
+                            },
+                            800:{
+                                items:3
+                            },
+                            1024:{
+                                items:4
+                            },
+                            1400:{
+                                items:5
+                            }
+                        }
+                    });    		
+                }
+
+                
+            },
+            initPartner() {
+                if ($('.sponsors-carousel').length) {
+                    $('.sponsors-carousel').owlCarousel({
+                        loop:true,
+                        margin:30,
+                        nav:true,
+                        smartSpeed: 700,
+                        autoplay: true,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            600:{
+                                items:2
+                            },
+                            768:{
+                                items:3
+                            },
+                            1024:{
+                                items:4
+                            },
+                            1400:{
+                                items:5
+                            },
+                        }
+                    });    		
+                }
+            },
+            owlTestimoniInit() {
+                if ($('.testimonial-carousel-two').length) {
+                    $('.testimonial-carousel-two').owlCarousel({
+                        loop:true,
+                        margin:70,
+                        nav:true,
+                        smartSpeed: 700,
+                        autoplay: true,
+                        navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            600:{
+                                items:1
+                            },
+                            768:{
+                                margin:30,
+                                items:2
+                            },
+                            1024:{
+                                items:2
+                            }
+                        }
+                    });    		
+                }
             },
             owlPreferedInit() {
                 if ($('.image-carousel').length && $('.thumbs-carousel').length) {
@@ -720,7 +663,7 @@
                             loop:false, items: 1, 
                             margin: 0, 
                             nav: false,
-                            navText: [ '<span class="icon fa fa-angle-left"></span>', '<span class="icon fa fa-angle-right"></span>' ],
+                            navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
                             dots: false,
                             autoplay: true,
                             autoplayTimeout: 5000
@@ -737,7 +680,7 @@
                             margin: 20,
                             items: 1,
                             nav: true,
-                            navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+                            navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
                             dots: false,
                             center: false,
                             autoplay: true,
@@ -791,7 +734,7 @@
                         autoHeight: true,
                         autoplay: true,
                         autoplayTimeout:10000,
-                        navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+                        navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
                         responsive:{
                             0: { items:1 },
                             600: { items:1 },
@@ -805,9 +748,23 @@
         beforeCreate() {},
         created() {},
         beforeMount() {
+           
         },
-        mounted() {
-            this.initialFrame()
+        async mounted() {
+            await this.initialFrame()
+            if(this.preferedProduct.length > 0) {
+                this.owlPreferedInit()
+            }
+            this.owlBannerInit()
+            if(this.partners.length > 0) {
+                this.initPartner()
+            }
+            if(this.testimonies.length > 0) {
+                this.owlTestimoniInit()
+            }
+            if(this.trends.length > 0) {
+                this.owlTrendInit()
+            }
             // this.owlInit()
         }
     }

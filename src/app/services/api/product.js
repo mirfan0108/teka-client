@@ -1,26 +1,22 @@
-import axios from 'axios'
-const ENV = process.env.BASE_API
-const BLOB_ = process.env.BASE_
+import _DUMMY_PRODUCT from "../_DUMMY/product"
+
+
 class Product {
     static getProduct(page = 1, search = '' , specie = '', construction = 0, rangeWidth = '', rangeThickness = '', rangeLength = '', color = 0) {
         let queries = `?page=${page}&search=${search}&specie=${specie}&construction=${construction}&width=${rangeWidth}&thickness=${rangeThickness}&Length=${rangeLength}&color=${color}`
-        return axios.get(`${ENV}/products/all${queries}`)
+        return _DUMMY_PRODUCT.list
     }
 
     static getDetail_Product(id) {
-        return axios.get(`${ENV}/products/detail/${id}`)
+        return _DUMMY_PRODUCT.detail
     }
 
     static getSpecies() {
-        return axios.get(`${ENV}/products/species`)
+        return _DUMMY_PRODUCT.species
     }
 
     static getConstruction() {
-        return axios.get(`${ENV}/products/construction`)
-    }
-
-    static getBlob(image) {
-        return axios.get(`${BLOB_}/blob/${image}`)
+        return _DUMMY_PRODUCT.construction
     }
 
 }

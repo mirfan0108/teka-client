@@ -1,0 +1,1 @@
+export default [{"id":1,"name":"TLF","createdAt":null,"updatedAt":null},{"id":2,"name":"PBF","createdAt":null,"updatedAt":null},{"id":3,"name":"Herringbone","createdAt":null,"updatedAt":null},{"id":4,"name":"Design Parquet","createdAt":null,"updatedAt":null},{"id":5,"name":"Chevron","createdAt":null,"updatedAt":null}]

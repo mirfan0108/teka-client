@@ -1,0 +1,122 @@
+<template>
+    <div>
+        <!--Page Title-->
+        <section class="page-title" style="background-image:url(/assets/images/background/10.jpg);">
+            <div class="auto-container">
+                <div class="inner-container clearfix">
+                    <div class="title-box">
+                        <h1>{{$root.lang() == 1 ? 'Detail Galeri' : $root.lang() == 2 ? 'Gallery Detail' : 'Galerie Details'}}</h1>
+                        
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="/">{{$root.lang() == 1 ? 'Beranda' : $root.lang() == 2 ? 'Home' : 'Zuhause'}}</a></li>
+                        <li><a href="/gallery">{{$root.lang() == 1 ? 'Galeri' : $root.lang() == 2 ? 'Galleries' : 'Galerie'}}</a></li>
+                        <li v-if="Galeri">{{Galeri.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="project-details-section">
+            <div class="project-detail">
+                <div class="auto-container">
+                    <!--Lower Content-->
+                    <div class="lower-content"> 
+                        <div class="row clearfix">
+                            <!--Content Column-->
+                            <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                                <div class="inner-column">
+                                    <h2>
+                                        {{
+                                            $root.lang() == 1 ? 'Deskripsi' : $root.lang() == 2 ? 'Description' : 'Beschreibung'
+                                        }}
+                                    </h2>
+                                    <p>
+                                        {{Galeri.description}}
+                                    </p> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonial-section-two">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <span class="float-text">
+                        {{
+                            Galeri.name
+                        }}
+                    </span>
+                    <h2>
+                        {{
+                            Galeri.client_name
+                        }}
+                    </h2>
+                </div>
+
+                <div class="testimonial-carousel-two owl-carousel owl-theme">
+                    <!-- Testimonial block two -->
+                    <div class="testimonial-block-two" v-for="dt in Galeri.tb_gallery_images">
+                        <div class="inner-box">
+                            <div class="thumb"><img :src="$root.asset(dt.name)" alt=""></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!--End Portfolio Details-->
+    </div>
+</template>
+
+<script>
+    import ApiGalery from "../services/api/gallery"
+    export default {
+        props: ['id'],
+        data() {
+            return {
+                Galeri: {}
+            }
+        },
+        mounted() {
+            ApiGalery.getDetail_Gallery(this.id, this.$root.lang())
+            .then(resp => {
+                console.log(resp)
+                if(resp && resp.data) {
+                    this.Galeri = resp.data
+                }
+            })
+            .finally(() => {
+                if ($('.testimonial-carousel-two').length) {
+                    $('.testimonial-carousel-two').owlCarousel({
+                        loop:true,
+                        margin:70,
+                        nav:true,
+                        smartSpeed: 700,
+                        autoplay: true,
+                        navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            600:{
+                                items:1
+                            },
+                            768:{
+                                margin:30,
+                                items:2
+                            },
+                            1024:{
+                                items:2
+                            }
+                        }
+                    });    		
+                }
+            })
+        }
+    }
+</script>

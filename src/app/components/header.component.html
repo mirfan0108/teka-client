@@ -255,15 +255,8 @@
         },
         beforeMount() {},
         mounted() {
-            ApiFrame.getConstruction()
-            .then(_responseHttp => {
-                this.constructions = _responseHttp.data
-            })
-
-            ApiFrame.getLang()
-            .then(_responseHttp => {
-                this.langs = _responseHttp.data
-            })
+            this.constructions = ApiFrame.getConstruction()
+            this.langs = ApiFrame.getLang()
         },
         methods: {
             setLang(lang) {

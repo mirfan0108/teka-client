@@ -12,12 +12,16 @@
             <div class="inner-box">
                 <div class="cross-icon"><span class="fa fa-times"></span></div>
                 <div class="title">
-                    <h2>Get Appointment</h2>
+                    <h2>
+                        {{
+                            $root.lang() == 1 ? 'Kirim Pertanyaan' : $root.lang() == 2 ? 'Send Inquiry' : 'Anfrage absenden'
+                        }}
+                    </h2>
                 </div>
                 
                 <!--Appointment Form-->
                 <div class="appointment-form">
-                    <form method="post" action="http://expert-themes.com/html/contra/contact.html">
+                    <form>
                         <div class="form-group">
                             <input type="text" name="text" value="" placeholder="Name" required>
                         </div>
@@ -31,7 +35,11 @@
                             <textarea placeholder="Message"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="theme-btn btn-style-three">Submit now</button>
+                            <button type="submit" class="theme-btn btn-style-three">
+                                {{
+                                    $root.lang() == 1 ? 'Kirim' : $root.lang() == 2 ? 'Send' : 'Senden'
+                                }}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -39,7 +47,7 @@
                 <!--Contact Info Box-->
                 <div class="contact-info-box">
                     <ul class="info-list">
-                        <li>contact@genarate.com</li>
+                        <li>contact@gg.me</li>
                         <li>+(123) 456 7890</li>
                     </ul>
                     <ul class="social-list clearfix">

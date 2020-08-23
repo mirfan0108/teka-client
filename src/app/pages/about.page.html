@@ -5,12 +5,12 @@
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
-                        <h1>About Us</h1>
-                        <span class="title">The Interior speak for themselves</span>
+                        <h1>{{$root.lang() == 1 ? 'Tentang Teka Parquet' : $root.lang() == 3 ? 'Über Teka Parkett' : 'About Teka Parquet'}}</h1>
+                        <!-- <span class="title">The Interior speak for themselves</span> -->
                     </div>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="index.html">Home</a></li>
-                        <li>About Us</li>
+                        <li><a href="/">Home</a></li>
+                        <li>{{$root.lang() == 1 ? 'Tentang Teka Parquet' : $root.lang() == 3 ? 'Über Teka Parkett' : 'About Teka Parquet'}}</li>
                     </ul>
                 </div>
             </div>
@@ -25,11 +25,11 @@
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column">
                             <div class="title-box wow fadeInLeft" data-wow-delay='1200ms'>
-                                <h2>SINCE <br> 1994</h2>
+                                <h2>{{$root.lang() == 1? 'Sejak' : $root.lang() == 3 ? 'Schon Seit' : 'Since'}} <br> {{since}}</h2>
                             </div>
                             <div class="image-box wow fadeInRight" data-wow-delay='600ms'>
-                                <figure class="alphabet-img"><img src="assets/images/resource/alphabet-image.png" alt=""></figure>
-                                <figure class="image"><img src="assets/images/resource/image-1.jpg" alt=""></figure>
+                                <figure class="alphabet-img"><img src="/assets/images/resource/alphabet-image.png" alt=""></figure>
+                                <figure class="image"><img src="/assets/images/resource/image-1.jpg" alt=""></figure>
                             </div>
                         </div>
                     </div>
@@ -39,12 +39,10 @@
                         <div class="inner-column wow fadeInLeft">
                             <div class="content-box">
                                 <div class="title">
-                                    <h2>TEKA</h2>
+                                    <h2>{{name}}</h2>
                                 </div>
                                 <div class="text">
-                                    PT. Tanjung Kreasi Parquet Industry is a wooden floor manufacturer established in 1994 in Indonesia, 
-                                    and a member of DSN group, a public company listed in 2012. The company is specializing in production of 
-                                    Engineered Wood Flooring which has been renowned as TEKA Parquet Brand. 
+                                    {{about}}
                                 </div>
                                 <!-- <div class="link-box"><a href="about.html" class="theme-btn btn-style-one">About Us</a></div> -->
                             </div>
@@ -53,76 +51,20 @@
                 </div>
             </div>
         </section>
-        <!--End About Section -->
-
-        <!--Clients Section-->
-        <section class="clients-section style-two">
-            <div class="auto-container">
-                <div class="sponsors-outer">
-                    <!--Sponsors Carousel-->
-                    <ul class="sponsors-carousel owl-carousel owl-theme">
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/1.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/2.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/3.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/4.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/5.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/1.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/2.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/3.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/4.png" alt=""></a></figure></li>
-                        <li class="slide-item"><figure class="image-box"><a href="#"><img src="assets/images/clients/5.png" alt=""></a></figure></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <!--End Clients Section-->
-
-        <!-- Process Section -->
-        <section class="process-section" style="background-image: url(assets/images/background/8.jpg);">
+        
+        <section class="process-section" style="background-image: url(/assets/images/background/8.jpg);">
             <div class="auto-container">
                 <div class="sec-title light">
-                    <span class="float-text">WHY TEKA</span>
-                    <h2>WHY TEKA</h2>
+                    <span class="float-text">{{$root.lang() == 1 ? 'KENAPA TEKA' : $root.lang() == 2 ? 'WHY TEKA' : 'WARUM TEKA'}} </span>
+                    <h2>{{$root.lang() == 1 ? 'KENAPA TEKA' : $root.lang() == 2 ? 'WHY TEKA' : 'WARUM TEKA'}}</h2>
                 </div>
                 <div class="row">
                     <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
+                    <div class="process-block col-lg-3 col-md-6 col-sm-12" v-for="(dt, index) in whys">
                         <div class="inner-box">
-                            <span class="count">01</span>
-                            <h4><a href="service-detail.html">Material</a></h4>
-                            <div class="text">TEKA Parquet use green raw material</div>
-                            <!-- <div class="link-box"><a href="service-detail.html">Read More</a></div> -->
-                        </div>
-                    </div>
-
-                    <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <span class="count">02</span>
-                            <h4><a href="service-detail.html">Certificate</a></h4>
-                            <div class="text">
-                                Our production process is certified to iso 9001:2008
-                            </div>
-                            <!-- <div class="link-box"><a href="service-detail.html">Read More</a></div> -->
-                        </div>
-                    </div>
-
-                    <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <span class="count">03</span>
-                            <h4><a href="service-detail.html">Quality</a></h4>
-                            <div class="text">Our products are comply with standard quality in Japan, Europe, US and Canada</div>
-                            <!-- <div class="link-box"><a href="service-detail.html">Read More</a></div> -->
-                        </div>
-                    </div>
-
-                    <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <span class="count">04</span>
-                            <h4><a href="service-detail.html">Products</a></h4>
-                            <div class="text">TEKA Parquet has many products range including superior items</div>
+                            <span class="count">0{{index+1}}</span>
+                            <h4><a href="service-detail.html">{{dt.title}}</a></h4>
+                            <div class="text">{{dt.summary}}</div>
                             <!-- <div class="link-box"><a href="service-detail.html">Read More</a></div> -->
                         </div>
                     </div>
@@ -132,67 +74,55 @@
         <!--End Process Section -->
 
         <!-- Team Section -->
-        <!-- <section class="team-section">
+        <section class="team-section">
             <div class="auto-container">
                 <div class="sec-title">
-                    <span class="float-text">Certificate</span>
-                    <h2>Certificate</h2>
+                    <span class="float-text">{{$root.lang() == 1? 'Sertifikat' : $root.lang() == 3 ? 'Zertifikat' : 'Certificate'}}</span>
+                    <h2>{{$root.lang() == 1? 'Sertifikat' : $root.lang() == 3 ? 'Zertifikat' : 'Certificate'}}</h2>
                 </div>
 
                 <div class="row clearfix">
-                    <div class="team-block col-lg-4 col-md-6 col-sm-12">
+                    <div class="team-block col-lg-4 col-md-6 col-sm-12" v-for="cert in certificates">
                         <div class="inner-box">
                             <div class="image-box">
-                                <div class="image"><a href="team.html"><img src="assets/images/resource/team-1.jpg" alt=""></a></div>
-                                <ul class="social-links">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                                </ul>
-                                <h3 class="name"><a href="team.html">Scott Grey</a></h3>
+                                <div class="image">
+                                    <a :href="$root.asset(cert.image)" target="_BLANK"><img :src="$root.asset(cert.image)" alt="" style="height: 420px;"></a></div>
+                                <h3 class="name"><a style="font-size: 9pt;" href="javascript:void(0)">{{cert.name}}</a></h3>
                             </div>
-                            <span class="designation">Architect</span>
-                        </div>
-                    </div>
-                    <div class="team-block col-lg-4 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <div class="image"><a href="team.html"><img src="assets/images/resource/team-2.jpg" alt=""></a></div>
-                                <ul class="social-links">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                                </ul>
-                                <h3 class="name"><a href="team.html">Russel Reed</a></h3>
-                            </div>
-                            <span class="designatiion">Project Manager</span>
-                        </div>
-                    </div>
-                    <div class="team-block col-lg-4 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <div class="image"><a href="team.html"><img src="assets/images/resource/team-3.jpg" alt=""></a></div>
-                                <ul class="social-links">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-whatsapp"></i></a></li>
-                                </ul>
-                                <h3 class="name"><a href="team.html">Cheryl Ray</a></h3>
-                            </div>
-                            <span class="designatiion">Interior Designer</span>
+                            <!-- <span class="designation">Architect</span> -->
                         </div>
                     </div>
 
                 </div>
             </div>
-        </section> -->
+        </section>
         <!--End Team Section -->
 
     </div>
 </template>
+
+<script>
+    import ApiFrame from "../services/api/content.js"
+    export default {
+        data() {
+            return {
+                certificates: [],
+                about: '',
+                since: '',
+                name: '',
+                whys: [],
+                partners: []
+
+            }
+        },
+        mounted() {
+            this.partners = ApiFrame.getPartner()
+            this.name = ApiFrame.getFrame('home').content.tb_profile.name
+            this.about = ApiFrame.getFrame('home').content.tb_profile.about
+            this.since = ApiFrame.getFrame('home').content.tb_profile.since
+            this.whys = ApiFrame.getFrame('home').content.tb_profile.tb_why_us
+            this.certificates = ApiFrame.getCert()
+        }
+    }
+
+</script>

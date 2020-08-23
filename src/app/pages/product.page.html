@@ -318,7 +318,7 @@
                 }
             },
             fetchProduct() {
-                ApiProduct.getProduct( 
+                this.products = ApiProduct.getProduct( 
                     this.currentPage, 
                     this.search, 
                     this.specieSelected, 
@@ -327,25 +327,14 @@
                     this.rangeThickness,
                     this.rangeLength,
                     this.colorSelected
-                )
-                .then(_responseHtml => {
-                    this.products = _responseHtml.data.rows
-                    this.pager = this.$root.paginationCreator(_responseHtml.data.count)
-                })
-                .catch((err) => console.log(err))
-                .finally(() => {})
+                ).rows
+                this.pager = this.$root.paginationCreator(ApiProduct.getProduct().count)
             },
             fetchSpecies() {
-                ApiProduct.getSpecies()
-                .then(_responseHtml => {
-                    this.species = _responseHtml.data
-                })
+                this.species = ApiProduct.getSpecies()
             },
             fetchConstruction() {
-                ApiProduct.getConstruction()
-                .then(_responseHtml => {
-                    this.contructions = _responseHtml.data
-                })
+                this.contructions = ApiProduct.getConstruction()
             },
             setPage(page) {
                 this.currentPage = page

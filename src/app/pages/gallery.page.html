@@ -5,12 +5,11 @@
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
-                        <h1>Galleries</h1>
-                        <span class="title">The Interior speak for themselves</span>
+                        <h1>{{$root.lang() == 1 ? 'Galeri' : $root.lang() == 2 ? 'Galleries' : 'Galerie'}}</h1>
                     </div>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="index.html">Home</a></li>
-                        <li>Galleries</li>
+                        <li><a href="/">{{$root.lang() == 1 ? 'Beranda' : $root.lang() == 2 ? 'Home' : 'Zuhause'}}</a></li>
+                        <li>{{$root.lang() == 1 ? 'Galeri' : $root.lang() == 2 ? 'Galleries' : 'Galerie'}}</li>
                     </ul>
                 </div>
             </div>
@@ -22,159 +21,19 @@
             <div class="auto-container">
                 <div class="row">
                     <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
+                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12" v-for="galeri in galleries">
                         <div class="inner-box">
                             <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-4.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
+                                <figure class="image">
+                                    <img :src="$root.asset(galeri.tb_gallery_images[0].name)" alt="">
+                                </figure>
+                                <div class="overlay-box"><a :href="'/gallery/'+galeri.id"><i class="fa fa-link"></i></a></div>
                             </div>
                             <div class="caption-box">
                                 <div class="inner">
-                                    <h3><a href="blog-detail.html">In Good Taste: Mark Finlay Architects & Interiors.</a></h3>
+                                    <h3><a :href="'/gallery/'+galeri.id">{{galeri.name}}</a></h3>
                                     <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-5.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">The Lexury Apartment of sepcial interiors.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-6.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">6 Easy Ways to Create a Backyard Paradise.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-7.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">The Business metting room interior in the rank.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-12.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">In Good Taste: Mark Finlay Architects & Interiors.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-13.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">The Lexury Apartment of sepcial interiors.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-14.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">6 Easy Ways to Create a Backyard Paradise.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image"><img src="assets/images/resource/news-15.jpg" alt=""></figure>
-                                <div class="overlay-box"><a href="blog-detail.html"><i class="fa fa-link"></i></a></div>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a href="blog-detail.html">The Business metting room interior in the rank.</a></h3>
-                                    <ul class="info">
-                                        <li>06 June 2018,</li>
-                                        <li><a href="blog-detail-2.html">John Smith</a></li>
-                                        <li><a href="blog-detail-2.html">3 Commets</a></li>
+                                        <li>{{galeri.client_name}}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -183,7 +42,7 @@
                 </div>
 
                 <!--Post Share Options-->
-                <div class="styled-pagination">
+                <!-- <div class="styled-pagination">
                     <ul class="clearfix">
                         <li class="prev-post"><a href="#"><span class="fa fa-long-arrow-left"></span> Prev</a></li>
                         <li><a href="#">1</a></li>
@@ -191,9 +50,33 @@
                         <li><a href="#">3</a></li>
                         <li class="next-post"><a href="#"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </section>
         <!--End Blog Section -->
     </div>
 </template>
+
+<script>
+    import Gallery from "../services/api/gallery.js"
+    export default {
+        data() {
+            return {
+                galleries: [],
+                currentPage: 1,
+                totalPage: 1,
+                totalRows: 0
+            }
+        },
+        mounted() {
+            this.initGallery()
+        },
+        methods: {
+            initGallery() {
+                this.galleries = Gallery.getGallery(this.$root.lang(), this.currentPage).rows
+                
+            }
+        }
+    }
+
+</script>

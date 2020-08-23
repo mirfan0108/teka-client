@@ -188,6 +188,9 @@
                                             <button v-if="!onDownloads" @click.prevent="getTechnicalSheets()" class="theme-btn btn-style-one" style="width: 100%">{{onDownloads ? 'Please Wait...':'Technical Sheet'}}</button>
                                             <button v-if="onDownloads" style="width: 100%;" disabled>Please Wait...</button>
                                         </div>
+                                        <div style="margin-top: 10px;" >
+                                            <a id="demo-tds" href="/assets/tds/demo/TDS_White_Mapple.pdf" class="theme-btn btn-style-one" style="width: 100%;">Preview TDS</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -219,6 +222,7 @@
         </div>
         <!--End Sidebar Page Container-->
         
+        <!-- DEMO TDS -->
     </div>
 </template>
 
@@ -239,195 +243,19 @@
         },
         methods: {
             fetchProduct() {
-                ApiProduct.getProduct()
-                .then(_responseHtml => {
-                    this.products = _responseHtml.data.rows
-                })
-                .catch((err) => console.log(err))
-                .finally(() => {})
+                this.products = ApiProduct.getProduct().rows
             },
             fetchDetail() {
-                ApiProduct.getDetail_Product(this.id)
-                .then(_responseHtml => {
-                    this.details = _responseHtml.data
-                })
+                this.details = ApiProduct.getDetail_Product(this.id)
             },
             async getTechnicalSheets() {
-                this.onDownloads = true
-                let dataBase64
-                ApiProduct.getBlob(this.details.image)
-                .then(_resp => {
-                    dataBase64 = _resp.data
-                })
-                .finally(() => {
-                    let thickness = ''
-                    let _width = ''
-                    let _length = ''
-                    this.details.tb_size_thicknesses.map((_val, index) => {
-                        thickness += this.$root.lang() == 2 ? this.$root.convertToInch(_val.size_thickness) : _val.size_thickness
-                        thickness += this.details.tb_size_thicknesses[index + 1] ? ' /' : this.$root.lang() == 2 ? ' inch' : ' mm'
-                    })
-
-                    this.details.tb_size_widths.map((_val, index) => {
-                        _width += this.$root.lang() == 2 ? this.$root.convertToInch(_val.size_width) : _val.size_width
-                        _width += this.details.tb_size_widths[index + 1] ? ' /' : this.$root.lang() == 2 ? ' inch' : ' mm'
-                    })
-
-                    this.details.tb_size_lengths.map((_val, index) => {
-                        _length += this.$root.lang() == 2 ? this.$root.convertToInch(_val.size_length) : _val.size_length
-                        _length += this.details.tb_size_lengths[index + 1] ? ' /' : this.$root.lang() == 2 ? ' inch' : ' mm'
-                    })
-
-                    let criteria = ''
-                    let noteCriteria = ''
-                    this.details.tb_criteria_gradings.map(_cr => {
-                        if(this.$root.lang() == _cr.id_lang) {
-                            criteria = _cr.criteria
-                            if(_cr.note && _cr.note != '') {
-                                noteCriteria = 'n/b : '+ _cr.note
-                            }
-                        }
-                    })
-
-                    var filename = `TDS_${this.details.name}.pdf`
-                    var docDefinition = { 
-                        info: {
-                            title: `Technical data sheet ${this.details.name}`,
-                            author: 'Teka Parquet',
-                            subject: 'Technical Data Sheet',
-                            keywords: 'Technical Data Sheet',
-                            creator: 'Teka Parquet',
-                            producer: 'Teka Parquet'
-                        },
-                        pageSize: 'A4',
-                        pageMargins: [ 40, 60, 40, 100 ],
-                        header: {
-                            width: 600,
-                            image: 'headerImage'
-                        },
-                        footer: {
-                            width: 600,
-                            margin: [ 0, 0, 0, 30 ],
-                            image: 'footerImage'
-                        },
-                        content: [
-                            {
-                                margin: [ 0, 40, 0, 0 ],
-                                table: {
-                                    widths: [ '*' ],
-                                    body: [
-                                        [{text: this.details.name, style: 'header'}]
-                                    ]
-                                }
-                            },
-                            {
-                                margin: [ 0, 20, 0, 0 ],
-                                alignment: 'justify',
-                                columns: [
-                                    [
-                                        {
-                                            image: 'productImage',
-                                            margin: [ 0, 0, 0, 20 ]
-                                        },
-                                        {
-                                            table: {
-                                                widths: [ 80, 140 ],
-                                                body: [
-                                                    [{text: 'DETAILS', colSpan: 2, alignment: 'center'}, {}],
-                                                    ['Product Name', this.details.name],
-                                                    ['Product Code', this.details.code],
-                                                    ['Construction', this.details.name],
-                                                    ['Pattern', this.details.pattern],
-                                                    ['Process', this.details.process],
-                                                    ['Finish', this.details.finish],
-                                                    ['Profile', this.details.profile],
-                                                    ['Edge Profile', this.details.edge_profile],
-                                                    ['Backing', this.details.backing],
-                                                    ['Thickness', thickness],
-                                                    ['Width', _width],
-                                                    ['Length', _length]
-                                                ]
-                                            }
-                                        },
-
-                                        { qr: window.location.href, foreground: 'brown' , margin: [ 0, 10, 0, 0 ], fit: '100'},
-                                    ],
-                                    [
-                                        {
-                                            table: {
-                                                headerRows: 1,
-                                                widths: [ '*', 'auto' ],
-                                                body: [
-                                                    [{text: 'INSTALLATION METHODS', colSpan: 2, alignment: 'center'}, {}],
-                                                    ['Fully Bonded', this.details.tb_installation.full_bonded],
-                                                    ['Nailed', this.details.tb_installation.nailed],
-                                                    ['Floated on underlay', this.details.tb_installation.floated],
-                                                    ['Over Underfloor Heating', this.details.tb_installation.over_underfloor]
-                                                ]
-                                            },
-                                        },
-                                        {
-                                            text: 'Grading Criteria',
-                                            style: 'subheader',
-                                            margin: [ 0, 10, 0, 10 ],
-                                        },
-                                        {
-                                            text: criteria
-                                        },
-                                        {
-                                            margin: [ 0, 10, 0, 10 ],
-                                            text: noteCriteria,
-                                            style: 'small'
-                                        },
-                                        {
-                                            table: {
-                                                headerRows: 1,
-                                                widths: [ '*', 'auto' ],
-                                                body: [
-                                                    [{text: 'TECHNICAL CRITERIA', colSpan: 2, alignment: 'center'}, {}],
-                                                    ['Origin', this.details.tb_criteria_detail.origin],
-                                                    ['Responsible Certification', this.details.tb_criteria_detail.certificate],
-                                                    ['Janka Hardess Rating', this.details.tb_criteria_detail.janka],
-                                                    ['Formaldehyde Emission', this.details.tb_criteria_detail.formal_emission],
-                                                    ['Pentachlorophenol Emission', this.details.tb_criteria_detail.penta_emmision],
-                                                    ['Slip Testing', this.details.tb_criteria_detail.slip_test],
-                                                    ['Reaction to Fire Certification', this.details.tb_criteria_detail.reaction_fire],
-                                                    ['Thermal Conductivity', this.details.tb_criteria_detail.thermal],
-                                                ]
-                                            },
-                                        }
-                                    ]
-                                ]
-                            },
-                        ],
-                        images: {
-                            productImage: `data:image/jpeg;base64,${dataBase64.productImage}`,
-                            headerImage: `data:image/jpeg;base64,${dataBase64.headerImage}`,
-                            footerImage: `data:image/jpeg;base64,${dataBase64.footerImage}`
-                        },
-                        styles: {
-                            header: {
-                                fontSize: 18,
-                                bold: true,
-                               
-                            },
-                            subheader: {
-                                fontSize: 15,
-                                bold: true
-                            },
-                            quote: {
-                                italics: true
-                            },
-                            small: {
-                                fontSize: 8
-                            }
-                        }
-                    };
-                    pdfMake.createPdf(docDefinition).download(filename);
-                    setTimeout(() => {
-                        this.onDownloads = false
-                    }, 500)
-                })
+                /** 
+                 * Untuk TDS data yang dibutuhkan akan diproses di backend dan dikirim ke frontend.
+                 * karena detail product sudah terambil sebelumnya maka yang dibutuhkan saat ini adalah blob image header
+                 * dan footer.
+                 * oleh karena itu backend akan mengirimkan blob tersebut
+                 * 
+                */
             }
         }
     }

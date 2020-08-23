@@ -1,0 +1,1 @@
+export default [{"id":2,"country_code":"EN","country_name":"ENGLISH","country_lang":"LANGUAGE","country_flag":"flag/flag-us.png","createdAt":null,"updatedAt":null}]

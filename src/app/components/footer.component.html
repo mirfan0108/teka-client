@@ -8,45 +8,22 @@
                     <div class="big-column col-xl-7 col-lg-12 col-md-12 col-sm-12">
                         <div class="row">
                             <!--Footer Column-->
-                            <div class="footer-column col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                            <div class="footer-column col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                 <div class="footer-widget about-widget">
                                     <div class="footer-logo">
                                         <figure>
-                                            <a href="index.html"><img src="assets/images/logo-white.png" alt="teka logo" width="200"></a>
+                                            <a href="index.html"><img src="/assets/images/logo-white.png" alt="teka logo" width="200"></a>
                                         </figure>
                                     </div>
                                     <div class="widget-content">
-                                        <div class="text">Contra and layouts, in content of dummy text is nonsensical.typefaces of dummy text is appearance of different general the content of dummy text is nonsensical. typefaces of dummy text is nonsensical.</div>
+                                        <div class="text">
+                                            {{footer}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!--Footer Column-->
-                            <div class="footer-column col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="footer-widget recent-posts">
-                                    <h2 class="widget-title">Recent Posts</h2>
-                                     <!--Footer Column-->
-                                    <div class="widget-content">
-                                        <div class="post">
-                                            <div class="thumb"><a href="blog-detail.html"><img src="assets/images/resource/post-thumb-1.jpg" alt=""></a></div>
-                                            <h4><a href="blog-detail.html">Triangle Concrete House on lake</a></h4>
-                                            <ul class="info">
-                                                <li>26 Aug</li>
-                                                <li>3 Comments</li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="post">
-                                            <div class="thumb"><a href="blog-detail.html"><img src="assets/images/resource/post-thumb-2.jpg" alt=""></a></div>
-                                            <h4><a href="blog-detail.html">The Amazing Interior for the Hotel art</a></h4>
-                                            <ul class="info">
-                                                <li>26 Aug</li>
-                                                <li>3 Comments</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>         
+                                    
                         </div>
                     </div>
                     
@@ -55,14 +32,51 @@
                         <div class="row clearfix">
                             <div class="footer-column col-xl-5 col-lg-6 col-md-6 col-sm-12">
                                  <div class="footer-widget links-widget">
-                                    <h2 class="widget-title">Useful links</h2>
+                                    <h2 class="widget-title">
+                                        {{
+                                            $root.lang() == 1 ? 'Tautan ' : 
+                                            $root.lang() == 2 ? 'Useful links' :
+                                            $root.lang() == 3 ? 'Nützliche Links' : ''
+                                        }}
+                                    </h2>
                                     <div class="widget-content">
                                         <ul class="list">
-                                            <li><a href="/about">About</a></li>
-                                            <li><a href="/product">Products</a></li>
-                                            <li><a href="/gallery">Galleries</a></li>
-                                            <li><a href="#">Articles</a></li>
-                                            <li><a href="/contact-us">Contact Us</a></li>
+                                            <li>
+                                                <a href="/about">
+                                                {{
+                                                    $root.lang() == 1 ? 'Tentang Teka':
+                                                    $root.lang() == 2 ? 'About Teka':
+                                                    $root.lang() == 3 ? 'über Teka' : ''
+                                                }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/product">
+                                                {{
+                                                    $root.lang() == 1 ? 'Produk':
+                                                    $root.lang() == 2 ? 'Product':
+                                                    $root.lang() == 3 ? 'Produkt' : ''
+                                                }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/gallery">
+                                                {{
+                                                    $root.lang() == 1 ? 'Galeri' : 
+                                                    $root.lang() == 2 ? 'Gallery':
+                                                    $root.lang() == 3 ? 'Galerie' : ''
+                                                }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/contact-us">
+                                                {{
+                                                    $root.lang() == 1 ? 'Hubungi Kami' :
+                                                    $root.lang() == 2 ? 'Contact Us' :
+                                                    $root.lang() == 3 ? 'Kontaktiere uns' : ''
+                                                }}
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -71,31 +85,19 @@
                             <!--Footer Column-->
                             <div class="footer-column col-xl-7 col-lg-6 col-md-6 col-sm-12">
                                 <div class="footer-widget gallery-widget">
-                                    <h2 class="widget-title">Recent Works</h2>
+                                    <h2 class="widget-title">
+                                        {{
+                                            $root.lang() == 1 ? 'Pekerjaan Terkahir':
+                                            $root.lang() == 2 ? 'Recent Works' : 
+                                            $root.lang() == 3 ? 'Neueste Arbeiten' : ''
+                                        }}
+                                    </h2>
                                     <div class="widget-content">
                                         <div class="outer clearfix">
-                                            <figure class="image">
-                                                <a href="assets/images/gallery/1.jpg" class="lightbox-image" title="Image Title Here"><img src="assets/images/resource/work-thumb-1.jpg" alt=""></a>
-                                            </figure>
-
-                                            <figure class="image">
-                                                <a href="assets/images/gallery/2.jpg" class="lightbox-image" title="Image Title Here"><img src="assets/images/resource/work-thumb-2.jpg" alt=""></a>
-                                            </figure>
-
-                                            <figure class="image">
-                                                <a href="assets/images/gallery/3.jpg" class="lightbox-image" title="Image Title Here"><img src="assets/images/resource/work-thumb-3.jpg" alt=""></a>
-                                            </figure>
-
-                                            <figure class="image">
-                                                <a href="assets/images/gallery/4.jpg" class="lightbox-image" title="Image Title Here"><img src="assets/images/resource/work-thumb-4.jpg" alt=""></a>
-                                            </figure>
-
-                                            <figure class="image">
-                                                <a href="assets/images/gallery/5.jpg" class="lightbox-image" title="Image Title Here"><img src="assets/images/resource/work-thumb-5.jpg" alt=""></a>
-                                            </figure>
-
-                                            <figure class="image">
-                                                <a href="assets/images/gallery/1.jpg" class="lightbox-image" title="Image Title Here"><img src="assets/images/resource/work-thumb-1.jpg" alt=""></a>
+                                            <figure class="image" v-for="gallery in galleries">
+                                                <a :href="$root.asset(gallery.tb_gallery_images[0].name)" class="lightbox-image" :title="gallery.name">
+                                                    <img :src="$root.asset(gallery.tb_gallery_images[0].name)" alt="">
+                                                </a>
                                             </figure>
                                         </div>
                                     </div>       
@@ -111,18 +113,40 @@
         <div class="footer-bottom">
             <div class="auto-container">
                 <div class="inner-container clearfix">
-                    <div class="social-links">
-                        <ul class="social-icon-two">
-                            <li><a href="#">Term and Condition </a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                        </ul>
-                    </div>
                     
                     <div class="copyright-text">
-                        <p>Copyright © 2020 <a href="#">Teka Parquet.</a> All right reserved</p>
+                        <p>
+                            {{
+                                $root.lang() == 1 ? 'Hak Cipta © ' : 
+                                $root.lang() == 2 ? 'Copyright © ' :
+                                $root.lang() ==3 ? 'Urheberrechte ©' : ''
+                            }} 2020 <a href="#">Teka Parquet.</a> 
+                            {{
+                                $root.lang() == 1 ? 'Hak cipta dilindungi Undang-undang' : 
+                                $root.lang() == 2 ? 'All right reserved' : 
+                                $root.lang() == 3 ? 'Alle Rechte vorbehalten' : ''
+                            }}
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 </template>
+
+<script>
+    import ApiFrame from "../services/api/content.js"
+    export default {
+        data() {
+            return {
+                footer: '',
+                galleries: []
+            }
+        },
+        mounted() {
+            this.footer = ApiFrame.getFrame('home').content.tb_profile.about
+            this.galleries = ApiFrame.getFrame('home').content.tb_project_galleries
+            
+        }
+    }
+</script>

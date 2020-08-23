@@ -544,113 +544,113 @@
 
 	//Testimonial Carousel two
 
-	if ($('.testimonial-carousel-two').length) {
+	// if ($('.testimonial-carousel-two').length) {
 
-		$('.testimonial-carousel-two').owlCarousel({
+	// 	$('.testimonial-carousel-two').owlCarousel({
 
-			loop:true,
+	// 		loop:true,
 
-			margin:70,
+	// 		margin:70,
 
-			nav:true,
+	// 		nav:true,
 
-			smartSpeed: 700,
+	// 		smartSpeed: 700,
 
-			autoplay: true,
+	// 		autoplay: true,
 
-			navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+	// 		navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
 
-			responsive:{
+	// 		responsive:{
 
-				0:{
+	// 			0:{
 
-					items:1
+	// 				items:1
 
-				},
+	// 			},
 
-				600:{
+	// 			600:{
 
-					items:1
+	// 				items:1
 
-				},
+	// 			},
 
-				768:{
+	// 			768:{
 
-					margin:30,
+	// 				margin:30,
 
-					items:2
+	// 				items:2
 
-				},
+	// 			},
 
-				1024:{
+	// 			1024:{
 
-					items:2
+	// 				items:2
 
-				}
+	// 			}
 
-			}
+	// 		}
 
-		});    		
+	// 	});    		
 
-	}
+	// }
 
 
 
 	//Projects Carousel
 
-	if ($('.projects-carousel').length) {
+	// if ($('.projects-carousel').length) {
 
-		$('.projects-carousel').owlCarousel({
+	// 	$('.projects-carousel').owlCarousel({
 
-			loop:true,
+	// 		loop:true,
 
-			margin:0,
+	// 		margin:0,
 
-			nav:true,
+	// 		nav:true,
 
-			smartSpeed: 700,
+	// 		smartSpeed: 700,
 
-			autoplay: true,
+	// 		autoplay: true,
 
-			navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
+	// 		navText: [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
 
-			responsive:{
+	// 		responsive:{
 
-				0:{
+	// 			0:{
 
-					items:1
+	// 				items:1
 
-				},
+	// 			},
 
-				600:{
+	// 			600:{
 
-					items:2
+	// 				items:2
 
-				},
+	// 			},
 
-				800:{
+	// 			800:{
 
-					items:3
+	// 				items:3
 
-				},
+	// 			},
 
-				1024:{
+	// 			1024:{
 
-					items:4
+	// 				items:4
 
-				},
+	// 			},
 
-				1400:{
+	// 			1400:{
 
-					items:5
+	// 				items:5
 
-				}
+	// 			}
 
-			}
+	// 		}
 
-		});    		
+	// 	});    		
 
-	}
+	// }
 
 
 
@@ -714,57 +714,7 @@
 
 	//Sponsors Carousel
 
-	if ($('.sponsors-carousel').length) {
-
-		$('.sponsors-carousel').owlCarousel({
-
-			loop:true,
-
-			margin:30,
-
-			nav:true,
-
-			smartSpeed: 700,
-
-			autoplay: true,
-
-			responsive:{
-
-				0:{
-
-					items:1
-
-				},
-
-				600:{
-
-					items:2
-
-				},
-
-				768:{
-
-					items:3
-
-				},
-
-				1024:{
-
-					items:4
-
-				},
-
-				1400:{
-
-					items:5
-
-				},
-
-			}
-
-		});    		
-
-	}
+	
 
 
 
