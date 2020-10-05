@@ -3,6 +3,40 @@
         <!-- Bnner Section -->
         <section class="banner-section-three" v-if="sliders.length > 0">
             <div class="banner-carousel-two owl-carousel owl-theme" >
+                <div class="slide-item" style="background-image: url('/assets/images/background/11.jpg');">
+                    <div class="auto-container">
+                        <div class="content-box clearfix">
+                            <div class="inner-box">
+                                <h2>Selamat Datang</h2>
+                                <div class="text">
+                                    Buat interor anda menjadi lebih elegan bersama kami.
+                                </div>
+                                <div class="link-box">
+                                    <a href="javascript:;">
+                                        Download Katalog
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-item" style="background-image: url('/assets/images/background/11.jpg');">
+                    <div class="auto-container">
+                        <div class="content-box clearfix">
+                            <div class="inner-box">
+                                <h2>Subscribe</h2>
+                                <div class="text">
+                                    Pastikan anda selalu update berita terbaru kami.
+                                </div>
+                                <div class="link-box">
+                                    <a href="javascript:;">
+                                        Subscibe Sekarang
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="slide-item" v-for="slide in sliders" :style="`background-image: url(${$root.asset(slide.image)});`">
                     <div class="auto-container">
                         <div class="content-box clearfix">
@@ -297,41 +331,6 @@
         </section>
         <!--End Clients Section-->
 
-        <!-- Video Section -->
-        <section class="video-section">
-            <div class="outer-box" style="background-image: url(/assets/images/background/9.jpg);">
-                <div class="auto-container">
-                    <div class="row">
-                        <div class="content-column col-lg-6 col-md-12 col-sm-12">
-                            <div class="inner-column">
-                                <div class="sec-title light">
-                                    <span class="float-text">
-                                        {{
-                                            $root.lang() == 1 ? 'Lihat Video' : $root.lang() == 3 ? 'Siehe Video' : 'See Video'
-                                        }}
-                                    </span>
-                                    <h2>{{video_title}}</h2>
-                                </div>
-                                <span class="title">{{video_subtitle}}</span>
-                                <div class="text">{{video_summary}}</div> 
-                            </div>
-                        </div>
-
-                        <!-- Video Column -->
-                        <div class="video-column col-lg-6 col-md-12 col-sm-12">
-                            <div class="inner-column">
-                                <div class="video-box">
-                                    <figure class="image"><img src="/assets/images/resource/video-img.jpg" alt="">
-                                        <a :href="video_link" class="link" data-fancybox="gallery" data-caption=""><span class="icon fa fa-play"></span></a>
-                                    </figure>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End Video Section -->
 
         <!-- FAQ Section -->
         <section class="faq-section"> 
@@ -540,31 +539,47 @@
         methods: {
             async initialFrame() {
                 AOS.init();
-                this.partners = await ApiFrame.getPartner()
-                let _content = await ApiFrame.getFrame('home')
-                this.sliders = await _content.content.tb_banners
-                this.preferedTitle = await _content.content.tb_static_content.prefered_title
-                this.preferedContent = await _content.content.tb_static_content.prefered_content
-                this.preferedProduct = await _content.content_prefered
-                this.faqs = await _content.content.tb_faqs
-                this.testimonies = await _content.content.tb_testimonis
-                this.address = await _content.content.tb_profile.tb_addresses[0].address
-                this.phone = await _content.content.tb_profile.phone
-                this.email = await  _content.content.tb_profile.email
-                this.video_title = await _content.content.tb_static_content.video_title
-                this.video_subtitle = await _content.content.tb_static_content.video_subtitle
-                this.video_summary = await _content.content.tb_static_content.video_summary
-                this.video_link = await _content.content.tb_static_content.video_link
-                this.promo_section_title = await _content.content.tb_static_content.promo_section_title
-                this.promo_section_subtitle = await _content.content.tb_static_content.promo_section_subtitle
-                this.promo_section_caption = await _content.content.tb_static_content.promo_section_caption
-                this.promo_img = await _content.content.tb_static_content.promo_section_image
-                this.trends = await _content.content_trend
-                
-                ApiFrame.getSocial_Media()
-                .then(_responseHttp => {
-                    this.socialMedia = _responseHttp.data
+                // this.partners = await 
+                ApiFrame.getFrame('home')
+                .then(async _content => {
+                    this.sliders = await _content.data.content.tb_banners
+                    this.preferedTitle = await _content.data.content.tb_static_content.prefered_title
+                    this.preferedContent = await _content.data.content.tb_static_content.prefered_content
+                    this.preferedProduct = await _content.data.content_prefered
+                    this.faqs = await _content.data.content.tb_faqs
+                    this.testimonies = await _content.data.content.tb_testimonis
+                    this.address = await _content.data.content.tb_profile.tb_addresses[0].address
+                    this.phone = await _content.data.content.tb_profile.phone
+                    this.email = await _content.data.content.tb_profile.email
+                    this.video_title = await _content.data.content.tb_static_content.video_title
+                    this.video_subtitle = await _content.data.content.tb_static_content.video_subtitle
+                    this.video_summary = await _content.data.content.tb_static_content.video_summary
+                    this.video_link = await _content.data.content.tb_static_content.video_link
+                    this.promo_section_title = await _content.data.content.tb_static_content.promo_section_title
+                    this.promo_section_subtitle = await _content.data.content.tb_static_content.promo_section_subtitle
+                    this.promo_section_caption = await _content.data.content.tb_static_content.promo_section_caption
+                    this.promo_img = await _content.data.content.tb_static_content.promo_section_image
+                    this.trends = await _content.data.content_trend
                 })
+                .then(() => {
+                    ApiFrame.getPartner().then(_partner => {
+                        this.partners = _partner.data
+                    }).finally(() => this.initPartner() )
+                })
+                .finally(() => {
+                    this.owlBannerInit()
+                    this.owlPreferedInit()
+                    this.owlTrendInit()
+                    this.owlTestimoniInit()
+                    
+                })
+                
+                
+                
+                // ApiFrame.getSocial_Media()
+                // .then(_responseHttp => {
+                //     this.socialMedia = _responseHttp.data
+                // })
             },
             owlTrendInit() {
                 if ($('.projects-carousel').length) {
@@ -755,7 +770,7 @@
             if(this.preferedProduct.length > 0) {
                 this.owlPreferedInit()
             }
-            this.owlBannerInit()
+            
             if(this.partners.length > 0) {
                 this.initPartner()
             }

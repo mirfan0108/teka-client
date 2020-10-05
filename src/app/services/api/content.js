@@ -11,7 +11,7 @@ class Content {
         let lang = sessionStorage.getItem('_LANG') ?  sessionStorage.getItem('_LANG') : 2
         switch (page) {
             case "home":
-                return _DUMMY_CONTENT.Home
+                return axios.get(`${ENV}/api/v1/content/page/home/lang/${lang}`)
             default:
                 break;
         }
@@ -37,11 +37,11 @@ class Content {
     }
 
     static getCert() {
-        return _DUMMY_CERT
+        return axios.get(`${ENV}/api/v1/content/sertificate`)
     }
 
     static getPartner() {
-        return _DUMMY_PARTNER
+        return axios.get(`${ENV}/api/v1/content/partner`)
     }
 }
 

@@ -21,47 +21,6 @@
         <div class="sidebar-page-container">
             <div class="auto-container">
                 <div class="row clearfix">
-                    <div class="content-side col-xl-9 col-lg-8 col-md-12">
-                        <div class="our-shop">
-                            <div class="row clearfix">
-                                <div class="shop-item col-xl-4 col-lg-6 col-md-6 col-sm-12" v-for="product in products">
-                                    <div class="inner-box">
-                                        <div class="image">
-                                            <img :src="$root.asset(product.image)" :alt="product.name" />
-                                            <div class="overlay-box">
-                                                <ul class="cart-option">
-                                                    <li><a :href="'/product/'+product.id"><span class="fa fa-hand-o-up "></span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="lower-content">
-                                            <h3><a :href="'/product/'+product.id">{{product.tb_construction.name}} - {{product.name}}</a></h3>
-                                            <div class="clearfix">
-                                                <div class="pull-left">
-                                                    <a class="add-cart" href="#"><span class="fa fa-eye"></span>Visualize Now</a>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                            <!--Post Share Options-->
-                            <div class="styled-pagination">
-                                <ul class="clearfix">
-                                    <li class="prev-post">
-                                        <a href="#"><span class="fa fa-long-arrow-left"></span> Prev</a>
-                                    </li>
-                                    <li v-for="page in pager" :class="currentPage == page ? 'active' : ''">
-                                        <a href="javascript:void(0)" @click.prevent="setPage(page)">{{page}}</a>
-                                    </li>
-                                    <li class="next-post"><a href="#"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!--Sidebar Side-->
                     <div class="sidebar-side col-xl-3 col-lg-4 col-md-12">
                         <aside class="sidebar">
@@ -131,7 +90,7 @@
                                                         <a href="javascript:void(0)" @click.prevent="filterColor(1)">Light </span></a>
                                                     </li>
                                                     <li :class="colorSelected == 2 ? 'clearfix active' : 'clearfix'" >
-                                                        <a href="javascript:void(0)" @click.prevent="filterColor(2)">Medium Dark </span></a>
+                                                        <a href="javascript:void(0)" @click.prevent="filterColor(2)">Medium</span></a>
                                                     </li>
                                                     <li :class="colorSelected == 3 ? 'clearfix active' : 'clearfix'" >
                                                         <a href="javascript:void(0)" @click.prevent="filterColor(3)">Dark </span></a>
@@ -221,6 +180,48 @@
                             </div>  
                         </aside>
                     </div>
+                    <div class="content-side col-xl-9 col-lg-8 col-md-12">
+                        <div class="our-shop">
+                            <div class="row clearfix">
+                                <div class="shop-item col-xl-4 col-lg-6 col-md-6 col-sm-12" v-for="product in products">
+                                    <div class="inner-box">
+                                        <div class="image">
+                                            <img :src="$root.asset(product.image)" :alt="product.name" />
+                                            <div class="overlay-box">
+                                                <ul class="cart-option">
+                                                    <li><a :href="'/product/'+product.id"><span class="fa fa-hand-o-up "></span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="lower-content">
+                                            <h3><a :href="'/product/'+product.id">{{product.tb_construction.name}} - {{product.name}}</a></h3>
+                                            <!-- <div class="clearfix">
+                                                <div class="pull-left">
+                                                    <a class="add-cart" href="#"><span class="fa fa-eye"></span>Visualize Now</a>
+                                                </div>
+                                            </div> -->
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!--Post Share Options-->
+                            <div class="styled-pagination">
+                                <ul class="clearfix">
+                                    <li class="prev-post">
+                                        <a href="#"><span class="fa fa-long-arrow-left"></span> Prev</a>
+                                    </li>
+                                    <li v-for="page in pager" :class="currentPage == page ? 'active' : ''">
+                                        <a href="javascript:void(0)" @click.prevent="setPage(page)">{{page}}</a>
+                                    </li>
+                                    <li class="next-post"><a href="#"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>
@@ -318,7 +319,7 @@
                 }
             },
             fetchProduct() {
-                this.products = ApiProduct.getProduct( 
+                ApiProduct.getProduct( 
                     this.currentPage, 
                     this.search, 
                     this.specieSelected, 
@@ -327,14 +328,23 @@
                     this.rangeThickness,
                     this.rangeLength,
                     this.colorSelected
-                ).rows
-                this.pager = this.$root.paginationCreator(ApiProduct.getProduct().count)
+                ).then(resp => {
+                    console.log(resp)
+                    this.products = resp.data.rows
+                    this.pager = resp.data.count
+                })
             },
             fetchSpecies() {
-                this.species = ApiProduct.getSpecies()
+                ApiProduct.getSpecies()
+                .then(_resp => {
+                    this.species = _resp.data
+                })
             },
             fetchConstruction() {
-                this.contructions = ApiProduct.getConstruction()
+                ApiProduct.getConstruction()
+                .then(_resp => {
+                    this.contructions = _resp.data
+                })
             },
             setPage(page) {
                 this.currentPage = page

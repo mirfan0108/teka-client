@@ -73,7 +73,11 @@
         },
         methods: {
             initGallery() {
-                this.galleries = Gallery.getGallery(this.$root.lang(), this.currentPage).rows
+                Gallery.getGallery(this.$root.lang(), this.currentPage)
+                .then(resp => {
+                    this.galleries = resp.data.rows
+                    totalPage = resp.data.count
+                })
                 
             }
         }

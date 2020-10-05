@@ -116,12 +116,56 @@
             }
         },
         mounted() {
-            this.partners = ApiFrame.getPartner()
-            this.name = ApiFrame.getFrame('home').content.tb_profile.name
-            this.about = ApiFrame.getFrame('home').content.tb_profile.about
-            this.since = ApiFrame.getFrame('home').content.tb_profile.since
-            this.whys = ApiFrame.getFrame('home').content.tb_profile.tb_why_us
-            this.certificates = ApiFrame.getCert()
+            
+            ApiFrame.getFrame('home')
+                .then(_content => {
+                    
+                    this.name = _content.data.content.tb_profile.name
+                    this.about = _content.data.content.tb_profile.about
+                    this.since = _content.data.content.tb_profile.since
+                    this.whys = _content.data.content.tb_profile.tb_why_us
+                })
+                .then(() => {
+                    ApiFrame.getPartner().then(_partner => {
+                        this.partners = _partner.data
+                    }).finally(() => this.initPartner() )
+                })
+                .then(() => {
+                    ApiFrame.getCert()
+                    .then(_resp => {
+                        this.certificates = _resp.data
+                    })
+                })
+        },
+        methods: {
+            initPartner() {
+                if ($('.sponsors-carousel').length) {
+                    $('.sponsors-carousel').owlCarousel({
+                        loop:true,
+                        margin:30,
+                        nav:true,
+                        smartSpeed: 700,
+                        autoplay: true,
+                        responsive:{
+                            0:{
+                                items:1
+                            },
+                            600:{
+                                items:2
+                            },
+                            768:{
+                                items:3
+                            },
+                            1024:{
+                                items:4
+                            },
+                            1400:{
+                                items:5
+                            },
+                        }
+                    });    		
+                }
+            }
         }
     }
 

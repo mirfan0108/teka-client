@@ -113,7 +113,13 @@
         <div class="footer-bottom">
             <div class="auto-container">
                 <div class="inner-container clearfix">
-                    
+                    <div class="social-links">
+                        <ul class="social-icon-two">
+                            <li><a href="https://facebook.com/teka.parquet.3"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/TEKAparquet"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://instagram.com/tekaparquet/?hl=id"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
                     <div class="copyright-text">
                         <p>
                             {{
@@ -144,8 +150,11 @@
             }
         },
         mounted() {
-            this.footer = ApiFrame.getFrame('home').content.tb_profile.about
-            this.galleries = ApiFrame.getFrame('home').content.tb_project_galleries
+            ApiFrame.getFrame('home')
+            .then(_content => {
+                this.footer = _content.data.content.tb_profile.about
+                this.galleries = _content.data.content.tb_project_galleries
+            })
             
         }
     }

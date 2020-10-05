@@ -1,13 +1,15 @@
 import _DUMMY_GALLERY from "../_DUMMY/gallery"
+import axios from 'axios'
+const ENV = process.env.BASE_API
+
 class Gallery {
     static getGallery(lang, page = 1) {
-        return _DUMMY_GALLERY.list
+        let queries = `page=${page}&lang=${lang}`
+        return axios.get(`${ENV}/api/v1/project-gallery/all?${queries}`)
     }
 
     static getDetail_Gallery(id, lang) {
-        return new Promise((resolve, reject) => {
-            resolve ({data: _DUMMY_GALLERY.detail})
-        })
+        return axios.get(`${ENV}/api/v1/project-gallery/detail/${id}`)
     }
 
 }
