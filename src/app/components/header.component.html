@@ -1,24 +1,95 @@
 <template>
-    <header class="main-header header-style-seven">
+    <header class="main-header header-style-two">
+        <div class="alert alert-success" v-if="onSuccess">
+            <strong>{{ 
+                $root.lang() == 1 ? 'Berhasil' : 
+                $root.lang() == 2 ? 'Success' : 
+                $root.lang() == 3 ? 'Erfolg' : ''
+            }}!</strong> {{ 
+                $root.lang() == 1 ? 'Anda telah berlangganan dengan kami' : 
+                $root.lang() == 2 ? 'You have subscribed with us' : 
+                $root.lang() == 3 ? 'Sie haben sich bei uns angemeldet' : ''
+            }}
+        </div>
+        <div class="alert alert-danger" v-if="onError">
+            <strong>{{ 
+                $root.lang() == 1 ? 'Kesalahan' : 
+                $root.lang() == 2 ? 'Error' : 
+                $root.lang() == 3 ? 'Error' : ''
+            }}!</strong> {{ 
+                $root.lang() == 1 ? 'Email yang anda masukan sudah terdaftar!' : 
+                $root.lang() == 2 ? 'The email you entered is already registered!' : 
+                $root.lang() == 3 ? 'Die von Ihnen eingegebene E-Mail ist bereits registriert!' : ''
+            }}
+        </div>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">
+                        {{
+                            $root.lang() == 1 ? 'Berlangganan Sekarang' : 
+                            $root.lang() == 3 ? 'Abonniere jetzt' : 'subscribe Now'
+                        }}
+                    </h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{
+                            $root.lang() == 1 ? 'Dengan mengisi email anda dibawah ini, anda akan menerima berita dari kami' : 
+                            $root.lang() == 3 ? 'Wenn Sie unten Ihre E-Mail-Adresse eingeben, erhalten Sie Neuigkeiten von uns' : 'By filling in your email below, you will receive news from us'
+                        }}
+                    </p>
+                    <div class="form-group">
+                        <input type="email" v-model="email" class="form-control"  placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="closed-modal-subscribe">
+                    {{
+                        $root.lang() == 1 ? 'Tutup' : 
+                        $root.lang() == 3 ? 'Deckel' : 'Close'
+                    }}
+                  </button>
+                  <button type="button" class="btn btn-primary" @click="sendEmail()">
+                        {{
+                            $root.lang() == 1 ? 'Berlangganan' : 
+                            $root.lang() == 3 ? 'Abonniere' : 'Subscribe'
+                        }}
+                    </button>
+                </div>
+              </div>
+          
+            </div>
+        </div>
         <div class="header-top">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="top-right">
                         <ul class="social-icon-four clearfix">
-                            <li><a href="javascript:;" @click="setLang(1)">ID</a></li>
-                            <li><a href="javascript:;" @click="setLang(2)">EN</a></li>
-                            <li><a href="javascript:;" @click="setLang(3)">DE</a></li>
+                            <li><a href="javascript:;" @click="setLang(1)">
+                                <img src="/assets/images/icons/id.png" alt="ID Flag" width="30">
+                            </a></li>
+                            <li><a href="javascript:;" @click="setLang(2)">
+                                <img src="/assets/images/icons/uk.png" alt="EN Flag" width="30">
+                            </a></li>
+                            <li><a href="javascript:;" @click="setLang(3)">
+                                <img src="/assets/images/icons/de.png" alt="DE Flag" width="30">
+                            </a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div class="header-lower">
-            <div class="auto-container">
-                <div class="main-box clearfix">
+            <div class="auto-container" style="max-width: 100%;">
+                <div class="main-box clearfix" style="background-color: rgb(0 0 0 / 57%); border-radius: 0; padding: 0 210px;">
                     <div class="logo-box">
                         <div class="logo">
-                            <a href="/"><img src="/assets/images/logo.png" alt="teka logo"  width="200"></a>
+                            <a href="/"><img src="/assets/images/logo-white.png" alt="teka logo"  width="200"></a>
                         </div>
                     </div>
     
@@ -72,11 +143,7 @@
                                         <ul>
                                             <li>
                                                 <a href="/product">
-                                                    {{ 
-                                                        $root.lang() == 1 ? 'Semua' : 
-                                                        $root.lang() == 2 ? 'All' : 
-                                                        $root.lang() == 3 ? 'Alles' : ''
-                                                    }}
+                                                    Enginered Wood
                                                 </a>
                                             </li>
                                             <li v-for="construction in constructions">
@@ -93,14 +160,19 @@
                                             }}
                                         </a>
                                     </li>
-                                    <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
-                                        <a href="/contact-us">
+                                    <li v-if="resources.length > 0" :class="$root.$router.history.current.name == 'resources.page.html' ? 'current dropdown' : 'dropdown'">
+                                        <a href="javascript:void(0)">
                                             {{ 
                                                 $root.lang() == 1 ? 'Sumber Daya' : 
                                                 $root.lang() == 2 ? 'Resource' : 
                                                 $root.lang() == 3 ? 'Resource' : ''
                                             }}
                                         </a>
+                                        <ul>
+                                            <li v-for="resource in resources">
+                                                <a :href="'/resource/'+resource.id">{{resource.name}}</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </div>
@@ -185,14 +257,19 @@
                                         }}
                                     </a>
                                 </li>
-                                <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
-                                    <a href="/contact-us">
+                                <li v-if="resources.length > 0" :class="$root.$router.history.current.name == 'resources.page.html' ? 'current dropdown' : 'dropdown'">
+                                    <a href="javascript:void(0)">
                                         {{ 
                                             $root.lang() == 1 ? 'Sumber Daya' : 
                                             $root.lang() == 2 ? 'Resource' : 
                                             $root.lang() == 3 ? 'Resource' : ''
                                         }}
                                     </a>
+                                    <ul>
+                                        <li v-for="resource in resources">
+                                            <a :href="'/resource/'+resource.id">{{resource.name}}</a>
+                                        </li>
+                                    </ul>
                                 </li>
                                 
                             </ul> 
@@ -210,13 +287,22 @@
         data() {
             return {
                 constructions: [],
-                langs: []
+                resources: [],
+                email: null,
+                onSuccess: false,
+                onError: false
             }
         },
         beforeMount() {},
         mounted() {
-            this.constructions = ApiFrame.getConstruction()
-            this.langs = ApiFrame.getLang()
+            ApiFrame.getMenus(sessionStorage.getItem('_LANG'))
+            .then(resp => {
+                if(resp.data) {
+                    this.constructions = resp.data.constructions
+                    this.resources = resp.data.resources
+                }
+                console.log('menu => ',resp)
+            })
         },
         methods: {
             setLang(lang) {
@@ -230,6 +316,22 @@
                     result += sentence[i][0].toUpperCase() + sentence[i].slice(1)+ ' '
                 }
                 return result
+            },
+            sendEmail() {
+                ApiFrame.subscribe({email: this.email.toLowerCase()})
+                .catch(err => {
+                    this.onError = true;
+                    setTimeout(() => {
+                        this.onError = false
+                    }, 3000)
+                })
+                .then(resp => {
+                    console.log('data', resp)
+                })
+                .finally(() => {
+                    this.email = null
+                    $("#closed-modal-subscribe").click()
+                })
             }
         }
         

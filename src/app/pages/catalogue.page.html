@@ -1,0 +1,55 @@
+<template>
+    <div>
+         <!--Page Title-->
+         <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+            <div class="auto-container">
+                <div class="inner-container clearfix">
+                    <div class="title-box">
+                        <h1>{{$root.lang() == 1 ? 'Katalog' : $root.lang() == 3 ? 'Katalog' : 'Catalogue'}}</h1>
+                        <!-- <span class="title">The Interior speak for themselves</span> -->
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="/">{{ 
+                            $root.lang() == 1 ? 'Beranda' : 
+                            $root.lang() == 2 ? 'Home' : 
+                            $root.lang() == 3 ? 'Zuhause' : ''
+                        }}</a></li>
+                        <li>{{$root.lang() == 1 ? 'Katalog' : $root.lang() == 3 ? 'Katalog' : 'Catalogue'}}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+        <div class="auto-container">
+            <div class="row">
+                <!-- News Block -->
+                <div class="news-block-two col-lg-6 col-md-12 col-sm-12" v-for="galeri in galleries">
+                    <div class="inner-box">
+                        <div class="image-box">
+                            <figure class="image">
+                                <img :src="$root.asset(galeri.tb_gallery_images[0].name)" alt="">
+                            </figure>
+                        </div>
+                        <div class="caption-box">
+                            <div class="inner">
+                                <h3><a :href="'/gallery/'+galeri.id">{{galeri.name}}</a></h3>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                Catalogue: []
+            }
+        }
+    }
+</script>

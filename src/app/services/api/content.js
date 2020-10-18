@@ -23,6 +23,21 @@ class Content {
     static getConstruction() {
         return _DUMMY_CONSTRUCTION
     }
+    static getMenus(id_lang) {
+        return axios.get(`${ENV}/api/v1/content/menus/${id_lang}`)
+    }
+
+    static getTnc(id_lang) {
+        return axios.get(`${ENV}/api/v1/content/tnc/${id_lang}`)
+    }
+
+    static getPP(id_lang) {
+        return axios.get(`${ENV}/api/v1/content/pp/${id_lang}`)
+    }
+
+    static getResource(id) {
+        return axios.get(`${ENV}/api/v1/content/resources-detail/${id}`)
+    }
 
     static getGallery() {
         return axios.get(`${ENV}/project-gallery/all`)
@@ -42,6 +57,10 @@ class Content {
 
     static getPartner() {
         return axios.get(`${ENV}/api/v1/content/partner`)
+    }
+
+    static subscribe(req) {
+        return axios.post(`${ENV}/api/v1/global/subscribe`, req)
     }
 }
 

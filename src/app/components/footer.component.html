@@ -1,5 +1,5 @@
 <template>
-    <footer class="main-footer alternate" style="background-image: url(images/background/5.jpg);">
+    <footer class="main-footer alternate" style="background-image: url(/assets/images/background/5.jpg);">
         <div class="auto-container">
             <!--Widgets Section-->
             <div class="widgets-section">
@@ -30,7 +30,7 @@
                     <!--Big Column-->
                     <div class="big-column col-xl-5 col-lg-12 col-md-12 col-sm-12">
                         <div class="row clearfix">
-                            <div class="footer-column col-xl-5 col-lg-6 col-md-6 col-sm-12">
+                            <div class="footer-column col-12">
                                  <div class="footer-widget links-widget">
                                     <h2 class="widget-title">
                                         {{
@@ -40,69 +40,82 @@
                                         }}
                                     </h2>
                                     <div class="widget-content">
-                                        <ul class="list">
-                                            <li>
-                                                <a href="/about">
-                                                {{
-                                                    $root.lang() == 1 ? 'Tentang Teka':
-                                                    $root.lang() == 2 ? 'About Teka':
-                                                    $root.lang() == 3 ? 'über Teka' : ''
-                                                }}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/product">
-                                                {{
-                                                    $root.lang() == 1 ? 'Produk':
-                                                    $root.lang() == 2 ? 'Product':
-                                                    $root.lang() == 3 ? 'Produkt' : ''
-                                                }}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/gallery">
-                                                {{
-                                                    $root.lang() == 1 ? 'Galeri' : 
-                                                    $root.lang() == 2 ? 'Gallery':
-                                                    $root.lang() == 3 ? 'Galerie' : ''
-                                                }}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/contact-us">
-                                                {{
-                                                    $root.lang() == 1 ? 'Hubungi Kami' :
-                                                    $root.lang() == 2 ? 'Contact Us' :
-                                                    $root.lang() == 3 ? 'Kontaktiere uns' : ''
-                                                }}
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <ul class="list">
+                                                    <li>
+                                                        <a href="/about">
+                                                        {{
+                                                            $root.lang() == 1 ? 'Tentang Teka':
+                                                            $root.lang() == 2 ? 'About Teka':
+                                                            $root.lang() == 3 ? 'über Teka' : ''
+                                                        }}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/product">
+                                                        {{
+                                                            $root.lang() == 1 ? 'Produk':
+                                                            $root.lang() == 2 ? 'Product':
+                                                            $root.lang() == 3 ? 'Produkt' : ''
+                                                        }}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/gallery">
+                                                        {{
+                                                            $root.lang() == 1 ? 'Galeri' : 
+                                                            $root.lang() == 2 ? 'Gallery':
+                                                            $root.lang() == 3 ? 'Galerie' : ''
+                                                        }}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/contact-us">
+                                                        {{
+                                                            $root.lang() == 1 ? 'Hubungi Kami' :
+                                                            $root.lang() == 2 ? 'Contact Us' :
+                                                            $root.lang() == 3 ? 'Kontaktiere uns' : ''
+                                                        }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <ul class="list">
+                                                    <li>
+                                                        <a href="/term-n-condition" >
+                                                        {{
+                                                            $root.lang() == 1 ? 'Syarat dan Kondisi':
+                                                            $root.lang() == 2 ? 'Term and Condition':
+                                                            $root.lang() == 3 ? 'Nutzungsbedingungen' : ''
+                                                        }}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/privacy-policy" >
+                                                        {{
+                                                            $root.lang() == 1 ? 'Rahasia Pribadi':
+                                                            $root.lang() == 2 ? 'Privacy Policy':
+                                                            $root.lang() == 3 ? 'Datenschutz-Bestimmungen' : ''
+                                                        }}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;" data-toggle="modal" data-target="#myModal"  >
+                                                            {{
+                                                                $root.lang() == 1 ? 'Berlangganan Sekarang' : 
+                                                                $root.lang() == 3 ? 'Abonniere jetzt' : 'subscribe Now'
+                                                            }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!--Footer Column-->
-                            <div class="footer-column col-xl-7 col-lg-6 col-md-6 col-sm-12">
-                                <div class="footer-widget gallery-widget">
-                                    <h2 class="widget-title">
-                                        {{
-                                            $root.lang() == 1 ? 'Pekerjaan Terkahir':
-                                            $root.lang() == 2 ? 'Recent Works' : 
-                                            $root.lang() == 3 ? 'Neueste Arbeiten' : ''
-                                        }}
-                                    </h2>
-                                    <div class="widget-content">
-                                        <div class="outer clearfix">
-                                            <figure class="image" v-for="gallery in galleries">
-                                                <a :href="$root.asset(gallery.tb_gallery_images[0].name)" class="lightbox-image" :title="gallery.name">
-                                                    <img :src="$root.asset(gallery.tb_gallery_images[0].name)" alt="">
-                                                </a>
-                                            </figure>
-                                        </div>
-                                    </div>       
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,7 +134,7 @@
                         </ul>
                     </div>
                     <div class="copyright-text">
-                        <p>
+                        <p style="font-size: 9pt" >
                             {{
                                 $root.lang() == 1 ? 'Hak Cipta © ' : 
                                 $root.lang() == 2 ? 'Copyright © ' :

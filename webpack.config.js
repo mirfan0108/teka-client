@@ -78,7 +78,7 @@ module.exports = {
             ]
         },
         host: '0.0.0.0',
-        port: 9001,
+        port: 9003,
         compress: true,
         open: false,
         watchOptions: {

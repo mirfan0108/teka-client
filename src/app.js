@@ -10,6 +10,11 @@ import ProductPage from "@/app/pages/product.page.html"
 import ProductDetailPage from "@/app/pages/product.detail.page.html"
 import StartPage from "@/app/pages/starter.page.html"
 import ProjectDetailPage from "@/app/pages/project.detail.page.html"
+
+import TncPage from "@/app/pages/tnc.page.html"
+import PrivacyPage from "@/app/pages/privacy.page.html"
+import CataloguePage from "@/app/pages/catalogue.page.html"
+import ResourcePage from "@/app/pages/resources.page.html"
 // END PAGES
 
 // START IMPORT
@@ -68,6 +73,27 @@ const router = new VueRouter({
                   path: "/gallery/:id",
                   name: 'project.detail.page.html',
                   component: ProjectDetailPage,
+                  props: true
+                },
+                {
+                  path: "/term-n-condition",
+                  name: 'tnc.page.html',
+                  component: TncPage
+                },
+                {
+                  path: "/privacy-policy",
+                  name: 'pp.page.html',
+                  component: PrivacyPage
+                },
+                {
+                  path: "/catalogue",
+                  name: 'catalogue.page.html',
+                  component: CataloguePage
+                },
+                {
+                  path: "/resource/:id",
+                  name: 'resources.page.html',
+                  component: ResourcePage,
                   props: true
                 },
               ]

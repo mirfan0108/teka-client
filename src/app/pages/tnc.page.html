@@ -1,0 +1,52 @@
+<template>
+    <div>
+        <!--Page Title-->
+        <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+            <div class="auto-container">
+                <div class="inner-container clearfix">
+                    <div class="title-box">
+                        <h1>{{$root.lang() == 1 ? 'Syarat dan Kondisi' : $root.lang() == 3 ? 'Nutzungsbedingungen' : 'Term and Condition'}}</h1>
+                        <!-- <span class="title">The Interior speak for themselves</span> -->
+                    </div>
+                    <ul class="bread-crumb clearfix">
+                        <li><a href="/">{{ 
+                            $root.lang() == 1 ? 'Beranda' : 
+                            $root.lang() == 2 ? 'Home' : 
+                            $root.lang() == 3 ? 'Zuhause' : ''
+                        }}</a></li>
+                        <li>{{$root.lang() == 1 ? 'Syarat dan Kondisi' : $root.lang() == 3 ? 'Nutzungsbedingungen' : 'Term and Condition'}}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Page Title-->
+        <div class="sidebar-page-container">
+            <div class="auto-container">
+                <div v-html="tnc">
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    import ApiContent from "../services/api/content.js"
+    export default {
+        data() {
+            return {
+                tnc: '',
+                onLoad: true
+            }
+        },
+        mounted() {
+            this.getTnc()
+        },  
+        methods: {
+            getTnc() {
+                ApiContent.getTnc(this.$root.lang())
+                .then(resp => {
+                    this.tnc = resp.data.tnc
+                })
+            }
+        }
+    }
+</script>

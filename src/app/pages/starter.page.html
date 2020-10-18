@@ -42,12 +42,22 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         methods: {
             setStarter(setter) {
                 sessionStorage.setItem('__STARTER', setter)
                 window.location.href = "/"
             }
+        },
+        mounted() {
+            axios.get("http://ip-api.com/json")
+            .then(resp => {
+                if(resp.data && resp.data.countryCode == 'ID') {
+                    sessionStorage.setItem('_LANG', 1)
+                }
+                sessionStorage.setItem('_CC', resp.data.countryCode)
+            })
         }
     }
 </script>

@@ -18,6 +18,10 @@ class Product {
     static getConstruction() {
         return axios.get(`${ENV}/api/v1/products/construction`)
     }
+    static getBlob(image) {
+        return axios.get(`${ENV}/blob/${image}`)
+    }
+
 
 }
 

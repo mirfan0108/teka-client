@@ -3,16 +3,25 @@
         <!-- Bnner Section -->
         <section class="banner-section-three" v-if="sliders.length > 0">
             <div class="banner-carousel-two owl-carousel owl-theme" >
-                <div class="slide-item" style="background-image: url('/assets/images/background/11.jpg');">
+                <div class="slide-item" style="background-image: url('/assets/images/background/12.jpg');">
                     <div class="auto-container">
                         <div class="content-box clearfix">
                             <div class="inner-box">
-                                <h2>Selamat Datang</h2>
+                                <h4 class="title" >
+                                    {{
+                                        $root.lang() == 1 ? 'Selamat Datang di' : $root.lang() == 3 ? 'Willkommen zu' : 'Welcome To'
+                                    }}
+                                </h4>
+                                <h2>TEKA PARQUET</h2>
                                 <div class="text">
-                                    Buat interor anda menjadi lebih elegan bersama kami.
+                                    {{
+                                        $root.lang() == 1 ? 'Buat interor anda menjadi lebih elegan bersama kami.' : 
+                                        $root.lang() == 3 ? 'Machen Sie Ihr Interieur mit uns eleganter.' : 'Make your interior more elegant with us.'
+                                    }}
+                                    
                                 </div>
                                 <div class="link-box">
-                                    <a href="javascript:;">
+                                    <a href="/catalogue" class="btn" style="background-color: #ab8b40; color: white; border-radius: 20px; padding: 5px;">
                                         Download Katalog
                                     </a>
                                 </div>
@@ -20,17 +29,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="slide-item" style="background-image: url('/assets/images/background/11.jpg');">
+                <div class="slide-item" style="background-image: url('/assets/images/background/15.jpg');">
                     <div class="auto-container">
                         <div class="content-box clearfix">
                             <div class="inner-box">
-                                <h2>Subscribe</h2>
-                                <div class="text">
-                                    Pastikan anda selalu update berita terbaru kami.
+                                <h2>TEKA PARQUET</h2>
+                                <div class="text" style="font-size: 14pt">
+                                    {{
+                                        $root.lang() == 1 ? 'Ayo berlangganan! jangan sampai ketinggalan update dari kami' : 
+                                        $root.lang() == 3 ? 'Komm schon, abonnieren! Verpassen Sie nicht unsere Updates' : 'Come on, subscribe! Don\'t miss our updates'
+                                    }}
+                                    
                                 </div>
                                 <div class="link-box">
-                                    <a href="javascript:;">
-                                        Subscibe Sekarang
+                                    <a href="javascript:;" data-toggle="modal" data-target="#myModal"  class="btn" style="background-color: #ab8b40; color: white; border-radius: 20px; padding: 5px;">
+                                        {{
+                                            $root.lang() == 1 ? 'Berlangganan Sekarang' : 
+                                            $root.lang() == 3 ? 'Abonniere jetzt' : 'subscribe Now'
+                                        }}
                                     </a>
                                 </div>
                             </div>
@@ -46,11 +62,11 @@
                                 <div class="text">
                                     {{slide.content}}
                                 </div>
-                                <div class="link-box"><a href="/about">
+                                <!-- <div class="link-box"><a href="/about">
                                     {{
                                         $root.lang() == 1 ? 'Lihat Detail' : $root.lang() == 3 ? 'Im Detail sehen' : 'View Detail'
                                     }}
-                                </a></div>
+                                </a></div> -->
                             </div>
                         </div>
                     </div>
@@ -499,6 +515,9 @@
             </div>
         </section>
         <!--End Contact Section -->
+
+        
+
     </div>
 </template>
 
