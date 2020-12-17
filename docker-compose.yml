@@ -1,0 +1,38 @@
+version: '3'
+services:
+
+  teka-nginx:
+    image: nginx
+    volumes:
+      - ./app/docker-nginx-stack/site.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./config/upstream.conf:/etc/nginx/upstreams/vue.conf:ro     # Development only
+      - ./config/route-dev.conf:/etc/nginx/routes/vue.conf:ro       # Development only
+      # - ./www/docker-vue-stack:/var/www/html:ro                   # Production only
+    ports:
+      - ${APP_PORT:-80}:80
+    networks:
+      - teka-view
+
+  www-teka:
+    image: node:lts-alpine
+    volumes:
+      - npm-cache:/root/.npm
+      - node_modules:/opt/app/node_modules
+      - ./src:/opt/app/src:ro
+      - ./package.json:/opt/app/package.json:ro
+      - ./yarn.lock:/opt/app/yarn.lock:ro
+      - ./webpack.config.js:/opt/app/webpack.config.js:ro
+      - ./www/wwwteka:/opt/app/www/view
+    working_dir: /opt/app
+    networks:
+      teka-view:
+        aliases:
+          - builder.teka-view.com
+    command: ["yarn", "build:serve:install"] # Development only
+    #command: ["yarn", "build:install"]     # Production only
+
+volumes:
+  npm-cache: {}
+  node_modules: {}
+networks:
+  teka-view: {}
