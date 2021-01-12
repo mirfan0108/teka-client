@@ -151,7 +151,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="pull-right">
-                                                        <a href="javascript:void(0)" class="theme-btn btn-style-one" @click.prevent="fetchProduct()">Filtter</a>
+                                                        <a href="javascript:void(0)" class="theme-btn btn-style-one" @click.prevent="filterSize()">Filtter</a>
                                                     </div>
                                                 </div>
                                                 
@@ -199,15 +199,15 @@
                             </div>
                         
                             <!--Post Share Options-->
-                            <div class="styled-pagination">
+                            <div class="styled-pagination" v-if="pager > 1">
                                 <ul class="clearfix">
                                     <li class="prev-post">
-                                        <a href="#"><span class="fa fa-long-arrow-left"></span> Prev</a>
+                                        <a href="javascript:;"><span class="fa fa-long-arrow-left"></span> Prev</a>
                                     </li>
                                     <li v-for="page in pager" :class="currentPage == page ? 'active' : ''">
                                         <a href="javascript:void(0)" @click.prevent="setPage(page)">{{page}}</a>
                                     </li>
-                                    <li class="next-post"><a href="#"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
+                                    <li class="next-post"><a href="javascript:;"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -234,6 +234,7 @@
                 totalProduct: 0,
                 currentPage: 1,
                 onLoad_fetch: true,
+                firstPage: 1,
                 // FILTER
                 specieSelected: 0,
                 constructionSelected: _construc,
@@ -252,7 +253,8 @@
                 sizeThicknessMM: [12,12.7,14,15,19],
                 sizeThicknessInc: [],
                 // ACCORDION
-                accordion: ''
+                accordion: '',
+                
             }
         },
         beforeCreate() {},
@@ -265,8 +267,20 @@
             this.fetchConstruction()
             this.initSlider()
         },
-
+        watch: {
+            currentPage: function(newVal, oldVal) {
+                this.fetchProduct()
+            }
+        },
+        
         methods: {
+            totalPager(count) {
+                if(count > 12) {
+                    this.pager = Math.ceil(count/12);
+                } else {
+                    this.pager = 1
+                }
+            },
             initSlider() {
                 if($('.size-width-slider').length){
                     $( ".size-width-slider" ).slider({
@@ -346,7 +360,7 @@
                 ).then(resp => {
                     console.log(resp)
                     this.products = resp.data.rows
-                    this.pager = resp.data.count
+                    this.totalPager(resp.data.count)
                 })
                 .finally(() => {
                     setTimeout(() => {
@@ -369,16 +383,23 @@
             setPage(page) {
                 this.currentPage = page
             },
+            filterSize() {
+                this.currentPage = 1
+                this.fetchProduct()
+            },
             filterSpecie(selected) {
                 this.specieSelected = selected
+                this.currentPage = 1
                 this.fetchProduct()
             },
             filterColor(selected) {
                 this.colorSelected = selected
+                this.currentPage = 1
                 this.fetchProduct()
             },
             filterConstruction(selected) {
                 this.constructionSelected = selected
+                this.currentPage = 1
                 this.fetchProduct()
             },
             accordionSetter(setter) {
