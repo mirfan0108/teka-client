@@ -21,34 +21,50 @@
         </section>
         <!--End Page Title-->
 
-        <div class="auto-container">
-            <div class="row">
-                <!-- News Block -->
-                <div class="news-block-two col-lg-6 col-md-12 col-sm-12" v-for="galeri in galleries">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image">
-                                <img :src="$root.asset(galeri.tb_gallery_images[0].name)" alt="">
-                            </figure>
-                        </div>
-                        <div class="caption-box">
-                            <div class="inner">
-                                <h3><a :href="'/gallery/'+galeri.id">{{galeri.name}}</a></h3>
-                                
+        <section class="blog-section">
+            <div class="auto-container">
+                <div class="row">
+                    <!-- News Block -->
+                    <div class="news-block-two col-lg-4 col-md-12 col-sm-12" v-for="catalogue in Catalogue">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <figure class="image">
+                                    <img src="/assets/images/icons/PDF-img.jpg" alt="icon pdf" >
+                                </figure>
+                            </div>
+                            <div class="caption-box">
+                                <div class="inner">
+                                    <h3><a :href="$root.catalogue(catalogue.path)" target="_BLANK">{{catalogue.name}}</a></h3>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </template>
 
 <script>
+    import ApiProduct from "../services/api/product.js"
     export default {
         data() {
             return {
                 Catalogue: []
+            }
+        },
+        mounted() {
+            this.initCatalogue()
+        },
+        methods: {
+            initCatalogue() {
+                ApiProduct.getCatalogue(this.$root.lang())
+                .then(resp => {
+                    if(resp && resp.data) {
+                        this.Catalogue = resp.data
+                    }
+                })
             }
         }
     }

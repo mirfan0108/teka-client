@@ -46,6 +46,10 @@
             getTnc() {
                 ApiContent.getResource(this.id)
                 .then(resp => {
+                    console.log('resp', resp)
+                    if(resp.data.id_lang != this.$root.lang()) {
+                        this.$router.replace({ name: 'home.page.html' })
+                    } 
                     this.resouce_title = resp.data.name
                     this.resouce_content = resp.data.content
                 })

@@ -27,7 +27,7 @@
                                 <figure class="image">
                                     <img :src="$root.asset(galeri.tb_gallery_images[0].name)" alt="">
                                 </figure>
-                                <div class="overlay-box"><a :href="'/gallery/'+galeri.id"><i class="fa fa-link"></i></a></div>
+                                <div class="overlay-box"><a :href="'/gallery/'+galeri.id"><i class="fa fa-eye"></i></a></div>
                             </div>
                             <div class="caption-box">
                                 <div class="inner">
@@ -75,8 +75,9 @@
             initGallery() {
                 Gallery.getGallery(this.$root.lang(), this.currentPage)
                 .then(resp => {
+                    console.log('resp', resp)
                     this.galleries = resp.data.rows
-                    totalPage = resp.data.count
+                    this.totalPage = resp.data.count
                 })
                 
             }

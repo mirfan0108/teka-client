@@ -3,10 +3,10 @@
         <!-- Bnner Section -->
         <section class="banner-section-three" v-if="sliders.length > 0">
             <div class="banner-carousel-two owl-carousel owl-theme" >
-                <div class="slide-item" style="background-image: url('/assets/images/background/12.jpg');">
+                <div class="slide-item" style="background-image: url('/assets/images/background/16.jpg'); height: 100%;">
                     <div class="auto-container">
-                        <div class="content-box clearfix">
-                            <div class="inner-box">
+                        <div class="content-box clearfix" style="min-height: 430px; vertical-align: middle;">
+                            <div class="inner-box" >
                                 <h4 class="title" >
                                     {{
                                         $root.lang() == 1 ? 'Selamat Datang di' : $root.lang() == 3 ? 'Willkommen zu' : 'Welcome To'
@@ -22,17 +22,21 @@
                                 </div>
                                 <div class="link-box">
                                     <a href="/catalogue" class="btn" style="background-color: #ab8b40; color: white; border-radius: 20px; padding: 5px;">
-                                        Download Katalog
+                                    {{
+                                        $root.lang() == 1 ? 'Unduh Katalog' :
+                                        $root.lang() == 3 ? 'Katalog Herunterladen' : 'Download Catalogue'
+                                    }}
+                                        
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="slide-item" style="background-image: url('/assets/images/background/15.jpg');">
+                <div class="slide-item" style="background-image: url('/assets/images/background/17.jpg');  height: 100%;">
                     <div class="auto-container">
-                        <div class="content-box clearfix">
-                            <div class="inner-box">
+                        <div class="content-box clearfix" style="min-height: 430px; vertical-align: middle;">
+                            <div class="inner-box" >
                                 <h2>TEKA PARQUET</h2>
                                 <div class="text" style="font-size: 14pt">
                                     {{
@@ -45,7 +49,7 @@
                                     <a href="javascript:;" data-toggle="modal" data-target="#myModal"  class="btn" style="background-color: #ab8b40; color: white; border-radius: 20px; padding: 5px;">
                                         {{
                                             $root.lang() == 1 ? 'Berlangganan Sekarang' : 
-                                            $root.lang() == 3 ? 'Abonniere jetzt' : 'subscribe Now'
+                                            $root.lang() == 3 ? 'Abonniere Jetzt' : 'Subscribe Now'
                                         }}
                                     </a>
                                 </div>
@@ -53,10 +57,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="slide-item" v-for="slide in sliders" :style="`background-image: url(${$root.asset(slide.image)});`">
+                <div class="slide-item" v-for="slide in sliders" :style="`background-image: url(${$root.asset(slide.image)});  height: 100%;` ">
                     <div class="auto-container">
-                        <div class="content-box clearfix">
-                            <div class="inner-box">
+                        <div class="content-box clearfix" style="min-height: 430px; vertical-align: middle;">
+                            <div class="inner-box" >
                                 <h4 class="title" >{{slide.subtitle}}</h4>
                                 <h2>{{slide.title}}</h2>
                                 <div class="text">
@@ -74,14 +78,16 @@
             </div>
 
             <div class="bottom-box">
-                <div class="auto-container">
-                    <div class=" clearfix" style="position: relative; padding: 35px 0;">
-                        <ul class="social-links clearfix">
-                            <li v-for="socmed in socialMedia">
-                                <a :href="socmed.link" target="_BLANK">
-                                    <span :class="socmed.icon_class"></span> {{socmed.name}}
-                                </a>
+                <div class="auto-container" >
+                    <div class=" clearfix" style="position: relative; padding: 30px 0;">
+                        <ul class="social-links clearfix" >
+                            <li>
+                                Folow us 
                             </li>
+                            <li><a href="https://facebook.com/teka.parquet.3">Facebook</a></li>
+                            <li><a href="https://twitter.com/TEKAparquet">Twitter</a></li>
+                            <li><a href="https://instagram.com/tekaparquet/?hl=id">Instagram</a></li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -597,6 +603,7 @@
                 
                 // ApiFrame.getSocial_Media()
                 // .then(_responseHttp => {
+                //     console.log(_responseHttp)
                 //     this.socialMedia = _responseHttp.data
                 // })
             },

@@ -118,6 +118,7 @@ var app = new Vue({
       return {
         base_url: path => ROOT_PATH + "/" + (path || ""),
         asset: path => process.env.ASSETS +"/"+ path,
+        catalogue: path => process.env.CATALOGUE + "/" + path,
         convertToInch: mm => {
           var inches = mm/2.54;
           return inches.toFixed(2)

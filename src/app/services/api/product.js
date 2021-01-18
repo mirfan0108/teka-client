@@ -22,6 +22,10 @@ class Product {
         return axios.get(`${ENV}/blob/${image}`)
     }
 
+    static getCatalogue(id_lang) {
+        return axios.get(`${ENV}/api/v1/global/catalogue?id_lang=${id_lang}`)
+    }
+
 
 }
 

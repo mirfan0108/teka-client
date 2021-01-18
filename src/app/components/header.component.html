@@ -23,7 +23,7 @@
             }}
         </div>
         <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
           
               <!-- Modal content-->
               <div class="modal-content">
@@ -283,6 +283,7 @@
 
 <script>
     import ApiFrame from "../services/api/content.js"
+    import swal from 'sweetalert';
     export default {
         data() {
             return {
@@ -318,20 +319,50 @@
                 return result
             },
             sendEmail() {
-                ApiFrame.subscribe({email: this.email.toLowerCase()})
-                .catch(err => {
-                    this.onError = true;
-                    setTimeout(() => {
-                        this.onError = false
-                    }, 3000)
-                })
-                .then(resp => {
-                    console.log('data', resp)
-                })
-                .finally(() => {
-                    this.email = null
-                    $("#closed-modal-subscribe").click()
-                })
+                let ValidateEmail = txt => {
+                    var EmailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
+                    return EmailPattern.test(txt)
+                }
+                if(ValidateEmail(this.email)) {
+                    ApiFrame.subscribe({ email: this.email.toLowerCase() })
+                        .catch(err => {
+                            this.onError = true;
+                            swal({
+                                title: null,
+                                text: "Your email has been subscribed",
+                                icon: "error",
+                                buttons: false,
+                                dangerMode: true,
+                            });
+                            setTimeout(() => {
+                                this.onError = false
+                            }, 3000)
+                        })
+                        .then(resp => {
+                            if (resp) {
+                                swal({
+                                    title: "Success",
+                                    text: "Thank you subscribing to our Newsletter",
+                                    icon: "success",
+                                    buttons: false,
+                                    dangerMode: false,
+                                });
+                            }
+                        })
+                        .finally(() => {
+                            this.email = null
+                            $("#closed-modal-subscribe").click()
+                        })
+                } else {
+                    swal({
+                        title: null,
+                        text: "Please input your email",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                }
+                
             }
         }
         
