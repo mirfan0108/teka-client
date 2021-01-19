@@ -57,15 +57,27 @@
                     </h2>
                 </div>
 
-                <div class="testimonial-carousel-two owl-carousel owl-theme">
+                <div class="testimonial-carousel-two owl-carousel owl-theme" v-if="Galeri && Galeri.tb_gallery_images.length > 2">
                     <!-- Testimonial block two -->
                     <div class="testimonial-block-two" v-for="dt in Galeri.tb_gallery_images">
                         <div class="inner-box">
-                            <div class="thumb"><img :src="$root.asset(dt.name)" alt=""></div>
+                            <div class="thumb"><img :src="$root.asset(dt.name)" alt="Image teka project" style="height: 350px;"></div>
                         </div>
                     </div>
-
                 </div>
+
+                <div class="row" v-if="Galeri && 2 >= Galeri.tb_gallery_images.length">
+                    <div class="col-6" v-for="dt in Galeri.tb_gallery_images">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="inner-box">
+                                    <div class="thumb"><img :src="$root.asset(dt.name)" alt="Image teka project" style="height: 350px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </section>
 

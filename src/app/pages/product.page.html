@@ -5,12 +5,14 @@
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
-                        <h1>Products</h1>
-                        <span class="title">Our Quality Products</span>
+                        <h1>{{$root.lang() == 1 ? 'Produk' : $root.lang() == 2 ? 'Products' : 'Produkt'}}</h1>
+                        <span class="title">
+                            {{$root.lang() == 1 ? 'Produk Dengan Kualitas Terbaik' : $root.lang() == 2 ? 'Our Quality Products' : 'Unsere Qualitätsprodukte'}}
+                        </span>
                     </div>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="/">Home</a></li>
-                        <li>Products</li>
+                        <li><a href="/">{{$root.lang() == 1 ? 'Beranda' : $root.lang() == 2 ? 'Home' : 'Zuhause'}}</a></li>
+                        <li>{{$root.lang() == 1 ? 'Produk' : $root.lang() == 2 ? 'Products' : 'Produkt'}}</li>
                     </ul>
                 </div>
             </div>
