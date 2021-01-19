@@ -486,34 +486,37 @@
                         <div class="inner-column">
                             <!-- Contact Form -->
                             <div class="contact-form">
-                                <form method="post" >
-                                    <div class="row">
-                                        <div class="form-group col-lg-6 col-md-12">
-                                            <input type="text" name="username" 
-                                            :placeholder="$root.lang() == 1 ? 'Nama Lengkap' : $root.lang() == 3 ? 'Vollständiger Name' : 'Full Name'" required>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-12">
-                                            <input type="text" name="phone" :placeholder="$root.lang() == 1 ? 'Telepon' : $root.lang() == 3 ? 'Telefon' : 'Phone'" required>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-12">
-                                            <input type="text" name="company" :placeholder="$root.lang() == 1 ? 'Perusahaan' : $root.lang() == 3 ? 'Unternehmen' : 'Company'" required>
-                                        </div>
-                                        
-                                        <div class="form-group col-lg-6 col-md-12">
-                                            <input type="email" name="email" placeholder="Email" required>
-                                        </div>
-
-                                        <div class="form-group col-lg-12 col-md-12">
-                                            <textarea name="message" :placeholder="$root.lang() == 1 ? 'Pesan' : $root.lang() == 3 ? 'Botschaft' : 'Message'"></textarea>
-                                        </div>
-                                        
-                                        <div class="form-group col-lg-12 col-md-12">
-                                            <button class="theme-btn btn-style-three" type="submit" name="submit-form">{{$root.lang() == 1 ? 'Kirim' : $root.lang() == 3 ? 'Einreichen' : 'Submit'}}</button>
-                                        </div> 
+                                <div class="row">
+                                    <div class="form-group col-lg-6 col-md-12">
+                                        <input type="text" name="username"
+                                            :placeholder="$root.lang() == 1 ? 'Nama Lengkap' : $root.lang() == 3 ? 'Vollständiger Name' : 'Full Name'"
+                                            v-model="formInquiry.name">
                                     </div>
-                                </form>
+                                
+                                    <div class="form-group col-lg-6 col-md-12">
+                                        <input type="text" name="phone"
+                                            :placeholder="$root.lang() == 1 ? 'Telepon' : $root.lang() == 3 ? 'Telefon' : 'Phone'" v-model="formInquiry.phone">
+                                    </div>
+                                
+                                    <div class="form-group col-lg-6 col-md-12">
+                                        <input type="text" name="company"
+                                            :placeholder="$root.lang() == 1 ? 'Perusahaan (opsional)' : $root.lang() == 3 ? 'Unternehmen (optional)' : 'Company (optional)'" v-model="formInquiry.company">
+                                    </div>
+                                
+                                    <div class="form-group col-lg-6 col-md-12">
+                                        <input type="email" name="email" placeholder="Email" v-model="formInquiry.email">
+                                    </div>
+                                
+                                    <div class="form-group col-lg-12 col-md-12">
+                                        <textarea name="message"
+                                            :placeholder="$root.lang() == 1 ? 'Pesan' : $root.lang() == 3 ? 'Botschaft' : 'Message'" v-model="formInquiry.content"></textarea>
+                                    </div>
+                                
+                                    <div class="form-group col-lg-12 col-md-12">
+                                        <button @click="sendInquiry()" class="theme-btn btn-style-three" type="submit" name="submit-form">{{$root.lang() == 1 ? 'Kirim' :
+                                            $root.lang() == 3 ? 'Einreichen' : 'Submit'}}</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -529,6 +532,8 @@
 
 <script>
     import ApiFrame from "../services/api/content.js"
+    import ApiEmail from "../services/api/email.js"
+
     import AOS from 'aos';
     export default {
         data() {
@@ -556,17 +561,126 @@
                 trends: [],
                 partners: [],
 
+                formInquiry: {
+                    email: "",
+                    subject: "Inquiry From tekaparquet.com",
+                    name: "",
+                    phone: "",
+                    company: "",
+                    content: ""
+                },
+
                 en_ : [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
                 id_ : [ '<span class="fa fa-long-arrow-left"></span> Kembali', 'Selanjutnya<span class="fa fa-long-arrow-right"></span>' ],
                 deu_: [ '<span class="fa fa-long-arrow-left"></span> Bisherige', 'Nächster<span class="fa fa-long-arrow-right"></span>' ]
             }
         },
         methods: {
+            sendInquiry() {
+                if(this.validateInquiry()) {
+                    swal({
+                        title: null,
+                        text: "Please Wait",
+                        icon: "info",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+
+                    ApiEmail.sendInquiry(this.formInquiry)
+                    .catch(err => {
+                        swal({
+                            title: null,
+                            text: err,
+                            icon: "error",
+                            buttons: false,
+                            dangerMode: true,
+                        });
+                    })
+                    .then(resp => {
+                        swal({
+                            title: "Thank You",
+                            text: "Your message has been sent. We will reply your message immediately",
+                            icon: "success",
+                            buttons: false,
+                            dangerMode: true,
+                        });
+                    })
+                    .finally(() => {
+                        this.formInquiry = {
+                            email: "",
+                            subject: "Inquiry From tekaparquet.com",
+                            name: "",
+                            phone: "",
+                            company: "",
+                            content: ""
+                        }
+                    })
+                }
+            },
+            validateInquiry() {
+                let ValidateEmail = txt => {
+                    var EmailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return EmailPattern.test(txt)
+                }
+                if (!this.formInquiry.name.trim().length) {
+                    swal({
+                        title: null,
+                        text: "Name is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if (!this.formInquiry.phone.trim().length) {
+                    swal({
+                        title: null,
+                        text: "Email is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if (!this.formInquiry.content.trim().length) {
+                    swal({
+                        title: null,
+                        text: "Message is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if(!this.formInquiry.email.trim().length) {
+                    swal({
+                        title: null,
+                        text: "Email is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if (!ValidateEmail(this.formInquiry.email)) {
+                    swal({
+                        title: null,
+                        text: "Please input email correctly",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                
+                return true
+            },
             async initialFrame() {
                 AOS.init();
                 // this.partners = await 
                 ApiFrame.getFrame('home')
                 .then(async _content => {
+                    console.log('home => ', _content)
                     this.sliders = await _content.data.content.tb_banners
                     this.preferedTitle = await _content.data.content.tb_static_content.prefered_title
                     this.preferedContent = await _content.data.content.tb_static_content.prefered_content
