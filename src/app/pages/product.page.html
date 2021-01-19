@@ -290,7 +290,7 @@
                         max: 10,
                         slide: ( event, ui ) => {
                             let resWidth 
-                            if(sessionStorage.getItem('_CC') == 'ID') {
+                            if(this.$root.lang() == 1) {
                                 resWidth = ui.value != 0 ? this.sizeWidthMM[ui.value - 1] : 0
                                 $( "input.size-width" ).val( resWidth +"mm");
                                 this.rangeWidth = ui.value != 0 ?  this.sizeWidthMM[ui.value - 1] - 1+"-"+this.sizeWidthMM[ui.value - 1] : ''
@@ -312,7 +312,7 @@
                         max: 7,
                         slide: ( event, ui ) => {
                             let resLength 
-                            if(sessionStorage.getItem('_CC') == 'ID') {
+                            if(this.$root.lang() == 1) {
                                 resLength = ui.value != 0 ? this.sizeLengthMM[ui.value - 1] : 0
                                 $( "input.size-length" ).val( resLength +"mm");
                                 this.rangeLength = ui.value != 0 ?  this.sizeLengthMM[ui.value - 1] - 1+"-"+this.sizeLengthMM[ui.value - 1] : ''
@@ -333,7 +333,7 @@
                         max: 5,
                         slide: ( event, ui ) => {
                             let resThickness 
-                            if(sessionStorage.getItem('_CC') == 'ID') {
+                            if(this.$root.lang() == 1) {
                                 resThickness = ui.value != 0 ? this.sizeThicknessMM[ui.value - 1] : 0
                                 $( "input.size-thickness" ).val( resThickness +"mm");
                                 this.rangeThickness = ui.value != 0 ?  this.sizeThicknessMM[ui.value - 1] - 1+"-"+this.sizeThicknessMM[ui.value - 1] : ''
