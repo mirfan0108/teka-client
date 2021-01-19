@@ -232,7 +232,45 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
+                                <li v-if="constructions.length > 6" :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown has-mega-menu' : 'dropdown has-mega-menu'" >
+                                    <a href="javascript:void(0)">
+                                        {{
+                                        $root.lang() == 1 ? 'Produk' :
+                                        $root.lang() == 2 ? 'Product' :
+                                        $root.lang() == 3 ? 'Produkt' : ''
+                                        }}
+                                    </a>
+                                    <div class="mega-menu" style="width: 50%; margin-left: 60%;">
+                                        <div class="mega-menu-bar row clearfix">
+                                            <div class="column col-lg-6 col-md-6 col-sm-6">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/product">
+                                                            Enginered Wood
+                                                        </a>
+                                                    </li>
+                                                    <li v-for="(construction, index) in constructions" v-if="((index+1) % 2) == 0">
+                                                        <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
+                                                    </li>
+                                                    <!-- <li><a href="about.html">About Us</a></li>
+                                                    <li><a href="faq.html">FAQ's</a></li>
+                                                    <li><a href="team.html">Our Team</a></li>
+                                                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                                                    <li><a href="login.html">Login</a></li> -->
+                                                </ul>
+                                            </div>
+                                            <div class="column col-lg-6 col-md-6 col-sm-6">
+                                                <ul>
+                                                    <li v-for="(construction, index) in constructions" v-if="((index+1) % 2) != 0">
+                                                        <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li v-if="6 >= constructions.length "
+                                    :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
                                     <a href="javascript:void(0)">
                                         {{
                                         $root.lang() == 1 ? 'Produk' :
@@ -328,22 +366,57 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
+                                <li v-if="constructions.length > 6"
+                                    :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown has-mega-menu' : 'dropdown has-mega-menu'">
                                     <a href="javascript:void(0)">
-                                        {{ 
-                                            $root.lang() == 1 ? 'Produk' : 
-                                            $root.lang() == 2 ? 'Product' : 
-                                            $root.lang() == 3 ? 'Produkt' : ''
+                                        {{
+                                        $root.lang() == 1 ? 'Produk' :
+                                        $root.lang() == 2 ? 'Product' :
+                                        $root.lang() == 3 ? 'Produkt' : ''
+                                        }}
+                                    </a>
+                                    <div class="mega-menu" style="width: 50%; margin-left: 60%;">
+                                        <div class="mega-menu-bar row clearfix">
+                                            <div class="column col-lg-6 col-md-6 col-sm-6">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/product">
+                                                            Enginered Wood
+                                                        </a>
+                                                    </li>
+                                                    <li v-for="(construction, index) in constructions" v-if="((index+1) % 2) == 0">
+                                                        <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
+                                                    </li>
+                                                    <!-- <li><a href="about.html">About Us</a></li>
+                                                                                    <li><a href="faq.html">FAQ's</a></li>
+                                                                                    <li><a href="team.html">Our Team</a></li>
+                                                                                    <li><a href="coming-soon.html">Coming Soon</a></li>
+                                                                                    <li><a href="login.html">Login</a></li> -->
+                                                </ul>
+                                            </div>
+                                            <div class="column col-lg-6 col-md-6 col-sm-6">
+                                                <ul>
+                                                    <li v-for="(construction, index) in constructions" v-if="((index+1) % 2) != 0">
+                                                        <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li v-if="6 >= constructions.length "
+                                    :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
+                                    <a href="javascript:void(0)">
+                                        {{
+                                        $root.lang() == 1 ? 'Produk' :
+                                        $root.lang() == 2 ? 'Product' :
+                                        $root.lang() == 3 ? 'Produkt' : ''
                                         }}
                                     </a>
                                     <ul>
                                         <li>
                                             <a href="/product">
-                                                {{ 
-                                                    $root.lang() == 1 ? 'Semua' : 
-                                                    $root.lang() == 2 ? 'All' : 
-                                                    $root.lang() == 3 ? 'Alles' : ''
-                                                }}
+                                                Enginered Wood
                                             </a>
                                         </li>
                                         <li v-for="construction in constructions">

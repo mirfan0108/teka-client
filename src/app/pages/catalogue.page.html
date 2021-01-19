@@ -23,22 +23,26 @@
 
         <section class="blog-section">
             <div class="auto-container">
-                <div class="row">
-                    <!-- News Block -->
-                    <div class="news-block-two col-lg-4 col-md-12 col-sm-12" v-for="catalogue in Catalogue">
-                        <div class="inner-box">
-                            <div class="image-box">
-                                <figure class="image">
-                                    <img src="/assets/images/icons/PDF-img.jpg" alt="icon pdf" >
-                                </figure>
-                            </div>
-                            <div class="caption-box">
-                                <div class="inner">
-                                    <h3><a :href="$root.catalogue(catalogue.path)" target="_BLANK">{{catalogue.name}}</a></h3>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                <div class="cart-outer">
+                    <div class="table-outer">
+                        <table class="cart-table">
+                            <thead class="cart-header">
+                                <tr>
+                                    <th style="width: 20px;">#</th>
+                                    <th style="text-align: left;">{{$root.lang() == 1 ? 'Nama Katalog' : $root.lang() == 3 ? 'Katalog Name' : 'Catalogue Name'}}</th>
+                                    <th style="width: 20px;">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(catalogue, index) in Catalogue">
+                                    <td class="sub-total">{{index+1}}</td>
+                                    <td class="total" style="text-align: left;">{{catalogue.name}}</td>
+                                    <td>
+                                        <a :href="$root.catalogue(catalogue.path)" target="_BLANK" class="remove-btn"><span class="fa fa-download"></span></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
