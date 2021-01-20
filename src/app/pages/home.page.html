@@ -135,12 +135,12 @@
                         <div class="inner-column" >
                             <div class="carousel-outer">
                                 <ul class="image-carousel owl-carousel owl-theme">
-                                    <li v-for="prefered in preferedProduct">
-                                        <a href="/product" class="lightbox-image" :title="prefered.tb_product.name">
+                                    <li v-for="prefered in preferedProduct" v-if="prefered.tb_product">
+                                        <a  href="/product" class="lightbox-image" :title="prefered.tb_product.name">
                                             <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
                                         </a>
                                     </li>
-                                    <li v-for="prefered in preferedProduct">
+                                    <li v-for="prefered in preferedProduct" v-if="prefered.tb_product">
                                         <a href="/product" class="lightbox-image" :title="prefered.tb_product.name">
                                             <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
                                         </a>
@@ -148,13 +148,13 @@
                                 </ul>
                                 
                                 <ul class="thumbs-carousel owl-carousel owl-theme">
-                                    <li class="thumb-box" v-for="prefered in preferedProduct">
+                                    <li class="thumb-box" v-for="prefered in preferedProduct" v-if="prefered.tb_product">
                                         <figure>
                                             <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name">
                                         </figure>
                                         <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
                                     </li>
-                                    <li class="thumb-box" v-for="prefered in preferedProduct">
+                                    <li class="thumb-box" v-for="prefered in preferedProduct" v-if="prefered.tb_product">
                                         <figure><img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name"></figure>
                                         <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
                                     </li>
@@ -282,7 +282,7 @@
             <div class="inner-container">
                 <div class="projects-carousel owl-carousel owl-theme">
                     <!-- Project Block -->
-                    <div class="project-block" v-for="tren in trends">
+                    <div class="project-block" v-for="tren in trends" v-if="tren.tb_product">
                         <div class="image-box">
                             <figure class="image"><img :src="$root.asset(tren.image)" alt=""></figure>
                             <div class="overlay-box">
