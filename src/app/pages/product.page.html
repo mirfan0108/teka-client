@@ -296,7 +296,7 @@
                                 this.rangeWidth = ui.value != 0 ?  this.sizeWidthMM[ui.value - 1] - 1+"-"+this.sizeWidthMM[ui.value - 1] : ''
                             } else {
                                 resWidth = ui.value != 0 ? this.sizeWidthMM[ui.value - 1] : 0
-                                $( "input.size-width" ).val( resWidth +"\"inch");
+                                $( "input.size-width" ).val( this.$root.convertToInch(resWidth) +"\"inch");
                                 this.rangeWidth = ui.value != 0 ?  this.sizeWidthMM[ui.value - 1] - 1+"-"+this.sizeWidthMM[ui.value - 1] : ''
                             }
                         }
@@ -318,7 +318,7 @@
                                 this.rangeLength = ui.value != 0 ?  this.sizeLengthMM[ui.value - 1] - 1+"-"+this.sizeLengthMM[ui.value - 1] : ''
                             } else {
                                 resLength = ui.value != 0 ? this.sizeLengthMM[ui.value - 1] : 0
-                                $( "input.size-length" ).val( resLength +"\"inch");
+                                $( "input.size-length" ).val( this.$root.convertToInch(resLength) +"\"inch");
                                 this.rangeLength =  ui.value != 0 ?  this.sizeLengthMM[ui.value - 1] - 1+"-"+this.sizeLengthMM[ui.value - 1] : ''
                             }
                         }
@@ -339,7 +339,7 @@
                                 this.rangeThickness = ui.value != 0 ?  this.sizeThicknessMM[ui.value - 1] - 1+"-"+this.sizeThicknessMM[ui.value - 1] : ''
                             } else {
                                 resThickness = ui.value != 0 ? this.sizeThicknessMM[ui.value - 1] : 0
-                                $( "input.size-thickness" ).val( resThickness +"\"inch");
+                                $( "input.size-thickness" ).val( this.$root.convertToInch(resThickness) +"\"inch");
                                 this.rangeThickness = ui.value != 0 ?  this.sizeThicknessMM[ui.value - 1] - 1+"-"+this.sizeThicknessMM[ui.value - 1] : ''
                             }
                         }
@@ -360,7 +360,6 @@
                     this.rangeLength,
                     this.colorSelected
                 ).then(resp => {
-                    console.log(resp)
                     this.products = resp.data.rows
                     this.totalPager(resp.data.count)
                 })

@@ -309,7 +309,7 @@
                                     </a>
                                     <ul>
                                         <li v-for="resource in resources">
-                                            <a :href="'/resource/'+resource.id">{{resource.name}}</a>
+                                            <a :href="'/resource/'+$root.encrypt(resource.id)">{{resource.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -443,7 +443,7 @@
                                     </a>
                                     <ul>
                                         <li v-for="resource in resources">
-                                            <a :href="'/resource/'+resource.id">{{resource.name}}</a>
+                                            <a :href="'/resource/'+$root.encrypt(resource.id)">{{resource.name}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -479,7 +479,6 @@
                     this.constructions = resp.data.constructions
                     this.resources = resp.data.resources
                 }
-                console.log('menu => ',resp)
             })
         },
         methods: {

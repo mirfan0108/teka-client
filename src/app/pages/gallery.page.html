@@ -75,7 +75,6 @@
             initGallery() {
                 Gallery.getGallery(this.$root.lang(), this.currentPage)
                 .then(resp => {
-                    console.log('resp', resp)
                     this.galleries = resp.data.rows
                     this.totalPage = resp.data.count
                 })

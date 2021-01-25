@@ -117,12 +117,14 @@ var app = new Vue({
     data() {
       return {
         base_url: path => ROOT_PATH + "/" + (path || ""),
-        asset: path => process.env.ASSETS +"/"+ path,
+        asset: path => path ? process.env.ASSETS +"/"+ path : '#',
         catalogue: path => process.env.CATALOGUE + "/" + path,
         convertToInch: mm => {
-          var inches = mm/2.54;
+          var inches = mm/25.4;
           return inches.toFixed(2)
         },
+        encrypt: str => { return btoa(str) },
+        decrypt: text => { return atob(text)},
         lang: lang => sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2, 
         paginationCreator: totalItem => {
           let counter = 1

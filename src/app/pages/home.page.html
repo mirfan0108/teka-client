@@ -680,7 +680,6 @@
                 // this.partners = await 
                 ApiFrame.getFrame('home')
                 .then(async _content => {
-                    console.log('home => ', _content)
                     this.sliders = await _content.data.content.tb_banners
                     this.preferedTitle = await _content.data.content.tb_static_content.prefered_title
                     this.preferedContent = await _content.data.content.tb_static_content.prefered_content
@@ -712,14 +711,6 @@
                     this.owlTestimoniInit()
                     
                 })
-                
-                
-                
-                // ApiFrame.getSocial_Media()
-                // .then(_responseHttp => {
-                //     console.log(_responseHttp)
-                //     this.socialMedia = _responseHttp.data
-                // })
             },
             owlTrendInit() {
                 if ($('.projects-carousel').length) {
