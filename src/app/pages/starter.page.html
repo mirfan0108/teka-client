@@ -43,6 +43,7 @@
 
 <script>
     import axios from 'axios'
+    
     export default {
         methods: {
             setStarter(setter) {
@@ -51,8 +52,17 @@
             }
         },
         mounted() {
+            const ENV = process.env.BASE_API
             axios.get("http://ip-api.com/json")
             .then(resp => {
+                let form = {
+                    client_ip: resp.data.query,
+                    country: resp.data.country,
+                    mon: new Date().getMonth(),
+                    year: new Date().getFullYear()
+                }
+                axios.post(`${ENV}/api/v1/visitors`, form)
+                .then(res => console.log(res))
                 if(resp.data && resp.data.countryCode == 'ID') {
                     sessionStorage.setItem('_LANG', 1)
                 }
