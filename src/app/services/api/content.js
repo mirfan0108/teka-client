@@ -16,7 +16,7 @@ class Content {
             case "home":
                 return axios.get(`${ENV}/api/v1/content/page/home/lang/${lang}`)
             case "profesional":
-                return axios.get(`${ENV}/api/v1/content/page/home/lang/${lang}`)
+                return axios.get(`${ENV}/api/v1/content/page/professional/lang/${lang}`)
             default:
                 break;
         }
