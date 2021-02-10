@@ -84,105 +84,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="header-lower">
-            <div class="auto-container" style="max-width: 100%;">
-                <div class="main-box clearfix" style="background-color: rgb(0 0 0 / 57%); border-radius: 0; padding: 0 210px;">
-                    <div class="logo-box">
-                        <div class="logo">
-                            <a href="/"><img src="/assets/images/logo-white.png" alt="teka logo"  width="200"></a>
-                        </div>
-                    </div>
-    
-                    <div class="nav-outer">
-                        <nav class="main-menu navbar-expand-md ">
-                            <div class="navbar-header">  
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="icon flaticon-menu-button"></span>
-                                </button>
-                            </div>
-                            
-                            <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
-                                <ul class="navigation clearfix">
-                                    <li :class="$root.$router.history.current.name == 'home.page.html' ? 'current' : ''">
-                                        <a href="/">
-                                            {{ 
-                                                $root.lang() == 1 ? 'Beranda' : 
-                                                $root.lang() == 2 ? 'Home' : 
-                                                $root.lang() == 3 ? 'Zuhause' : ''
-                                            }}
-                                        </a>
-                                    </li>
-                                    <li :class="$root.$router.history.current.name == 'about.page.html' ? 'current dropdown' : 'dropdown'">
-                                        <a href="javascript:;" >
-                                            {{ 
-                                                $root.lang() == 1 ? 'Tentang Teka' : 
-                                                $root.lang() == 2 ? 'About Us' : 
-                                                $root.lang() == 3 ? 'Über uns' : ''
-                                            }}
-                                        </a>
-                                        <ul>
-                                            <li>
-                                                <a href="/about">
-                                                    {{ 
-                                                        $root.lang() == 1 ? 'Kenapa Kami' : 
-                                                        $root.lang() == 2 ? 'Why Us' : 
-                                                        $root.lang() == 3 ? 'warum wir' : ''
-                                                    }}
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li :class="$root.$router.history.current.name == 'product.page.html' ? 'current dropdown' : 'dropdown'">
-                                        <a href="javascript:void(0)">
-                                            {{ 
-                                                $root.lang() == 1 ? 'Produk' : 
-                                                $root.lang() == 2 ? 'Product' : 
-                                                $root.lang() == 3 ? 'Produkt' : ''
-                                            }}
-                                        </a>
-                                        <ul>
-                                            <li>
-                                                <a href="/product">
-                                                    Enginered Wood
-                                                </a>
-                                            </li>
-                                            <li v-for="construction in constructions">
-                                                <a :href="'/product?construction='+construction.id">{{construction.name}}</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li :class="$root.$router.history.current.name == 'gallery.page.html' ? 'current' : ''">
-                                        <a href="/gallery">
-                                            {{ 
-                                                $root.lang() == 1 ? 'Galeri Proyek' : 
-                                                $root.lang() == 2 ? 'Project Gallery' : 
-                                                $root.lang() == 3 ? 'Projektgalerie' : ''
-                                            }}
-                                        </a>
-                                    </li>
-                                    <li v-if="resources.length > 0" :class="$root.$router.history.current.name == 'resources.page.html' ? 'current dropdown' : 'dropdown'">
-                                        <a href="javascript:void(0)">
-                                            {{ 
-                                                $root.lang() == 1 ? 'Sumber Daya' : 
-                                                $root.lang() == 2 ? 'Resource' : 
-                                                $root.lang() == 3 ? 'Resource' : ''
-                                            }}
-                                        </a>
-                                        <ul>
-                                            <li v-for="resource in resources">
-                                                <a :href="'/resource/'+resource.id">{{resource.name}}</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>                       
-                        
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <div class="auto-container" >
             <div class="main-box clearfix" >
                 <div class="logo-box">
@@ -244,8 +145,8 @@
                                         <div class="mega-menu-bar row clearfix">
                                             <div class="column col-lg-6 col-md-6 col-sm-6">
                                                 <ul>
-                                                    <li>
-                                                        <a href="/product">
+                                                    <li v-if="!constructions || constructions.length == 0">
+                                                        <a href="/product" >
                                                             Enginered Wood
                                                         </a>
                                                     </li>
@@ -279,7 +180,7 @@
                                         }}
                                     </a>
                                     <ul>
-                                        <li>
+                                        <li v-if="!constructions || constructions.length == 0">
                                             <a href="/product">
                                                 Enginered Wood
                                             </a>
@@ -312,6 +213,11 @@
                                             <a :href="'/resource/'+$root.encrypt(resource.id)">{{resource.name}}</a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li class="">
+                                    <a href="javascript:;" @click="switchTo()">
+                                        {{getPage()}}
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -379,7 +285,7 @@
                                         <div class="mega-menu-bar row clearfix">
                                             <div class="column col-lg-6 col-md-6 col-sm-6">
                                                 <ul>
-                                                    <li>
+                                                    <li v-if="!constructions || constructions.length == 0">
                                                         <a href="/product">
                                                             Enginered Wood
                                                         </a>
@@ -414,7 +320,7 @@
                                         }}
                                     </a>
                                     <ul>
-                                        <li>
+                                        <li v-if="!constructions || constructions.length == 0">
                                             <a href="/product">
                                                 Enginered Wood
                                             </a>
@@ -447,7 +353,11 @@
                                         </li>
                                     </ul>
                                 </li>
-                                
+                                <li class="">
+                                    <a href="javascript:;" @click="switchTo()">
+                                        {{getPage()}}
+                                    </a>
+                                </li>
                             </ul> 
                         </div>
                     </nav>
@@ -493,6 +403,14 @@
                     result += sentence[i][0].toUpperCase() + sentence[i].slice(1)+ ' '
                 }
                 return result
+            },
+            switchTo() {
+                let sess = sessionStorage.getItem('__STARTER') == 'professional' ? 'setter' : 'professional'
+                sessionStorage.setItem('__STARTER', sess)
+                window.location.reload()
+            },
+            getPage() {
+                return sessionStorage.getItem('__STARTER') == 'professional' ? 'Home Owner' : 'Professional'
             },
             sendEmail() {
                 let ValidateEmail = txt => {
