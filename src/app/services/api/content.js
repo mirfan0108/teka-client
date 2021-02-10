@@ -8,9 +8,14 @@ import axios from 'axios'
 const ENV = process.env.BASE_API
 class Content {
     static getFrame(page) {
-        let lang = sessionStorage.getItem('_LANG') ?  sessionStorage.getItem('_LANG') : 2
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
+        if (sessionStorage.getItem('__STARTER') == 'professional') {
+            page = "profesional"
+        }
         switch (page) {
             case "home":
+                return axios.get(`${ENV}/api/v1/content/page/home/lang/${lang}`)
+            case "profesional":
                 return axios.get(`${ENV}/api/v1/content/page/home/lang/${lang}`)
             default:
                 break;
