@@ -24,7 +24,17 @@ class Product {
     }
 
     static getCatalogue(id_lang) {
-        return axios.get(`${ENV}/api/v1/global/catalogue?id_lang=${id_lang}`)
+        let content_type = sessionStorage.getItem('__STARTER') == 'professional' ? 2 : 1
+        return axios.get(`${ENV}/api/v1/global/catalogue?id_lang=${id_lang}&content_type=${content_type}`)
+    }
+
+    static getTrendAndPrefered(module) {
+        let content_type = sessionStorage.getItem('__STARTER') == 'professional' ? 2 : 1
+        if (module == 1) {
+            return axios.get(`${ENV}/api/v1/prefered/${content_type}`)
+        } else {
+            return axios.get(`${ENV}/api/v1/trending/${content_type}`)
+        }
     }
 
 

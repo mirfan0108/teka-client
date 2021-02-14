@@ -59,7 +59,8 @@
                     client_ip: resp.data.query,
                     country: resp.data.country,
                     mon: new Date().getMonth(),
-                    year: new Date().getFullYear()
+                    year: new Date().getFullYear(),
+                    city: resp.data.city
                 }
                 axios.post(`${ENV}/api/v1/visitors`, form)
                 .then(res => console.log(res))

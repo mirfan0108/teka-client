@@ -5,14 +5,14 @@
             <div class="banner-carousel-two owl-carousel owl-theme" >
                 <div class="slide-item" style="background-image: url('/assets/images/background/16.jpg'); height: 100%;">
                     <div class="auto-container">
-                        <div class="content-box clearfix" style="min-height: 430px; vertical-align: middle;">
+                        <div class="content-box clearfix" style="height: 335px; vertical-align: middle;">
                             <div class="inner-box" >
                                 <h4 class="title" >
                                     {{
                                         $root.lang() == 1 ? 'Selamat Datang di' : $root.lang() == 3 ? 'Willkommen zu' : 'Welcome To'
                                     }}
                                 </h4>
-                                <h2>TEKA PARQUET</h2>
+                                <h2 style="font-size: 20pt">TEKA PARQUET</h2>
                                 <div class="text">
                                     {{
                                         $root.lang() == 1 ? 'Buat interor anda menjadi lebih elegan bersama kami.' : 
@@ -35,9 +35,9 @@
                 </div>
                 <div class="slide-item" style="background-image: url('/assets/images/background/17.jpg');  height: 100%;">
                     <div class="auto-container">
-                        <div class="content-box clearfix" style="min-height: 430px; vertical-align: middle;">
+                        <div class="content-box clearfix" style="height: 335px; vertical-align: middle;">
                             <div class="inner-box" >
-                                <h2>TEKA PARQUET</h2>
+                                <h2 style="font-size: 20pt">TEKA PARQUET</h2>
                                 <div class="text" style="font-size: 14pt">
                                     {{
                                         $root.lang() == 1 ? 'Ayo berlangganan! jangan sampai ketinggalan update dari kami' : 
@@ -59,18 +59,18 @@
                 </div>
                 <div class="slide-item" v-for="slide in sliders" :style="`background-image: url(${$root.asset(slide.image)});  height: 100%;` ">
                     <div class="auto-container">
-                        <div class="content-box clearfix" style="min-height: 430px; vertical-align: middle;">
+                        <div class="content-box clearfix" style="height: 335px; vertical-align: middle;">
                             <div class="inner-box" >
                                 <h4 class="title" >{{slide.subtitle}}</h4>
-                                <h2>{{slide.title}}</h2>
+                                <h2 style="font-size: 20pt">{{slide.title}}</h2>
                                 <div class="text">
                                     {{slide.content}}
                                 </div>
-                                <!-- <div class="link-box"><a href="/about">
+                                <div v-if="slide.is_hyperlink" class="link-box"><a :href="slide.link">
                                     {{
                                         $root.lang() == 1 ? 'Lihat Detail' : $root.lang() == 3 ? 'Im Detail sehen' : 'View Detail'
                                     }}
-                                </a></div> -->
+                                </a></div>
                             </div>
                         </div>
                     </div>

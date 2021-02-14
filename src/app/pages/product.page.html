@@ -5,7 +5,7 @@
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
-                        <h1>{{$root.lang() == 1 ? 'Produk' : $root.lang() == 2 ? 'Products' : 'Produkt'}}</h1>
+                        <h1>{{titleText}}</h1>
                         <span class="title">
                             {{$root.lang() == 1 ? 'Produk Dengan Kualitas Terbaik' : $root.lang() == 2 ? 'Our Quality Products' : 'Unsere Qualitätsprodukte'}}
                         </span>
@@ -24,7 +24,7 @@
             <div class="auto-container">
                 <div class="row clearfix">
                     <!--Sidebar Side-->
-                    <div class="sidebar-side col-xl-3 col-lg-4 col-md-12">
+                    <div class="sidebar-side col-xl-3 col-lg-4 col-md-12" v-if="!is_prefered">
                         <aside class="sidebar">
                             
                             <!-- Search -->
@@ -166,7 +166,7 @@
                             </div>  
                         </aside>
                     </div>
-                    <div class="content-side col-xl-9 col-lg-8 col-md-12">
+                    <div :class="is_prefered ? 'content-side col-xl-12 col-lg-12 col-md-12' : 'content-side col-xl-9 col-lg-8 col-md-12'">
                         <div style="width: 100%;" align="center" v-if="onLoad_fetch">
                             <div class="cs-loader"></div>
                             <br>Mohon Tunggu ...
@@ -174,11 +174,12 @@
                         <div style="width: 100%; text-align: center; vertical-align: middle;" align="center" v-if="products.length == 0 && !onLoad_fetch">
                             <h4>No Data</h4>
                         </div>
+
                         <div class="our-shop" v-if="!onLoad_fetch">
 
                             <div class="row clearfix" v-if="products.length > 0">
 
-                                <div class="shop-item col-xl-4 col-lg-6 col-md-6 col-sm-12" v-for="product in products">
+                                <div :class="is_prefered ? 'shop-item col-xl-3 col-lg-6 col-md-6 col-sm-12' : 'shop-item col-xl-4 col-lg-6 col-md-6 col-sm-12'" v-for="product in products">
                                     
                                     <div class="inner-box">
                                         <div class="image">
@@ -256,6 +257,9 @@
                 sizeThicknessInc: [],
                 // ACCORDION
                 accordion: '',
+
+                is_prefered: false,
+                titleText: ''
                 
             }
         },
@@ -264,6 +268,18 @@
         beforeMount() {
         },
         mounted() {
+            switch (this.constructionSelected) {
+                case 'prefered':
+                    this.titleText = this.$root.lang() == 1 ? 'Produk yang disukai' : this.$root.lang() == 2 ? 'Preferred Products' : 'Bevorzugt Produkt'
+                    break;
+                case 'trends':
+                    this.titleText = this.$root.lang() == 1 ? 'Produk' : this.$root.lang() == 2 ? 'Products' : 'Produkt'
+                    break;
+                default:
+                    this.titleText = this.$root.lang() == 1 ? 'Tren Produk' : this.$root.lang() == 2 ? 'Trends Products' : 'TrendProdukt'
+                    break;
+            }
+            
             this.fetchProduct()
             this.fetchSpecies()
             this.fetchConstruction()
@@ -350,24 +366,38 @@
             },
             fetchProduct() {
                 this.onLoad_fetch = true;
-                ApiProduct.getProduct( 
-                    this.currentPage, 
-                    this.search, 
-                    this.specieSelected, 
-                    this.constructionSelected,
-                    this.rangeWidth,
-                    this.rangeThickness,
-                    this.rangeLength,
-                    this.colorSelected
-                ).then(resp => {
-                    this.products = resp.data.rows
-                    this.totalPager(resp.data.count)
-                })
-                .finally(() => {
-                    setTimeout(() => {
-                        this.onLoad_fetch = false
-                    }, 500)
-                })
+                if(this.constructionSelected > 0) {
+                    this.is_prefered = false
+                    ApiProduct.getProduct( 
+                        this.currentPage, 
+                        this.search, 
+                        this.specieSelected, 
+                        this.constructionSelected,
+                        this.rangeWidth,
+                        this.rangeThickness,
+                        this.rangeLength,
+                        this.colorSelected
+                    ).then(resp => {
+                        this.products = resp.data.rows
+                        this.totalPager(resp.data.count)
+                    })
+                    .finally(() => {
+                        setTimeout(() => {
+                            this.onLoad_fetch = false
+                        }, 500)
+                    })
+                } else {
+                    this.is_prefered = true
+                    ApiProduct.getTrendAndPrefered(this.constructionSelected == 'prefered' ? 1 : 0)
+                    .then(resp => {
+                        this.products = resp.data
+                    }).finally(() => {
+                        setTimeout(() => {
+                            this.onLoad_fetch = false
+                        }, 500)
+                    })
+
+                }
             },
             fetchSpecies() {
                 ApiProduct.getSpecies()
