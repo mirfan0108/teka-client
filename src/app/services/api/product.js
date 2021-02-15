@@ -25,7 +25,8 @@ class Product {
 
     static getCatalogue(id_lang) {
         let content_type = sessionStorage.getItem('__STARTER') == 'professional' ? 2 : 1
-        return axios.get(`${ENV}/api/v1/global/catalogue?id_lang=${id_lang}&content_type=${content_type}`)
+        let queries = `id_lang=${id_lang}&content_type=${content_type}`
+        return axios.get(`${ENV}/api/v1/global/catalogue?${queries}`)
     }
 
     static getTrendAndPrefered(module) {
