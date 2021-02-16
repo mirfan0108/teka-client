@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import AppMain from "@/app/components/content.component.html";
+import VueAnalytics from "vue-analytics"
 // START PAGES
 import HomePage from "@/app/pages/home.page.html"
 import AboutPage from "@/app/pages/about.page.html"
@@ -111,6 +112,16 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   to.name != 'starter.page.html' && !sessionStorage.getItem('__STARTER') ? next({ name: 'starter.page.html' }) : next()
 })
+
+Vue.use(VueAnalytics, {
+  id: 'G-ND0GR3LR0T',
+  router,
+  debug: {
+    enabled: true,
+    sendHitTask: true
+  }
+})
+
 var app = new Vue({
     el: "#app",
     router: router,
