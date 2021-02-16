@@ -445,7 +445,7 @@
             switchTo() {
                 let sess = sessionStorage.getItem('__STARTER') == 'professional' ? 'setter' : 'professional'
                 sessionStorage.setItem('__STARTER', sess)
-                window.location.reload()
+                window.location.href = "/"
             },
             getPage() {
                 return sessionStorage.getItem('__STARTER') == 'professional' ? 'Home Owner' : 'Professional'
