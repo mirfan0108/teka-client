@@ -114,12 +114,8 @@ router.beforeEach((to, from, next) => {
 })
 
 Vue.use(VueAnalytics, {
-  id: 'G-ND0GR3LR0T',
-  router,
-  debug: {
-    enabled: true,
-    sendHitTask: true
-  }
+  id: 'G-PE0J4DNLBS',
+  router
 })
 
 var app = new Vue({
