@@ -16,6 +16,7 @@ import TncPage from "@/app/pages/tnc.page.html"
 import PrivacyPage from "@/app/pages/privacy.page.html"
 import CataloguePage from "@/app/pages/catalogue.page.html"
 import ResourcePage from "@/app/pages/resources.page.html"
+import ProvenPage from "@/app/pages/proven.page.html"
 // END PAGES
 
 // START IMPORT
@@ -97,6 +98,12 @@ const router = new VueRouter({
                   component: ResourcePage,
                   props: true
                 },
+                {
+                  path: "/proven/:id",
+                  name: 'proven.detail.page.html',
+                  component: ProvenPage,
+                  props: true
+                },
               ]
             },
           ]
@@ -114,7 +121,7 @@ router.beforeEach((to, from, next) => {
 })
 
 Vue.use(VueAnalytics, {
-  id: 'G-PE0J4DNLBS',
+  id: 'UA-69164208-4',
   router
 })
 

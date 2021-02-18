@@ -67,6 +67,10 @@ class Content {
     static subscribe(req) {
         return axios.post(`${ENV}/api/v1/global/subscribe`, req)
     }
+
+    static getDetailProven(req) {
+        return axios.get(`${ENV}/api/v1/global/proven/${req}`)
+    }
 }
 
 export default Content
