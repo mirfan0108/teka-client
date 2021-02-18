@@ -177,44 +177,15 @@
                 </div>
                 <div class="row">
                     <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
+                    <div class="process-block col-lg-3 col-md-6 col-sm-12" v-for="(proven, index) in services">
                         <div class="inner-box">
-                            <span class="count">01</span>
-                            <h4><a href="service-detail.html">Concept</a></h4>
-                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
-                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
+                            <span class="count">0{{index+1}}</span>
+                            <h4><a href="service-detail.html">{{proven.name}}</a></h4>
+                            <div class="text">{{proven.summary}}</div>
+                            <div class="link-box"><a :href="`/proven/${proven.id}`">Read More</a></div>
                         </div>
                     </div>
 
-                    <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <span class="count">02</span>
-                            <h4><a href="service-detail.html">Idea</a></h4>
-                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
-                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
-                        </div>
-                    </div>
-
-                    <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <span class="count">03</span>
-                            <h4><a href="service-detail.html">Design</a></h4>
-                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
-                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
-                        </div>
-                    </div>
-
-                    <!-- Process Block -->
-                    <div class="process-block col-lg-3 col-md-6 col-sm-12">
-                        <div class="inner-box">
-                            <span class="count">04</span>
-                            <h4><a href="service-detail.html">excecution</a></h4>
-                            <div class="text">When an unknown printer took a galley of type and scrambled it to make a book.</div>
-                            <div class="link-box"><a href="service-detail.html">Read More</a></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -226,34 +197,10 @@
                     <div class="fact-counter">
                         <div class="row">
                             <!--Column-->
-                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                            <div v-for="val in valuesSection" class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
                                 <div class="count-box counted">
-                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="14">14</span></div>
-                                    <h4 class="counter-title">Years of <br>Experience</h4>
-                                </div>
-                            </div>
-    
-                            <!--Column-->
-                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInUp;">
-                                <div class="count-box counted">
-                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="237">237</span></div>
-                                    <h4 class="counter-title">Project <br>Taken</h4>
-                                </div>
-                            </div>
-    
-                            <!--Column-->
-                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-delay="800ms" style="visibility: visible; animation-delay: 800ms; animation-name: fadeInUp;">
-                                <div class="count-box counted">
-                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="11">11</span>K</div>
-                                    <h4 class="counter-title">Twitter <br> Follower</h4>
-                                </div>
-                            </div>
-    
-                            <!--Column-->
-                            <div class="counter-column col-lg-3 col-md-6 col-sm-12 wow fadeInUp animated" data-wow-delay="1200ms" style="visibility: visible; animation-delay: 1200ms; animation-name: fadeInUp;">
-                                <div class="count-box counted">
-                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="12">12</span></div>
-                                    <h4 class="counter-title">Awards<br>won</h4>
+                                    <div class="count"><span class="count-text" data-speed="5000" data-stop="14">{{val.number}}</span></div>
+                                    <h4 class="counter-title">{{val.description}}</h4>
                                 </div>
                             </div>
                         </div>
@@ -543,6 +490,8 @@
                 preferedTitle: '',
                 preferedContent: '',
                 preferedProduct: [],
+                services: [],
+                valuesSection: [],
                 faqs: [],
                 testimonies: [],
                 address: '',
@@ -698,6 +647,9 @@
                     this.promo_section_caption = await _content.data.content.tb_static_content.promo_section_caption
                     this.promo_img = await _content.data.content.tb_static_content.promo_section_image
                     this.trends = await _content.data.content_trend
+                    this.services = await _content.data.content.tb_services
+                    this.valuesSection = await _content.data.content.tb_constants
+
                 })
                 .then(() => {
                     ApiFrame.getPartner().then(_partner => {
