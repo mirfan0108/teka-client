@@ -226,7 +226,9 @@
 
 <script>
     import ApiProduct from "../services/api/product.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             let _construc = this.$root.$router.history.current.query.construction ? this.$root.$router.history.current.query.construction : 0
             return {
@@ -380,6 +382,8 @@
                     ).then(resp => {
                         this.products = resp.data.rows
                         this.totalPager(resp.data.count)
+                    }).then(() => {
+                        this.hidePreload()
                     })
                     .finally(() => {
                         setTimeout(() => {

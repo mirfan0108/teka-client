@@ -137,7 +137,9 @@
     import ApiFrame from "../services/api/content.js"
     import ApiEmail from "../services/api/email.js"
     import AOS from 'aos';
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             return {
                 addresses: {},
@@ -245,7 +247,7 @@
                     });
                     return false
                 }
-                if (!this.formInquiry.content.trim().length) {
+                if (!this.formInquiry.trim().length) {
                     swal({
                         title: null,
                         text: "Message is Required",
@@ -283,24 +285,26 @@
                 ApiFrame.getFrame('home')
                 .then(async resp => {
                     let _content = await resp.data
-                    this.sliders = await _content.content.tb_banners
-                    this.preferedTitle = await _content.content.tb_static_content.prefered_title
-                    this.preferedContent = await _content.content.tb_static_content.prefered_content
-                    this.preferedProduct = await _content.content_prefered
-                    this.faqs = await _content.content.tb_faqs
-                    this.testimonies = await _content.content.tb_testimonis
-                    this.address = await _content.content.tb_profile.tb_addresses[0].address
-                    this.phone = await _content.content.tb_profile.phone
-                    this.email = await  _content.content.tb_profile.email
-                    this.video_title = await _content.content.tb_static_content.video_title
-                    this.video_subtitle = await _content.content.tb_static_content.video_subtitle
-                    this.video_summary = await _content.content.tb_static_content.video_summary
-                    this.video_link = await _content.content.tb_static_content.video_link
-                    this.promo_section_title = await _content.content.tb_static_content.promo_section_title
-                    this.promo_section_subtitle = await _content.content.tb_static_content.promo_section_subtitle
-                    this.promo_section_caption = await _content.content.tb_static_content.promo_section_caption
-                    this.promo_img = await _content.content.tb_static_content.promo_section_image
-                    this.trends = await _content.content_trend
+                    this.sliders =  _content.tb_banners
+                    this.preferedTitle =  _content.tb_static_content.prefered_title
+                    this.preferedContent =  _content.tb_static_content.prefered_content
+                    this.preferedProduct =  _content.content_prefered
+                    this.faqs =  _content.tb_faqs
+                    this.testimonies =  _content.tb_testimonis
+                    this.address =  _content.tb_profile.tb_addresses[0].address
+                    this.phone =  _content.tb_profile.phone
+                    this.email =   _content.tb_profile.email
+                    // this.video_title = await _content.tb_static_content.video_title
+                    // this.video_subtitle = await _content.tb_static_content.video_subtitle
+                    // this.video_summary = await _content.tb_static_content.video_summary
+                    this.video_link =  _content.tb_static_content.video_link
+                    this.promo_section_title =  _content.tb_static_content.promo_section_title
+                    this.promo_section_subtitle =  _content.tb_static_content.promo_section_subtitle
+                    this.promo_section_caption =  _content.tb_static_content.promo_section_caption
+                    this.promo_img =  _content.tb_static_content.promo_section_image
+                    // this.trends = await _content.content_trend
+                }).finally(() => {
+                    this.hidePreload()
                 })
 
             },

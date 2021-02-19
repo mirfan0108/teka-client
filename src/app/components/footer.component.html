@@ -179,8 +179,8 @@
         mounted() {
             ApiFrame.getFrame('home')
             .then(_content => {
-                this.footer = _content.data.content.tb_profile.about
-                this.galleries = _content.data.content.tb_project_galleries
+                this.footer = _content.data.tb_profile.about
+                this.galleries = _content.data.tb_project_galleries
             })
             
         },

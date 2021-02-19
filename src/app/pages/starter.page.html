@@ -43,8 +43,9 @@
 
 <script>
     import axios from 'axios'
-    
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         methods: {
             setStarter(setter) {
                 sessionStorage.setItem('__STARTER', setter)
@@ -68,6 +69,8 @@
                     sessionStorage.setItem('_LANG', 1)
                 }
                 sessionStorage.setItem('_CC', resp.data.countryCode)
+            }).finally(() => {
+                this.hidePreload()
             })
         }
     }

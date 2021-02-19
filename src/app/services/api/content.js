@@ -22,6 +22,36 @@ class Content {
         }
     }
 
+    static getPrefered(page) {
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
+        if (sessionStorage.getItem('__STARTER') == 'professional') {
+            page = "profesional"
+        }
+        switch (page) {
+            case "home":
+                return axios.get(`${ENV}/api/v1/content/prefered/home/lang/${lang}`)
+            case "profesional":
+                return axios.get(`${ENV}/api/v1/content/prefered/professional/lang/${lang}`)
+            default:
+                break;
+        }
+    }
+
+    static getTrends(page) {
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
+        if (sessionStorage.getItem('__STARTER') == 'professional') {
+            page = "profesional"
+        }
+        switch (page) {
+            case "home":
+                return axios.get(`${ENV}/api/v1/content/trend/home/lang/${lang}`)
+            case "profesional":
+                return axios.get(`${ENV}/api/v1/content/trend/professional/lang/${lang}`)
+            default:
+                break;
+        }
+    }
+
     static getSocial_Media() {
         return axios.get(`${ENV}/social-media`)
     }

@@ -227,7 +227,9 @@
 
 <script>
     import ApiProduct from "../services/api/product.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         props: ['id'],
         data() {
             return {
@@ -282,6 +284,8 @@
                 ApiProduct.getDetail_Product(this.id)
                 .then(resp => {
                     this.details = resp.data
+                }).finally(() => {
+                    this.hidePreload()
                 })
             },
             async getTechnicalSheets() {

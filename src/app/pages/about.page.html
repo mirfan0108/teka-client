@@ -103,7 +103,9 @@
 
 <script>
     import ApiFrame from "../services/api/content.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             return {
                 certificates: [],
@@ -119,11 +121,10 @@
             
             ApiFrame.getFrame('home')
                 .then(_content => {
-                    
-                    this.name = _content.data.content.tb_profile.name
-                    this.about = _content.data.content.tb_profile.about
-                    this.since = _content.data.content.tb_profile.since
-                    this.whys = _content.data.content.tb_profile.tb_why_us
+                    this.name = _content.data.tb_profile.name
+                    this.about = _content.data.tb_profile.about
+                    this.since = _content.data.tb_profile.since
+                    this.whys = _content.data.tb_profile.tb_why_us
                 })
                 .then(() => {
                     ApiFrame.getPartner().then(_partner => {
@@ -135,6 +136,8 @@
                     .then(_resp => {
                         this.certificates = _resp.data
                     })
+                }).finally(() => {
+                    this.hidePreload()
                 })
         },
         methods: {

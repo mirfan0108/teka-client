@@ -480,9 +480,11 @@
 <script>
     import ApiFrame from "../services/api/content.js"
     import ApiEmail from "../services/api/email.js"
+    import Loader from "../mixins/preload.js"
 
     import AOS from 'aos';
     export default {
+        mixins:[Loader],
         data() {
             return {
                 sliders: [],
@@ -591,7 +593,7 @@
                     });
                     return false
                 }
-                if (!this.formInquiry.content.trim().length) {
+                if (!this.formInquiry.trim().length) {
                     swal({
                         title: null,
                         text: "Message is Required",
@@ -628,40 +630,50 @@
                 AOS.init();
                 // this.partners = await 
                 ApiFrame.getFrame('home')
-                .then(async _content => {
-                    this.sliders = await _content.data.content.tb_banners
-                    this.preferedTitle = await _content.data.content.tb_static_content.prefered_title
-                    this.preferedContent = await _content.data.content.tb_static_content.prefered_content
-                    this.preferedProduct = await _content.data.content_prefered
-                    this.faqs = await _content.data.content.tb_faqs
-                    this.testimonies = await _content.data.content.tb_testimonis
-                    this.address = await _content.data.content.tb_profile.tb_addresses[0].address
-                    this.phone = await _content.data.content.tb_profile.phone
-                    this.email = await _content.data.content.tb_profile.email
-                    this.video_title = await _content.data.content.tb_static_content.video_title
-                    this.video_subtitle = await _content.data.content.tb_static_content.video_subtitle
-                    this.video_summary = await _content.data.content.tb_static_content.video_summary
-                    this.video_link = await _content.data.content.tb_static_content.video_link
-                    this.promo_section_title = await _content.data.content.tb_static_content.promo_section_title
-                    this.promo_section_subtitle = await _content.data.content.tb_static_content.promo_section_subtitle
-                    this.promo_section_caption = await _content.data.content.tb_static_content.promo_section_caption
-                    this.promo_img = await _content.data.content.tb_static_content.promo_section_image
-                    this.trends = await _content.data.content_trend
-                    this.services = await _content.data.content.tb_services
-                    this.valuesSection = await _content.data.content.tb_constants
+                .then( _content => {
+                    this.sliders = _content.data.tb_banners
+                    this.preferedTitle =  _content.data.tb_static_content.prefered_title
+                    this.preferedContent =  _content.data.tb_static_content.prefered_content
+                    // this.preferedProduct = await _content.data.content_prefered
+                    this.faqs =  _content.data.tb_faqs
+                    this.testimonies =  _content.data.tb_testimonis
+                    this.address =  _content.data.tb_profile.tb_addresses[0].address
+                    this.phone =  _content.data.tb_profile.phone
+                    this.email =  _content.data.tb_profile.email
+                    // this.video_title =  _content.data.tb_static_content.video_title
+                    // this.video_subtitle =  _content.data.tb_static_content.video_subtitle
+                    // this.video_summary =  _content.data.tb_static_content.video_summary
+                    // this.video_link =  _content.data.tb_static_content.video_link
+                    this.promo_section_title =  _content.data.tb_static_content.promo_section_title
+                    this.promo_section_subtitle =  _content.data.tb_static_content.promo_section_subtitle
+                    this.promo_section_caption =  _content.data.tb_static_content.promo_section_caption
+                    this.promo_img =  _content.data.tb_static_content.promo_section_image
+                    // this.trends = await _content.data.content_trend
+                    this.services =  _content.data.tb_services
+                    this.valuesSection = _content.data.tb_constants
 
                 })
                 .then(() => {
                     ApiFrame.getPartner().then(_partner => {
                         this.partners = _partner.data
                     }).finally(() => this.initPartner() )
+
+                    ApiFrame.getPrefered('home').then(prefer => {
+                      console.log('prefer',prefer)  
+                    })
+
+                    ApiFrame.getTrends('home').then(prefer => {
+                        console.log('prefer', prefer)
+                    })
                 })
-                .finally(() => {
+                .then(() => {
                     this.owlBannerInit()
                     this.owlPreferedInit()
                     this.owlTrendInit()
                     this.owlTestimoniInit()
-                    
+                })
+                .finally(() => {
+                    this.hidePreload()
                 })
             },
             owlTrendInit() {

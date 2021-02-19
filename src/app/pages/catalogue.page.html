@@ -52,7 +52,9 @@
 
 <script>
     import ApiProduct from "../services/api/product.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             return {
                 Catalogue: []
@@ -68,6 +70,8 @@
                     if(resp && resp.data) {
                         this.Catalogue = resp.data
                     }
+                }).finally(() => {
+                    this.hidePreload()
                 })
             }
         }

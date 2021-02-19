@@ -5,7 +5,7 @@
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
-                        <h1>{{$root.lang() == 1 ? 'Rahasia Pribadi' : $root.lang() == 3 ? 'Datenschutz-Bestimmungen' : 'Privacy Policy'}}</h1>
+                        <h1>{{$root.lang() == 1 ? 'Kebijakan Privasi' : $root.lang() == 3 ? 'Datenschutz-Bestimmungen' : 'Privacy Policy'}}</h1>
                         <!-- <span class="title">The Interior speak for themselves</span> -->
                     </div>
                     <ul class="bread-crumb clearfix">
@@ -14,7 +14,7 @@
                             $root.lang() == 2 ? 'Home' : 
                             $root.lang() == 3 ? 'Zuhause' : ''
                         }}</a></li>
-                        <li>{{$root.lang() == 1 ? 'Rahasia Pribadi' : $root.lang() == 3 ? 'Datenschutz-Bestimmungen' : 'Privacy Policy'}}</li>
+                        <li>{{$root.lang() == 1 ? 'Kebijakan Privasi' : $root.lang() == 3 ? 'Datenschutz-Bestimmungen' : 'Privacy Policy'}}</li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,9 @@
 </template>
 <script>
     import ApiContent from "../services/api/content.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             return {
                 tnc: '',
@@ -45,6 +47,8 @@
                 ApiContent.getPP(this.$root.lang())
                 .then(resp => {
                     this.tnc = resp.data.privacy_policy
+                }).finally(() => {
+                    this.hidePreload()
                 })
             }
         }

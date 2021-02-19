@@ -88,7 +88,9 @@
 
 <script>
     import ApiGalery from "../services/api/gallery"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         props: ['id'],
         data() {
             return {
@@ -102,32 +104,34 @@
                     this.Galeri = resp.data
                 }
             })
-            .finally(() => {
+            .then(() => {
                 if ($('.testimonial-carousel-two').length) {
                     $('.testimonial-carousel-two').owlCarousel({
-                        loop:true,
-                        margin:70,
-                        nav:true,
+                        loop: true,
+                        margin: 70,
+                        nav: true,
                         smartSpeed: 700,
                         autoplay: true,
                         navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
-                        responsive:{
-                            0:{
-                                items:1
+                        responsive: {
+                            0: {
+                                items: 1
                             },
-                            600:{
-                                items:1
+                            600: {
+                                items: 1
                             },
-                            768:{
-                                margin:30,
-                                items:2
+                            768: {
+                                margin: 30,
+                                items: 2
                             },
-                            1024:{
-                                items:2
+                            1024: {
+                                items: 2
                             }
                         }
-                    });    		
+                    });
                 }
+            }).finally(() => {
+                this.hidePreload()
             })
         }
     }

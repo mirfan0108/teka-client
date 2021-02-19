@@ -30,7 +30,9 @@
 </template>
 <script>
     import ApiContent from "../services/api/content.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             return {
                 tnc: '',
@@ -45,6 +47,9 @@
                 ApiContent.getTnc(this.$root.lang())
                 .then(resp => {
                     this.tnc = resp.data.tnc
+                })
+                .finally(() => {
+                    this.hidePreload()
                 })
             }
         }

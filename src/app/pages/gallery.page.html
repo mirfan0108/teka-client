@@ -59,7 +59,9 @@
 
 <script>
     import Gallery from "../services/api/gallery.js"
+    import Loader from "../mixins/preload.js"
     export default {
+        mixins: [Loader],
         data() {
             return {
                 galleries: [],
@@ -77,6 +79,8 @@
                 .then(resp => {
                     this.galleries = resp.data.rows
                     this.totalPage = resp.data.count
+                }).finally(() => {
+                    this.hidePreload()
                 })
                 
             }
