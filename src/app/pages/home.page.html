@@ -96,7 +96,7 @@
         <!-- End Bnner Section -->
 
         <!-- Specialize Most Liked Section -->
-        <section class="specialize-section-two" >
+        <section class="specialize-section-two" v-if="preferedProduct.length > 0">
             <div class="auto-container" >
                 <div class="row" >
                     <!-- Title Column -->
@@ -135,29 +135,29 @@
                         <div class="inner-column" >
                             <div class="carousel-outer">
                                 <ul class="image-carousel owl-carousel owl-theme">
-                                    <li v-for="prefered in preferedProduct" v-if="prefered.tb_product">
-                                        <a  href="/product" class="lightbox-image" :title="prefered.tb_product.name">
+                                    <li v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index">
+                                        <a  href="/product" class="lightbox-image" :title="prefered.tb_product.name" >
                                             <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
                                         </a>
                                     </li>
-                                    <li v-for="prefered in preferedProduct" v-if="prefered.tb_product">
+                                    <!-- <li v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index">
                                         <a href="/product" class="lightbox-image" :title="prefered.tb_product.name">
-                                            <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
+                                            <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 200px; width: 200px;">
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 
                                 <ul class="thumbs-carousel owl-carousel owl-theme">
-                                    <li class="thumb-box" v-for="prefered in preferedProduct" v-if="prefered.tb_product">
+                                    <li class="thumb-box" v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index" >
                                         <figure>
-                                            <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name">
+                                            <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name" style="height: 100px; width: 100px;">
                                         </figure>
                                         <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
                                     </li>
-                                    <li class="thumb-box" v-for="prefered in preferedProduct" v-if="prefered.tb_product">
+                                    <!-- <li class="thumb-box" v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index">
                                         <figure><img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name"></figure>
                                         <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -659,17 +659,19 @@
                     }).finally(() => this.initPartner() )
 
                     ApiFrame.getPrefered('home').then(prefer => {
-                      console.log('prefer',prefer)  
+                        this.preferedProduct = prefer.data
+                    }).finally(() => {
+                        this.owlPreferedInit()
                     })
 
                     ApiFrame.getTrends('home').then(prefer => {
-                        console.log('prefer', prefer)
+                        this.trends = prefer.data
+                    }).finally(() => {
+                        this.owlTrendInit()
                     })
                 })
                 .then(() => {
                     this.owlBannerInit()
-                    this.owlPreferedInit()
-                    this.owlTrendInit()
                     this.owlTestimoniInit()
                 })
                 .finally(() => {

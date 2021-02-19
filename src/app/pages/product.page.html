@@ -395,6 +395,8 @@
                     ApiProduct.getTrendAndPrefered(this.constructionSelected == 'prefered' ? 1 : 0)
                     .then(resp => {
                         this.products = resp.data
+                    }).then(() => {
+                        this.hidePreload()
                     }).finally(() => {
                         setTimeout(() => {
                             this.onLoad_fetch = false
