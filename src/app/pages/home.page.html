@@ -136,7 +136,7 @@
                             <div class="carousel-outer">
                                 <ul class="image-carousel owl-carousel owl-theme">
                                     <li v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index">
-                                        <a  href="/product" class="lightbox-image" :title="prefered.tb_product.name" >
+                                        <a  :href="`/product/${prefered.tb_product.id}`" class="lightbox-image" :title="prefered.tb_product.name" >
                                             <img :src="$root.asset(prefered.tb_product.image)" alt="" style="height: 600px; width: 600px;">
                                         </a>
                                     </li>
@@ -152,7 +152,7 @@
                                         <figure>
                                             <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name" style="height: 100px; width: 100px;">
                                         </figure>
-                                        <div class="overlay"><span class="icon fa fa-arrows-alt"></span></div>
+                                        <div class="overlay" style="height: 100px; width: 100px;"><span class="icon fa fa-arrows-alt"></span></div>
                                     </li>
                                     <!-- <li class="thumb-box" v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index">
                                         <figure><img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name"></figure>
