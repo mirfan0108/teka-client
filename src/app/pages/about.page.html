@@ -9,7 +9,7 @@
                         <!-- <span class="title">The Interior speak for themselves</span> -->
                     </div>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">{{$root.lang() == 1 ? 'Beranda' : $root.lang() == 2 ? 'Home' : 'Zuhause'}}</a></li>
                         <li>{{$root.lang() == 1 ? 'Tentang Teka Parquet' : $root.lang() == 3 ? 'Über Teka Parkett' : 'About Teka Parquet'}}</li>
                     </ul>
                 </div>

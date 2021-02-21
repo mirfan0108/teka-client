@@ -204,13 +204,13 @@
                             <!--Post Share Options-->
                             <div class="styled-pagination" v-if="pager > 1">
                                 <ul class="clearfix">
-                                    <li class="prev-post">
-                                        <a href="javascript:;"><span class="fa fa-long-arrow-left"></span> Prev</a>
+                                    <li class="prev-post" v-if="currentPage != 1">
+                                        <a href="javascript:;" @click.prevent="setPage(currentPage-1)"><span class="fa fa-long-arrow-left"></span> </a>
                                     </li>
                                     <li v-for="page in pager" :class="currentPage == page ? 'active' : ''">
                                         <a href="javascript:void(0)" @click.prevent="setPage(page)">{{page}}</a>
                                     </li>
-                                    <li class="next-post"><a href="javascript:;"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
+                                    <li class="next-post" v-if="currentPage != pager"><a href="javascript:;" @click.prevent="setPage(currentPage+1)"><span class="fa fa-long-arrow-right"></span> </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -300,6 +300,7 @@
                 } else {
                     this.pager = 1
                 }
+                console.log(this.pager)
             },
             initSlider() {
                 if($('.size-width-slider').length){
@@ -418,7 +419,9 @@
                 })
             },
             setPage(page) {
-                this.currentPage = page
+                if(page > 0) {
+                    this.currentPage = page
+                }
             },
             filterSize() {
                 this.currentPage = 1
