@@ -6,10 +6,10 @@
                 <div class="inner-container clearfix">
                     <div class="title-box">
                         <h1>{{details.name}}</h1>
-                        <span class="title">The Interior speak for themselves</span>
+                        <span class="title" v-if="details.tb_construction">{{details.tb_construction.name}} </span>
                     </div>
                     <ul class="bread-crumb clearfix">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">{{$root.lang() == 1 ? 'Beranda' : $root.lang() == 2 ? 'Home' : 'Zuhause'}}</a></li>
                         <li><a href="/product">{{$root.lang() == 1 ? 'Produk' : $root.lang() == 2 ? 'Products' : 'Produkt'}}</a></li>
                         <li>{{details.name}}</li>
                     </ul>
