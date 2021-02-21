@@ -10,7 +10,7 @@
                     </div>
                     <ul class="bread-crumb clearfix">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/product">Product</a></li>
+                        <li><a href="/product">{{$root.lang() == 1 ? 'Produk' : $root.lang() == 2 ? 'Products' : 'Produkt'}}</a></li>
                         <li>{{details.name}}</li>
                     </ul>
                 </div>
