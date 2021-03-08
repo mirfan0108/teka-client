@@ -272,10 +272,10 @@
         mounted() {
             switch (this.constructionSelected) {
                 case 'prefered':
-                    this.titleText = this.$root.lang() == 1 ? 'Produk yang disukai' : this.$root.lang() == 2 ? 'Preferred Products' : 'Bevorzugt Produkt'
+                    this.titleText = this.$root.lang() == 1 ? 'Produk yang disukai' : this.$root.lang() == 2 ? 'Highlighted Product' : 'Bevorzugt Produkt'
                     break;
                 case 'trends':
-                    this.titleText = this.$root.lang() == 1 ? 'Tren Produk' : this.$root.lang() == 2 ? 'Trends Products' : 'TrendProdukt'
+                    this.titleText = this.$root.lang() == 1 ? 'Tren Produk' : this.$root.lang() == 2 ? 'Trends Color' : 'TrendProdukt'
                     break;
                 default:
                     this.titleText = this.$root.lang() == 1 ? 'Produk' : this.$root.lang() == 2 ? 'Products' : 'Produkt'
