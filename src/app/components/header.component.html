@@ -310,12 +310,12 @@
                                                 <ul>
                                                     <li>
                                                         <a href="/product?construction=prefered">
-                                                            Prefered Product
+                                                            Highlighted Product
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="/product?construction=trends">
-                                                            Trending Product
+                                                            Trending Colours
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -394,6 +394,15 @@
                                             <a :href="'/resource/'+$root.encrypt(resource.id)">{{resource.name}}</a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
+                                    <a href="/contact-us">
+                                        {{
+                                            $root.lang() == 1 ? 'Hubungi Kami' :
+                                            $root.lang() == 2 ? 'Contact Us' :
+                                            $root.lang() == 3 ? 'Kontaktiere uns' : ''
+                                        }}
+                                    </a>
                                 </li>
                                 <!-- <li class="">
                                     <a href="javascript:;" @click="switchTo()">
