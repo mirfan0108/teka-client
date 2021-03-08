@@ -20,7 +20,9 @@
             </div>
         </section>
         <!--End Page Title-->
-
+        <a href="javascript:;" data-toggle="modal" data-target="#modal-contact"  id="open-email-modal" hidden>
+            <span class="fa fa-download"></span>
+        </a>
         <section class="blog-section">
             <div class="auto-container">
                 <div class="cart-outer">
@@ -38,7 +40,8 @@
                                     <td class="sub-total">{{index+1}}</td>
                                     <td class="total" style="text-align: left;">{{catalogue.name}}</td>
                                     <td>
-                                        <a :href="$root.catalogue(catalogue.path)" target="_BLANK" class="remove-btn"><span class="fa fa-download"></span></a>
+                                        
+                                        <a href="javascript:;" @click="openModal($root.catalogue(catalogue.path))" class="remove-btn"><span class="fa fa-download"></span></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -47,23 +50,70 @@
                 </div>
             </div>
         </section>
+
+
+        <div id="modal-contact" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">
+                        {{
+                            $root.lang() == 1 ? 'Berlangganan Sekarang' : 
+                            $root.lang() == 3 ? 'Abonniere jetzt' : 'subscribe Now'
+                        }}
+                    </h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" v-model="email" class="form-control"  placeholder="Enter email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="closed-modal-email">
+                    {{
+                        $root.lang() == 1 ? 'Tutup' : 
+                        $root.lang() == 3 ? 'Deckel' : 'Close'
+                    }}
+                  </button>
+                  <button type="button" class="btn btn-primary" @click="sendEmail()">
+                        {{
+                            $root.lang() == 1 ? 'Kirim' : 
+                            $root.lang() == 3 ? 'geschickt' : 'Sent'
+                        }}
+                    </button>
+                </div>
+              </div>
+          
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    import ApiFrame from "../services/api/content.js"
     import ApiProduct from "../services/api/product.js"
     import Loader from "../mixins/preload.js"
     export default {
         mixins: [Loader],
         data() {
             return {
-                Catalogue: []
+                Catalogue: [],
+                email: '',
+                selected_Url: ''
             }
         },
         mounted() {
             this.initCatalogue()
         },
         methods: {
+            openModal(selected) {
+                this.selected_Url = selected_Url
+                $("#open-email-modal").click()
+            },
             initCatalogue() {
                 ApiProduct.getCatalogue(this.$root.lang())
                 .then(resp => {
@@ -73,6 +123,29 @@
                 }).finally(() => {
                     this.hidePreload()
                 })
+            },
+            sendEmail() {
+                let ValidateEmail = txt => {
+                    var EmailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return EmailPattern.test(txt)
+                }
+                if(ValidateEmail(this.email)) {
+                    ApiFrame.subscribe({ email: this.email.toLowerCase() })
+                        .finally(() => {
+                            window.location.assign(this.selected_Url)
+                            this.email = null
+                            $("#closed-modal-email").click()
+                        })
+                } else {
+                    swal({
+                        title: null,
+                        text: "Please input your email",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                }
+                
             }
         }
     }

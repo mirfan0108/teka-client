@@ -1,5 +1,5 @@
 <template>
-    <header class="main-header header-style-two" style="background-color: rgb(0 0 0 / 57%);">
+    <header class="main-header header-style-two" style="background-color: rgb(0 0 0);">
         <div class="alert alert-success" v-if="onSuccess">
             <strong>{{ 
                 $root.lang() == 1 ? 'Berhasil' : 
@@ -147,12 +147,12 @@
                                                 <ul>
                                                     <li>
                                                         <a href="/product?construction=prefered">
-                                                            Prefered Product
+                                                            Highlighted Product
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="/product?construction=trends">
-                                                            Trending Product
+                                                            Trending Colours
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -196,12 +196,12 @@
                                     <ul>
                                         <li>
                                             <a href="/product?construction=prefered">
-                                                Prefered Product
+                                                Highlighted Product
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/product?construction=trends">
-                                                Trending Product
+                                                Trending Colours 
                                             </a>
                                         </li>
                                         <li v-for="construction in constructions">
@@ -233,11 +233,15 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <!-- <li class="">
-                                    <a href="javascript:;" @click="switchTo()">
-                                        {{getPage()}}
+                                <li :class="$root.$router.history.current.name == 'contact.page.html' ? 'current' : ''">
+                                    <a href="/contact-us">
+                                        {{
+                                            $root.lang() == 1 ? 'Hubungi Kami' :
+                                            $root.lang() == 2 ? 'Contact Us' :
+                                            $root.lang() == 3 ? 'Kontaktiere uns' : ''
+                                        }}
                                     </a>
-                                </li> -->
+                                </li>
                             </ul>
                         </div>
                     </nav><!-- Main Menu End-->
