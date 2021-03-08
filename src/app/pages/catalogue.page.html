@@ -40,8 +40,7 @@
                                     <td class="sub-total">{{index+1}}</td>
                                     <td class="total" style="text-align: left;">{{catalogue.name}}</td>
                                     <td>
-                                        
-                                        <a href="javascript:;" @click="openModal($root.catalogue(catalogue.path))" class="remove-btn"><span class="fa fa-download"></span></a>
+                                        <a href="javascript:;" @click="openModal(catalogue)" class="remove-btn"><span class="fa fa-download"></span></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -111,7 +110,7 @@
         },
         methods: {
             openModal(selected) {
-                this.selected_Url = selected_Url
+                this.selected_Url = selected
                 $("#open-email-modal").click()
             },
             initCatalogue() {
@@ -132,7 +131,7 @@
                 if(ValidateEmail(this.email)) {
                     ApiFrame.subscribe({ email: this.email.toLowerCase() })
                         .finally(() => {
-                            window.location.assign(this.selected_Url)
+                            window.location.assign(this.$root.catalogue(this.selected_Url.path))
                             this.email = null
                             $("#closed-modal-email").click()
                         })
