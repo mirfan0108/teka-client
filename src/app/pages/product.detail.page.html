@@ -101,10 +101,10 @@
                                                         <td>
                                                             <span v-for="(thickness, index) in details.tb_size_thicknesses">
                                                                 {{
-                                                                    $root.lang() == 2 ? $root.convertToInch(thickness.size_thickness) : thickness.size_thickness
+                                                                    $root.lang() == 2 ? $root.toFraction($root.convertToInch(thickness.size_thickness))+'"' : thickness.size_thickness
                                                                 }} 
                                                                 {{
-                                                                    details.tb_size_thicknesses[index+1] ? ' / ' : 
+                                                                    details.tb_size_thicknesses[index+1] ? ', ' : 
                                                                     $root.lang() == 2 ? ' inch' : ' mm'
                                                                 }}
                                                             </span>
@@ -115,11 +115,11 @@
                                                         <td>
                                                             <span v-for="(wd, index) in details.tb_size_widths">
                                                                 {{
-                                                                    $root.lang() == 2 ? $root.convertToInch(wd.size_width) : wd.size_width
+                                                                    $root.lang() == 2 ? $root.toFraction($root.convertToInch(wd.size_width))+'"' : wd.size_width
                                                                     
                                                                 }} 
                                                                 {{
-                                                                    details.tb_size_widths[index+1] ? ' / ' :
+                                                                    details.tb_size_widths[index+1] ? ', ' :
                                                                     $root.lang() == 2 ? ' inch': ' mm'
                                                                 }}
                                                             </span>
@@ -130,11 +130,11 @@
                                                         <td>
                                                             <span v-for="(leng, index) in details.tb_size_lengths">
                                                                 {{
-                                                                    $root.lang() == 2 ? $root.convertToInch(leng.size_length) : leng.size_length
+                                                                    $root.lang() == 2 ? $root.toFraction($root.convertToInch(leng.size_length))+'"' : leng.size_length
                                                                 }} 
                                                                 {{
-                                                                    details.tb_size_lengths[index+1] ? ' / ' : 
-                                                                    $root.lang() == 2 ? ' inch': ' mm'
+                                                                    details.tb_size_lengths[index+1] ? ', ' : 
+                                                                    $root.lang() == 2 ? ' feet': ' mm'
                                                                 }}
                                                             </span>
                                                         </td>
@@ -300,18 +300,18 @@
                     let _width = ''
                     let _length = ''
                     this.details.tb_size_thicknesses.map((_val, index) => {
-                        thickness += this.$root.lang() != 1 ? this.$root.convertToInch(_val.size_thickness) : _val.size_thickness
-                        thickness += this.details.tb_size_thicknesses[index + 1] ? ' /' : this.$root.lang() != 1 ? ' inch' : ' mm'
+                        thickness += this.$root.lang() != 1 ? this.$root.toFraction(this.$root.convertToInch(_val.size_thickness))+'"' : _val.size_thickness
+                        thickness += this.details.tb_size_thicknesses[index + 1] ? (this.$root.lang() != 1 ? ', ' : ', ') : this.$root.lang() != 1 ? ' inch' : ' mm'
                     })
 
                     this.details.tb_size_widths.map((_val, index) => {
-                        _width += this.$root.lang() != 1 ? this.$root.convertToInch(_val.size_width) : _val.size_width
-                        _width += this.details.tb_size_widths[index + 1] ? ' /' : this.$root.lang() != 1 ? ' inch' : ' mm'
+                        _width += this.$root.lang() != 1 ? this.$root.toFraction(this.$root.convertToInch(_val.size_width))+'"' : _val.size_width
+                        _width += this.details.tb_size_widths[index + 1] ? (this.$root.lang() != 1 ? ', ' : ' mm, ') : this.$root.lang() != 1 ? ' inch' : ' mm'
                     })
 
                     this.details.tb_size_lengths.map((_val, index) => {
-                        _length += this.$root.lang() != 1 ? this.$root.convertToInch(_val.size_length) : _val.size_length
-                        _length += this.details.tb_size_lengths[index + 1] ? ' /' : this.$root.lang() != 1 ? ' inch' : ' mm'
+                        _length += this.$root.lang() != 1 ? this.$root.toFraction(this.$root.convertToInch(_val.size_length))+'"' : _val.size_length
+                        _length += this.details.tb_size_lengths[index + 1] ? (this.$root.lang() != 1 ? ', ' : ' mm, ')  : this.$root.lang() != 1 ? ' feet' : ' mm' 
                     })
 
                     let criteria = ''
@@ -363,9 +363,11 @@
                                     [
                                         {
                                             image: 'productImage',
+                                            width: 240,
                                             margin: [ 0, 0, 0, 20 ]
                                         },
                                         {
+                                            style: 'medium',
                                             table: {
                                                 widths: [ 80, 140 ],
                                                 body: [
@@ -379,7 +381,7 @@
                                                     ['Profile', this.details.profile],
                                                     ['Edge Profile', this.details.edge_profile],
                                                     ['Backing', this.details.backing],
-                                                    ['Thickness', thickness],
+                                                    [{text: 'Thickness', alignment: 'left'}, thickness],
                                                     ['Width', _width],
                                                     ['Length', _length]
                                                 ]
@@ -390,6 +392,7 @@
                                     ],
                                     [
                                         {
+                                            style: 'medium',
                                             table: {
                                                 headerRows: 1,
                                                 widths: [ '*', 'auto' ],
@@ -416,6 +419,7 @@
                                             style: 'small'
                                         },
                                         {
+                                            style: 'medium',
                                             table: {
                                                 headerRows: 1,
                                                 widths: [ '*', 'auto' ],
@@ -456,6 +460,9 @@
                             },
                             small: {
                                 fontSize: 8
+                            },
+                            medium: {
+                                fontSize: 10
                             }
                         }
                     };

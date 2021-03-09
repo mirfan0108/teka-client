@@ -252,7 +252,7 @@
                 sizeWidthMM: [83,90,110,127,155,180,200,250,300,350],
                 sizeWidthInc: [],
 
-                sizeLengthMM: [1200,1800,2200,2900,3000,4000,4500],
+                sizeLengthMM: [1200,1800,2200,2900,3000,4000],
                 sizeLengthInc: [],
 
                 sizeThicknessMM: [12,12.7,14,15,19],
@@ -315,7 +315,7 @@
                                 this.rangeWidth = ui.value != 0 ?  this.sizeWidthMM[ui.value - 1] - 1+"-"+this.sizeWidthMM[ui.value - 1] : ''
                             } else {
                                 resWidth = ui.value != 0 ? this.sizeWidthMM[ui.value - 1] : 0
-                                $( "input.size-width" ).val( this.$root.convertToInch(resWidth) +"\"inch");
+                                $( "input.size-width" ).val( this.$root.toFraction(this.$root.convertToInch(resWidth)) +"\" inch");
                                 this.rangeWidth = ui.value != 0 ?  this.sizeWidthMM[ui.value - 1] - 1+"-"+this.sizeWidthMM[ui.value - 1] : ''
                             }
                         }
@@ -337,7 +337,7 @@
                                 this.rangeLength = ui.value != 0 ?  this.sizeLengthMM[ui.value - 1] - 1+"-"+this.sizeLengthMM[ui.value - 1] : ''
                             } else {
                                 resLength = ui.value != 0 ? this.sizeLengthMM[ui.value - 1] : 0
-                                $( "input.size-length" ).val( this.$root.convertToInch(resLength) +"\"inch");
+                                $( "input.size-length" ).val( this.$root.toFraction(this.$root.convertToInch(resLength)) +"\" feet");
                                 this.rangeLength =  ui.value != 0 ?  this.sizeLengthMM[ui.value - 1] - 1+"-"+this.sizeLengthMM[ui.value - 1] : ''
                             }
                         }
@@ -358,7 +358,7 @@
                                 this.rangeThickness = ui.value != 0 ?  this.sizeThicknessMM[ui.value - 1] - 1+"-"+this.sizeThicknessMM[ui.value - 1] : ''
                             } else {
                                 resThickness = ui.value != 0 ? this.sizeThicknessMM[ui.value - 1] : 0
-                                $( "input.size-thickness" ).val( this.$root.convertToInch(resThickness) +"\"inch");
+                                $( "input.size-thickness" ).val( this.$root.toFraction(this.$root.convertToInch(resThickness)) +"\" inch");
                                 this.rangeThickness = ui.value != 0 ?  this.sizeThicknessMM[ui.value - 1] - 1+"-"+this.sizeThicknessMM[ui.value - 1] : ''
                             }
                         }

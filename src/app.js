@@ -125,6 +125,11 @@ Vue.use(VueAnalytics, {
   router
 })
 
+var gcd = function(a, b) {
+  if (b < 0.0000001) return a;                
+  return gcd(b, Math.floor(a % b));           
+};
+
 var app = new Vue({
     el: "#app",
     router: router,
@@ -153,8 +158,36 @@ var app = new Vue({
           } 
           return pager
         },
+        toFraction: fraction => {
+          if(fraction > 0) {
+            var len = fraction.toString().length - 2;
+            var denominator = Math.pow(10, len);
+            var numerator = fraction * denominator;
+            var divisor = gcd(numerator, denominator);   
+            numerator /= divisor;                         
+            denominator /= divisor;  
+            var modRes = numerator % denominator
+            let tempNumerator
+            if(denominator > 1) {
+              if(Math.floor(modRes) > 0) {
+                tempNumerator = (Math.floor(numerator) - Math.floor(modRes)) / Math.floor(denominator)
+                
+                return Math.floor(tempNumerator) > 0 ? `${Math.floor(tempNumerator)}  ${Math.floor(modRes)}/${Math.floor(denominator)}` : `${Math.floor(modRes)}/${Math.floor(denominator)}`
+              } else {
+                return Math.floor(numerator) + '/' + Math.floor(denominator)
+              }
+            } else {
+              return Math.floor(numerator)
+            }     
+          } else {
+            return 0
+          }
+                 
+        },
         activeLink: "home"
       };
     },
     
   });
+
+  

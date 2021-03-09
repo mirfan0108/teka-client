@@ -43,8 +43,45 @@
                             $root.lang() == 3 ? 'Wenn Sie unten Ihre E-Mail-Adresse eingeben, erhalten Sie Neuigkeiten von uns' : 'By filling in your email below, you will receive news from us'
                         }}
                     </p>
-                    <div class="form-group">
-                        <input type="email" v-model="email" class="form-control"  placeholder="Enter email">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>{{
+                                    $root.lang() == 1 ? 'Nama' : 'Name'
+                                }}*</label>
+                                <input type="text" v-model="name" class="form-control"  :placeholder="$root.lang() == 1 ? 'Nama' : 'Name'">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{
+                                    $root.lang() == 1 ? 'Perusahaan' : 'Company'
+                                }}</label>
+                                <input type="text" v-model="company" class="form-control"  :placeholder="$root.lang() == 1 ? 'Perusahaan (Opsional)' : 'Company (Optional)'">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{
+                                    $root.lang() == 1 ? 'Jabatan' : 'Position'
+                                }}</label>
+                                <input type="text" v-model="position" class="form-control"  :placeholder="$root.lang() == 1 ? 'Jabatan (Opsional)' : 'Position (Optional)'">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email*</label>
+                                <input type="email" v-model="email" class="form-control"  placeholder="Enter email">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{
+                                    $root.lang() == 1 ? 'No. Telp' : 'Phone'
+                                }}*</label>
+                                <input type="number" v-model="phone" class="form-control"  placeholder="">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -427,7 +464,11 @@
             return {
                 constructions: [],
                 resources: [],
+                name: null,
                 email: null,
+                company: null,
+                position: null,
+                phone: null,
                 onSuccess: false,
                 onError: false
             }
@@ -463,13 +504,67 @@
             getPage() {
                 return sessionStorage.getItem('__STARTER') == 'professional' ? 'Home Owner' : 'Professional'
             },
+            validateSubscribe(formInquiry) {
+                let ValidateEmail = txt => {
+                    var EmailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return EmailPattern.test(txt)
+                }
+                if (!formInquiry.name.trim().length) {
+                    swal({
+                        title: null,
+                        text: "Name is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if (!formInquiry.phone.toString().trim().length) {
+                    swal({
+                        title: null,
+                        text: "phone is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if (!formInquiry.email.trim().length) {
+                    swal({
+                        title: null,
+                        text: "Email is Required",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                if (!ValidateEmail(formInquiry.email)) {
+                    swal({
+                        title: null,
+                        text: "Please input email correctly",
+                        icon: "error",
+                        buttons: false,
+                        dangerMode: true,
+                    });
+                    return false
+                }
+                return true
+            },
             sendEmail() {
                 let ValidateEmail = txt => {
                     var EmailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                     return EmailPattern.test(txt)
                 }
-                if(ValidateEmail(this.email)) {
-                    ApiFrame.subscribe({ email: this.email.toLowerCase() })
+                let form = {
+                    email: this.email.toLowerCase(),
+                    name: this.name,
+                    company: this.company,
+                    phone: this.phone,
+                    position: this.position
+                }
+                if(this.validateSubscribe(form)) {
+                    ApiFrame.subscribe(form)
                         .catch(err => {
                             this.onError = true;
                             swal({
@@ -501,7 +596,7 @@
                 } else {
                     swal({
                         title: null,
-                        text: "Please input your email",
+                        text: "Please check your input",
                         icon: "error",
                         buttons: false,
                         dangerMode: true,
