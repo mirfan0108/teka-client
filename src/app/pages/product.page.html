@@ -326,7 +326,7 @@
                 if($('.size-width-slider').length){
                     $( ".size-width-slider" ).slider({
                         min: 0,
-                        max: this.sizeWidthInc.length,
+                        max: this.$root.lang() == 1 ? this.sizeWidthMM.length : this.sizeWidthInc.length,
                         slide: ( event, ui ) => {
                             let resWidth 
                             if(this.$root.lang() == 1) {
@@ -348,7 +348,7 @@
                 if($('.size-length-slider').length){
                     $( ".size-length-slider" ).slider({
                         min: 0,
-                        max: 7,
+                        max: this.$root.lang() == 1 ? this.sizeLengthMM.length : this.sizeLengthInc.length,
                         slide: ( event, ui ) => {
                             let resLength 
                             if(this.$root.lang() == 1) {
@@ -369,7 +369,7 @@
                 if($('.size-thickness-slider').length){
                     $( ".size-thickness-slider" ).slider({
                         min: 0,
-                        max: this.sizeThicknessInc.length,
+                        max: this.$root.lang() == 1 ? this.sizeThicknessMM.length : this.sizeThicknessInc.length,
                         slide: ( event, ui ) => {
                             let resThickness 
                             if(this.$root.lang() == 1) {
