@@ -140,7 +140,7 @@ var app = new Vue({
         catalogue: path => process.env.CATALOGUE + "/" + path,
         convertToInch: mm => {
           var inches = mm/25.4;
-          return inches.toFixed(2)
+          return inches.toFixed(1)
         },
         encrypt: str => { return btoa(str) },
         decrypt: text => { return atob(text)},
@@ -160,6 +160,7 @@ var app = new Vue({
         },
         toFraction: fraction => {
           if(fraction > 0) {
+            // fraction = fraction.toFixed(1)
             var len = fraction.toString().length - 2;
             var denominator = Math.pow(10, len);
             var numerator = fraction * denominator;
@@ -169,7 +170,7 @@ var app = new Vue({
             var modRes = numerator % denominator
             let tempNumerator
             if(denominator > 1) {
-              if(Math.floor(modRes) > 0) {
+              if( numerator > denominator && Math.floor(modRes) > 0) {
                 tempNumerator = (Math.floor(numerator) - Math.floor(modRes)) / Math.floor(denominator)
                 
                 return Math.floor(tempNumerator) > 0 ? `${Math.floor(tempNumerator)}  ${Math.floor(modRes)}/${Math.floor(denominator)}` : `${Math.floor(modRes)}/${Math.floor(denominator)}`
@@ -180,6 +181,7 @@ var app = new Vue({
               return Math.floor(numerator)
             }     
           } else {
+            console.log('fraction da => ', fraction)
             return 0
           }
                  
