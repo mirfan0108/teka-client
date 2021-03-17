@@ -169,7 +169,7 @@
                     <div :class="is_prefered ? 'content-side col-xl-12 col-lg-12 col-md-12' : 'content-side col-xl-9 col-lg-8 col-md-12'">
                         <div style="width: 100%;" align="center" v-if="onLoad_fetch">
                             <div class="cs-loader"></div>
-                            <br>Mohon Tunggu ...
+                            
                         </div>
                         <div style="width: 100%; text-align: center; vertical-align: middle;" align="center" v-if="products.length == 0 && !onLoad_fetch">
                             <h4>No Data</h4>
@@ -276,7 +276,7 @@
             })
 
             this.sizeLengthMM.map(_mm => {
-                const find = this.sizeLengthInc.findIndex(_val => _val.inc == this.$root.convertToInch(_mm))
+                const find = this.sizeLengthInc.findIndex(_val => _val.inc == this.$root.convertToFeet(_mm))
                 if(find < 0) {
                     this.sizeLengthInc.push({mm: _mm, inc: this.$root.convertToInch(_mm) })
                 }
@@ -357,7 +357,7 @@
                                 this.rangeLength = ui.value != 0 ?  this.sizeLengthMM[ui.value - 1] - 1+"-"+this.sizeLengthMM[ui.value - 1] : ''
                             } else {
                                 resLength = ui.value != 0 ? this.sizeLengthInc[ui.value - 1].mm : 0
-                                $( "input.size-length" ).val( this.$root.toFraction(this.$root.convertToInch(resLength)) +"\" feet");
+                                $( "input.size-length" ).val( this.$root.convertToFeet(resLength) +"ft");
                                 this.rangeLength =  ui.value != 0 ?  this.sizeLengthInc[ui.value - 1].mm - 1+"-"+this.sizeLengthInc[ui.value - 1].mm : ''
                             }
                         }

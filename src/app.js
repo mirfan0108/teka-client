@@ -125,6 +125,14 @@ Vue.use(VueAnalytics, {
   router
 })
 
+function reduce(numerator,denominator){
+  var gcd_a = function gcd(a,b){
+    return b ? gcd_a(b, a%b) : a;
+  };
+  gcd_a = gcd_a(numerator,denominator);
+  return [numerator/gcd_a, denominator/gcd_a];
+}
+
 var gcd = function(a, b) {
   if (b < 0.0000001) return a;                
   return gcd(b, Math.floor(a % b));           
@@ -140,7 +148,13 @@ var app = new Vue({
         catalogue: path => process.env.CATALOGUE + "/" + path,
         convertToInch: mm => {
           var inches = mm/25.4;
-          return inches.toFixed(1)
+          console.log('mm => '+ mm +" | inch => "+inches.toFixed(4))
+
+          return inches.toFixed(2)
+        },
+        convertToFeet: mm => {
+          var feet = mm/304.8
+          return parseInt(feet)
         },
         encrypt: str => { return btoa(str) },
         decrypt: text => { return atob(text)},
@@ -159,31 +173,40 @@ var app = new Vue({
           return pager
         },
         toFraction: fraction => {
-          if(fraction > 0) {
-            // fraction = fraction.toFixed(1)
-            var len = fraction.toString().length - 2;
-            var denominator = Math.pow(10, len);
-            var numerator = fraction * denominator;
-            var divisor = gcd(numerator, denominator);   
-            numerator /= divisor;                         
-            denominator /= divisor;  
-            var modRes = numerator % denominator
-            let tempNumerator
-            if(denominator > 1) {
-              if( numerator > denominator && Math.floor(modRes) > 0) {
-                tempNumerator = (Math.floor(numerator) - Math.floor(modRes)) / Math.floor(denominator)
+          return fraction
+          // if(fraction > 0) {
+          //   // fraction = fraction.toFixed(4)
+          //   var len = fraction.toString().length - 2;
+          //   var denominator = Math.pow(10, len);
+          //   var numerator = fraction * denominator;
+          //   var divisor = gcd(numerator, denominator); 
+          //   numerator /= divisor;                         
+          //   denominator /= divisor;  
+          //   var modRes = numerator % denominator
+          //   let tempNumerator
+          //   if(denominator > 1) {
+          //     if( numerator > denominator && Math.floor(modRes) > 0) {
+          //       tempNumerator = (Math.floor(numerator) - Math.floor(modRes)) / Math.floor(denominator)
                 
-                return Math.floor(tempNumerator) > 0 ? `${Math.floor(tempNumerator)}  ${Math.floor(modRes)}/${Math.floor(denominator)}` : `${Math.floor(modRes)}/${Math.floor(denominator)}`
-              } else {
-                return Math.floor(numerator) + '/' + Math.floor(denominator)
-              }
-            } else {
-              return Math.floor(numerator)
-            }     
-          } else {
-            console.log('fraction da => ', fraction)
-            return 0
-          }
+          //       return Math.floor(tempNumerator) > 0 ? `${Math.floor(tempNumerator)}  ${Math.floor(modRes)}/${Math.floor(denominator)}` : `${Math.floor(modRes)}/${Math.floor(denominator)}`
+          //     } else {
+          //       return Math.floor(numerator) + '/' + Math.floor(denominator)
+          //     }
+          //   } else {
+          //     return Math.floor(numerator)
+          //   }  
+          //   // var denominator = 4;
+          //   // var numerator = Math.round(4 * (fraction * 0.00001));
+          //   // // reduce the fraction
+          //   // while (numerator && numerator % 2 === 0) {
+          //   //   numerator /= 2;
+          //   //   denominator /= 2;
+          //   // }
+          //   // return numerator + "/" + denominator;   
+          // } else {
+          //   console.log('fraction da => ', fraction)
+          //   return 0
+          // }
                  
         },
         activeLink: "home"

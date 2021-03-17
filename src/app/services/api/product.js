@@ -4,7 +4,8 @@ const ENV = process.env.BASE_API
 class Product {
     static getProduct(page = 1, search = '', specie = '', construction = 0, rangeWidth = '', rangeThickness = '', rangeLength = '', color = 0) {
         let content_type = sessionStorage.getItem('__STARTER') == 'professional' ? 2 : 1
-        let queries = `page=${page}&search=${search}&specie=${specie}&construction=${construction}&width=${rangeWidth}&thickness=${rangeThickness}&Length=${rangeLength}&color=${color}&content_type=${content_type}`
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
+        let queries = `page=${page}&search=${search}&specie=${specie}&construction=${construction}&width=${rangeWidth}&thickness=${rangeThickness}&Length=${rangeLength}&color=${color}&content_type=${content_type}&id_lang=${lang}`
         return axios.get(`${ENV}/api/v1/products/all?${queries}`)
     }
 
