@@ -315,6 +315,7 @@
                 ApiProduct.getDetail_Product(this.id)
                 .then(resp => {
                     this.details = resp.data
+                    this.imagesProduct = resp.data.tb_product_images
                 }).finally(() => {
                     this.hidePreload()
                 })
