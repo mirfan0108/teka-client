@@ -147,7 +147,13 @@
                                     </li> -->
                                 </ul>
                                 
-                                <ul class="thumbs-carousel owl-carousel owl-theme">
+                                <ul class="thumbs-carousel owl-carousel owl-theme" style="top: -40px;">
+                                    <li class="thumb-box" v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index" >
+                                        <figure>
+                                            <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name" style="height: 100px; width: 100px;">
+                                        </figure>
+                                        <div class="overlay" style="height: 100px; width: 100px;"><span class="icon fa fa-arrows-alt"></span></div>
+                                    </li>
                                     <li class="thumb-box" v-for="(prefered, index) in preferedProduct" v-if="prefered.tb_product && 8 > index" >
                                         <figure>
                                             <img :src="$root.asset(prefered.tb_product.image)" :alt="prefered.tb_product.name" style="height: 100px; width: 100px;">
