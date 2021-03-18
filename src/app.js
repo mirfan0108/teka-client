@@ -2,6 +2,16 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import AppMain from "@/app/components/content.component.html";
 import VueAnalytics from "vue-analytics"
+import { create, all } from 'mathjs'
+
+// create a mathjs instance with configuration
+const config = {
+  number: 'Fraction',
+  matrix: 'Matrix',
+  precision: 64,
+}
+const math = create(all, config)
+
 // START PAGES
 import HomePage from "@/app/pages/home.page.html"
 import AboutPage from "@/app/pages/about.page.html"
@@ -115,6 +125,67 @@ const router = new VueRouter({
         },
     ]
 })
+const getFracString = (num,den) =>
+  {
+    var s="";
+    num=num.toString();
+    den=den.toString();
+    var ulook=["\u2070","\u00B9","\u00B2","\u00B3","\u2074","\u2075","\u2076","\u2077","\u2078","\u2079"];
+    var dlook=["\u2080","\u2081","\u2082","\u2083","\u2084","\u2085","\u2086","\u2087","\u2088","\u2089"];
+    for(var i=0; i<num.length; i++)
+        s+=ulook[num[i]];
+    s+="/";
+    for(var i=0; i<den.length; i++)
+        s+=dlook[den[i]];         
+    return s;
+  }
+
+const d2f = (x) => {
+  var y = parseFloat(x);
+  y = Math.round(y*64)/64;
+  var absy=Math.abs(y);
+  var yy=Math.floor(absy);
+  var frac=roundresult(absy-yy);
+  //if( x2<0 ) sign = sign2 = '-';
+  var d = digits_after_period(absy);
+  var den = Math.round(Math.pow(10,d));
+  var num = Math.round(frac*den);
+  var len=num.toString().length;
+  var f=false;
+  if( len>8 ) f=true;
+  var g = gcd2(num,den,f);
+  var num2 = Math.round(num/g);
+  var den2 = Math.round(den/g);
+  y = yy;
+  y = y != 0 ? y : ''
+  //if( num2!=0 ) y+=" "+num2+"/"+den2;
+  console.log('n => frach => ', num2)
+  if( num2!=0 ) y+=" "+getFracString(num2,den2);
+  return(y);
+}
+
+const d2fPDF = (x) => {
+  var y = parseFloat(x);
+  y = Math.round(y*64)/64;
+  var absy=Math.abs(y);
+  var yy=Math.floor(absy);
+  var frac=roundresult(absy-yy);
+  //if( x2<0 ) sign = sign2 = '-';
+  var d = digits_after_period(absy);
+  var den = Math.round(Math.pow(10,d));
+  var num = Math.round(frac*den);
+  var len=num.toString().length;
+  var f=false;
+  if( len>8 ) f=true;
+  var g = gcd2(num,den,f);
+  var num2 = Math.round(num/g);
+  var den2 = Math.round(den/g);
+  y = yy;
+  y = y != 0 ? y : ''
+  //if( num2!=0 ) y+=" "+num2+"/"+den2;
+  if( num2!=0 ) y+=" "+num2+"/"+den2 ;
+  return(y);
+}
 
 router.beforeEach((to, from, next) => {
   to.name != 'starter.page.html' && !sessionStorage.getItem('__STARTER') ? next({ name: 'starter.page.html' }) : next()
@@ -124,15 +195,6 @@ Vue.use(VueAnalytics, {
   id: 'UA-69164208-4',
   router
 })
-
-function reduce(numerator,denominator){
-  var gcd_a = function gcd(a,b){
-    return b ? gcd_a(b, a%b) : a;
-  };
-  gcd_a = gcd_a(numerator,denominator);
-  return [numerator/gcd_a, denominator/gcd_a];
-}
-
 var gcd = function(a, b) {
   if (b < 0.0000001) return a;                
   return gcd(b, Math.floor(a % b));           
@@ -149,8 +211,8 @@ var app = new Vue({
         convertToInch: mm => {
           var inches = mm/25.4;
           console.log('mm => '+ mm +" | inch => "+inches.toFixed(4))
-
-          return inches.toFixed(2)
+         
+          return inches
         },
         convertToFeet: mm => {
           var feet = mm/304.8
@@ -173,41 +235,16 @@ var app = new Vue({
           return pager
         },
         toFraction: fraction => {
-          return fraction
-          // if(fraction > 0) {
-          //   // fraction = fraction.toFixed(4)
-          //   var len = fraction.toString().length - 2;
-          //   var denominator = Math.pow(10, len);
-          //   var numerator = fraction * denominator;
-          //   var divisor = gcd(numerator, denominator); 
-          //   numerator /= divisor;                         
-          //   denominator /= divisor;  
-          //   var modRes = numerator % denominator
-          //   let tempNumerator
-          //   if(denominator > 1) {
-          //     if( numerator > denominator && Math.floor(modRes) > 0) {
-          //       tempNumerator = (Math.floor(numerator) - Math.floor(modRes)) / Math.floor(denominator)
-                
-          //       return Math.floor(tempNumerator) > 0 ? `${Math.floor(tempNumerator)}  ${Math.floor(modRes)}/${Math.floor(denominator)}` : `${Math.floor(modRes)}/${Math.floor(denominator)}`
-          //     } else {
-          //       return Math.floor(numerator) + '/' + Math.floor(denominator)
-          //     }
-          //   } else {
-          //     return Math.floor(numerator)
-          //   }  
-          //   // var denominator = 4;
-          //   // var numerator = Math.round(4 * (fraction * 0.00001));
-          //   // // reduce the fraction
-          //   // while (numerator && numerator % 2 === 0) {
-          //   //   numerator /= 2;
-          //   //   denominator /= 2;
-          //   // }
-          //   // return numerator + "/" + denominator;   
-          // } else {
-          //   console.log('fraction da => ', fraction)
-          //   return 0
-          // }
-                 
+          if(fraction > 0) {
+            return d2f(fraction)
+          } 
+          return 0    
+        },
+        toFractionPDF: fraction => {
+          if(fraction > 0) {
+            return d2fPDF(fraction)
+          } 
+          return 0
         },
         activeLink: "home"
       };

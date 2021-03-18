@@ -300,18 +300,18 @@
                     let _width = ''
                     let _length = ''
                     this.details.tb_size_thicknesses.map((_val, index) => {
-                        thickness += this.$root.lang() != 1 ? this.$root.toFraction(this.$root.convertToInch(_val.size_thickness))+'"' : _val.size_thickness
+                        thickness += this.$root.lang() != 1 ? this.$root.toFractionPDF(this.$root.convertToInch(_val.size_thickness))+'"' : _val.size_thickness
                         thickness += this.details.tb_size_thicknesses[index + 1] ? (this.$root.lang() != 1 ? ', ' : ', ') : this.$root.lang() != 1 ? ' inch' : ' mm'
                     })
 
                     this.details.tb_size_widths.map((_val, index) => {
-                        _width += this.$root.lang() != 1 ? this.$root.toFraction(this.$root.convertToInch(_val.size_width))+'"' : _val.size_width
+                        _width += this.$root.lang() != 1 ? this.$root.toFractionPDF(this.$root.convertToInch(_val.size_width))+'"' : _val.size_width
                         _width += this.details.tb_size_widths[index + 1] ? (this.$root.lang() != 1 ? ', ' : ' mm, ') : this.$root.lang() != 1 ? ' inch' : ' mm'
                     })
 
                     this.details.tb_size_lengths.map((_val, index) => {
-                        _length += this.$root.lang() != 1 ? this.$root.toFraction(this.$root.convertToInch(_val.size_length))+'"' : _val.size_length
-                        _length += this.details.tb_size_lengths[index + 1] ? (this.$root.lang() != 1 ? ', ' : ' mm, ')  : this.$root.lang() != 1 ? ' feet' : ' mm' 
+                        _length += this.$root.lang() != 1 ? this.$root.convertToFeet(_val.size_length)+'' : _val.size_length
+                        _length += this.details.tb_size_lengths[index + 1] ? (this.$root.lang() != 1 ? ', ' : ' mm, ')  : this.$root.lang() != 1 ? ' ft' : ' mm' 
                     })
 
                     let criteria = ''
