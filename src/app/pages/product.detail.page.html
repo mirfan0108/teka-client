@@ -45,17 +45,15 @@
                                                     <div class="carousel-inner">
                                                       <div class="carousel-item active">
                                                           <div class="image-column">
-                                                              <figure class="image-box"><a  :href="$root.asset(details.image)" class="lightbox-image" title="Image Caption Here">
+                                                              <figure class="image-box">
+                                                                  <a  :href="$root.asset(details.image)" class="lightbox-images"  rel="lightbox-images" :title="details.name">
                                                                   <img :src="$root.asset(details.image)" alt=""></a>
                                                               </figure>
                                                           </div>
                                                       </div>
                                                       <div class="carousel-item" v-for="(img, index) in imagesProduct">
-                                                          <div class="image-column">
-                                                              <figure class="image-box"><a :href="$root.asset(img.image)"  :class="'lightbox-image img-'+index" title="Image Caption Here">
-                                                                  <img :src="$root.asset(img.image)" ></a>
-                                                              </figure>
-                                                          </div>
+                                                        <a :href="$root.asset(img.image)"  class="lightbox-images" rel="lightbox-images" :title="details.name">
+                                                            <img :src="$root.asset(img.image)" ></a>
                                                       </div>
                                                       
                                                     </div>
@@ -277,25 +275,7 @@
         mounted() {
             this.fetchProduct()
             this.fetchDetail()
-            if($('.lightbox-image').length) {
-                $('.lightbox-image').fancybox({
-                    openEffect  : 'fade',
-                    closeEffect : 'fade',
-                    helpers : {
-                        media : {}
-                    }
-                });
-            }
-
-            if($('.lightbox-image .img-0').length) {
-                $('.lightbox-image .img-0').fancybox({
-                    openEffect  : 'fade',
-                    closeEffect : 'fade',
-                    helpers : {
-                        media : {}
-                    }
-                });
-            }
+            
         },
         methods: {
             initPartner() {
@@ -372,21 +352,22 @@
 
 
                 })
-                .finally(() => {
-                    if(this.imagesProduct && this.imagesProduct.length > 0) {
-                        this.imagesProduct.map((img, index) => {
-                            if($(`.img-${index}`).length) {
-                                $(`.img-${index}`).fancybox({
-                                    openEffect  : 'fade',
-                                    closeEffect : 'fade',
-                                    helpers : {
-                                        media : {}
-                                    }
-                                });
-                            }
-                        })
-                    }
+                .then(() => {
                     this.hidePreload()
+                })
+                .finally(() => {
+                    if($('.lightbox-images').length) {
+                        $('.lightbox-images').fancybox({
+                            parent: ".header-top",
+                            closeBtn		: true,
+                            prevEffect	: 'none',
+		                    nextEffect	: 'none',
+                            helpers		: {
+                                title	: { type : 'inside' },
+                                buttons	: {}
+                            }
+                        });
+                    }
                 })
             },
             async getTechnicalSheets() {
