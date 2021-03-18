@@ -291,8 +291,10 @@
             <div class="auto-container">
                 <div class="sponsors-outer">
                     <ul class="sponsors-carousel owl-carousel owl-theme">
-                        <li class="slide-item" v-for="dt in partners"><figure class="image-box">
-                            <a :href="dt.link" target="_BLANK"><img :src="$root.asset(dt.logo)" :alt="dt.partner_name"></a></figure>
+                        <li class="slide-item" v-for="dt in partners">
+                            <figure class="image-box">
+                            <a :href="dt.link" target="_BLANK"><img :src="$root.asset(dt.logo)" :alt="dt.partner_name" style="width: 100px; height: 80px;"></a>
+                            </figure>
                         </li>
                     </ul>
                 </div>
