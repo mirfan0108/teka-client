@@ -127,12 +127,12 @@
                                                     <tr>
                                                         <td>Thickness</td>
                                                         <td>
-                                                            <span v-for="(thickness, index) in details.tb_size_thicknesses">
+                                                            <span v-for="(thickness, index) in tichnessSizes">
                                                                 {{
-                                                                    $root.lang() == 2 ? $root.toFraction($root.convertToInch(thickness.size_thickness))+'"' : thickness.size_thickness
+                                                                    $root.lang() == 2 ? thickness+'"' : thickness
                                                                 }} 
                                                                 {{
-                                                                    details.tb_size_thicknesses[index+1] ? ', ' : 
+                                                                    tichnessSizes[index+1] ? ', ' : 
                                                                     $root.lang() == 2 ? ' inch' : ' mm'
                                                                 }}
                                                             </span>
@@ -141,13 +141,13 @@
                                                     <tr>
                                                         <td>Width</td>
                                                         <td>
-                                                            <span v-for="(wd, index) in details.tb_size_widths">
+                                                            <span v-for="(wd, index) in widthSizes">
                                                                 {{
-                                                                    $root.lang() == 2 ? $root.toFraction($root.convertToInch(wd.size_width))+'"' : wd.size_width
+                                                                    $root.lang() == 2 ? wd+'"' : wd
                                                                     
                                                                 }} 
                                                                 {{
-                                                                    details.tb_size_widths[index+1] ? ', ' :
+                                                                    widthSizes[index+1] ? ', ' :
                                                                     $root.lang() == 2 ? ' inch': ' mm'
                                                                 }}
                                                             </span>
@@ -264,6 +264,8 @@
                 products: [],
                 details: {},
                 imagesProduct: [],
+                widthSizes: [],
+                tichnessSizes: [],
                 onDownloads: false,
             }
         },
@@ -303,7 +305,6 @@
             fetchProduct() {
                 ApiProduct.getProduct()
                 .then(resp => {
-                    console.log(resp)
                     this.products = resp.data.rows
                     
                 })
@@ -316,6 +317,36 @@
                 .then(resp => {
                     this.details = resp.data
                     this.imagesProduct = resp.data.tb_product_images
+                    if(resp.data.tb_size_widths && resp.data.tb_size_widths.length > 0) {
+                        resp.data.tb_size_widths.map(_wd => {
+                            if(this.$root.lang() == 2) {
+                                let temp = this.$root.toFraction(this.$root.convertToInch(_wd.size_width))
+                                const find = this.widthSizes.findIndex(_val => _val == temp)
+                                if(find < 0) {
+                                    this.widthSizes.push(temp)
+                                } 
+                            } else {
+                                this.widthSizes.push(_wd.size_width)
+                            }
+                        })
+                    }
+
+
+                    if(resp.data.tb_size_thicknesses && resp.data.tb_size_thicknesses.length > 0) {
+                        resp.data.tb_size_thicknesses.map(_wd => {
+                            if(this.$root.lang() == 2) {
+                                let temp = this.$root.toFraction(this.$root.convertToInch(_wd.size_thickness))
+                                const find = this.tichnessSizes.findIndex(_val => _val == temp)
+                                if(find < 0) {
+                                    this.tichnessSizes.push(temp)
+                                } 
+                            } else {
+                                this.tichnessSizes.push(_wd.size_thickness)
+                            }
+                        })
+                    }
+
+
                 }).finally(() => {
                     this.hidePreload()
                 })

@@ -142,7 +142,7 @@ const getFracString = (num,den) =>
 
 const d2f = (x) => {
   var y = parseFloat(x);
-  y = Math.round(y*64)/64;
+  y = Math.round(y*4)/4;
   var absy=Math.abs(y);
   var yy=Math.floor(absy);
   var frac=roundresult(absy-yy);
@@ -166,7 +166,7 @@ const d2f = (x) => {
 
 const d2fPDF = (x) => {
   var y = parseFloat(x);
-  y = Math.round(y*64)/64;
+  y = Math.round(y*4)/4;
   var absy=Math.abs(y);
   var yy=Math.floor(absy);
   var frac=roundresult(absy-yy);
