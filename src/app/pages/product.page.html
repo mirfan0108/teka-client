@@ -278,7 +278,7 @@
             this.sizeLengthMM.map(_mm => {
                 const find = this.sizeLengthInc.findIndex(_val => _val.inc == this.$root.convertToFeet(_mm))
                 if(find < 0) {
-                    this.sizeLengthInc.push({mm: _mm, inc: this.$root.convertToInch(_mm) })
+                    this.sizeLengthInc.push({mm: _mm, inc: this.$root.convertToFeet(_mm) })
                 }
             })
 

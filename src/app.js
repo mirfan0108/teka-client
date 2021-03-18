@@ -125,6 +125,10 @@ const router = new VueRouter({
         },
     ]
 })
+var gcd = function(a, b) {
+  if (b < 0.0000001) return a;                
+  return gcd(b, Math.floor(a % b));           
+};
 const getFracString = (num,den) =>
   {
     var s="";
@@ -142,7 +146,7 @@ const getFracString = (num,den) =>
 
 const d2f = (x) => {
   var y = parseFloat(x);
-  y = Math.round(y*8)/8;
+  y = Math.round(y*16)/16;
   var absy=Math.abs(y);
   var yy=Math.floor(absy);
   var frac=roundresult(absy-yy);
@@ -153,7 +157,7 @@ const d2f = (x) => {
   var len=num.toString().length;
   var f=false;
   if( len>8 ) f=true;
-  var g = gcd2(num,den,f);
+  var g = gcd(num,den,f);
   var num2 = Math.round(num/g);
   var den2 = Math.round(den/g);
   y = yy;
@@ -166,7 +170,7 @@ const d2f = (x) => {
 
 const d2fPDF = (x) => {
   var y = parseFloat(x);
-  y = Math.round(y*8)/8;
+  y = Math.round(y*16)/16;
   var absy=Math.abs(y);
   var yy=Math.floor(absy);
   var frac=roundresult(absy-yy);
@@ -177,7 +181,7 @@ const d2fPDF = (x) => {
   var len=num.toString().length;
   var f=false;
   if( len>8 ) f=true;
-  var g = gcd2(num,den,f);
+  var g = gcd(num,den);
   var num2 = Math.round(num/g);
   var den2 = Math.round(den/g);
   y = yy;
@@ -209,10 +213,11 @@ var app = new Vue({
         asset: path => path ? process.env.ASSETS +"/"+ path : '#',
         catalogue: path => process.env.CATALOGUE + "/" + path,
         convertToInch: mm => {
+          if(mm == 15) {
+            mm += 0.5
+          }
           var inches = mm/25.4;
-          console.log('mm => '+ mm +" | inch => "+inches.toFixed(4))
-         
-          return inches.toFixed(4)
+          return inches.toFixed(6)
         },
         convertToFeet: mm => {
           var feet = mm/304.8
