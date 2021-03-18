@@ -1,5 +1,6 @@
 <template>
     <div >
+        <div style="background-color: white; height: 1000px; width: 100%;" v-if="notFound">1</div>
         <!--Page Title-->
         <section class="page-title" style="background-image:url(/assets/images/background/10.jpg);">
             <div class="auto-container">
@@ -19,7 +20,7 @@
         <!--End Page Title-->
 
         <!--Sidebar Page Container-->
-        <div class="sidebar-page-container">
+        <div class="sidebar-page-container" >
             <div class="auto-container">
                 <div class="row clearfix">
                     
@@ -259,13 +260,15 @@
 <script>
     import ApiProduct from "../services/api/product.js"
     import Loader from "../mixins/preload.js"
+    import mixLang from "../mixins/lang.js"
     export default {
-        mixins: [Loader],
+        mixins: [Loader, mixLang],
         props: ['id'],
         data() {
             return {
                 products: [],
                 details: {},
+                notFound: false,
                 imagesProduct: [],
                 widthSizes: [],
                 tichnessSizes: [],
@@ -318,35 +321,61 @@
             },
             fetchDetail() {
                 ApiProduct.getDetail_Product(this.id)
+                .catch(err => {
+                    console.log('err', err)
+                })
                 .then(resp => {
-                    this.details = resp.data
-                    this.imagesProduct = resp.data.tb_product_images
-                    if(resp.data.tb_size_widths && resp.data.tb_size_widths.length > 0) {
-                        resp.data.tb_size_widths.map(_wd => {
-                            if(this.$root.lang() == 2) {
-                                let temp = this.$root.toFraction(this.$root.convertToInch(_wd.size_width))
-                                const find = this.widthSizes.findIndex(_val => _val == temp)
-                                if(find < 0) {
-                                    this.widthSizes.push(temp)
-                                } 
+                    if(resp.data) {
+                        this.details = resp.data
+                        this.imagesProduct = resp.data.tb_product_images
+                        if(resp.data.tb_size_widths && resp.data.tb_size_widths.length > 0) {
+                            resp.data.tb_size_widths.map(_wd => {
+                                if(this.$root.lang() == 2) {
+                                    let temp = this.$root.toFraction(this.$root.convertToInch(_wd.size_width))
+                                    const find = this.widthSizes.findIndex(_val => _val == temp)
+                                    if(find < 0) {
+                                        this.widthSizes.push(temp)
+                                    } 
+                                } else {
+                                    this.widthSizes.push(_wd.size_width)
+                                }
+                            })
+                        }
+    
+    
+                        if(resp.data.tb_size_thicknesses && resp.data.tb_size_thicknesses.length > 0) {
+                            resp.data.tb_size_thicknesses.map(_wd => {
+                                if(this.$root.lang() == 2) {
+                                    let temp = this.$root.toFraction(this.$root.convertToInch(_wd.size_thickness))
+                                    const find = this.tichnessSizes.findIndex(_val => _val == temp)
+                                    if(find < 0) {
+                                        this.tichnessSizes.push(temp)
+                                    } 
+                                } else {
+                                    this.tichnessSizes.push(_wd.size_thickness)
+                                }
+                            })
+                        }
+                    } else {
+                        this.notFound = true
+                        swal({
+                            title: "Opps",
+                            text: this.getNot_FoundProduct(),
+                            icon: "error",
+                            dangerMode: true,
+                            button: this.navigateTo_list()
+                            
+                        }).then((result) => {
+                            if(result) {
+                                window.location.href = "/product"
                             } else {
-                                this.widthSizes.push(_wd.size_width)
+                                window.location.href = "/"
                             }
-                        })
-                    }
-
-
-                    if(resp.data.tb_size_thicknesses && resp.data.tb_size_thicknesses.length > 0) {
-                        resp.data.tb_size_thicknesses.map(_wd => {
-                            if(this.$root.lang() == 2) {
-                                let temp = this.$root.toFraction(this.$root.convertToInch(_wd.size_thickness))
-                                const find = this.tichnessSizes.findIndex(_val => _val == temp)
-                                if(find < 0) {
-                                    this.tichnessSizes.push(temp)
-                                } 
-                            } else {
-                                this.tichnessSizes.push(_wd.size_thickness)
-                            }
+                            // if (result && result.isConfirmed) {
+                            //     window.location.href = "/product"
+                            // } else {
+                            //     window.location.href = "/"
+                            // }
                         })
                     }
 
