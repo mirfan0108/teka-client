@@ -10,7 +10,8 @@ class Product {
     }
 
     static getDetail_Product(id) {
-        return axios.get(`${ENV}/api/v1/products/detail/${id}`)
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
+        return axios.get(`${ENV}/api/v1/products/detail/${id}?id_lang=${lang}`)
     }
 
     static getSpecies() {
@@ -31,11 +32,12 @@ class Product {
     }
 
     static getTrendAndPrefered(module) {
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
         let content_type = sessionStorage.getItem('__STARTER') == 'professional' ? 2 : 1
         if (module == 1) {
-            return axios.get(`${ENV}/api/v1/prefered/${content_type}`)
+            return axios.get(`${ENV}/api/v1/prefered/${content_type}?id_lang=${lang}`)
         } else {
-            return axios.get(`${ENV}/api/v1/trending/${content_type}`)
+            return axios.get(`${ENV}/api/v1/trending/${content_type}?id_lang=${lang}`)
         }
     }
 

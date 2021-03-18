@@ -29,9 +29,9 @@ class Content {
         }
         switch (page) {
             case "home":
-                return axios.get(`${ENV}/api/v1/content/prefered/home/lang/${lang}`)
+                return axios.get(`${ENV}/api/v1/content/prefered/home/lang/${lang}?id_lang=${lang}`)
             case "profesional":
-                return axios.get(`${ENV}/api/v1/content/prefered/professional/lang/${lang}`)
+                return axios.get(`${ENV}/api/v1/content/prefered/professional/lang/${lang}?id_lang=${lang}`)
             default:
                 break;
         }
@@ -44,9 +44,9 @@ class Content {
         }
         switch (page) {
             case "home":
-                return axios.get(`${ENV}/api/v1/content/trend/home/lang/${lang}`)
+                return axios.get(`${ENV}/api/v1/content/trend/home/lang/${lang}?id_lang=${lang}`)
             case "profesional":
-                return axios.get(`${ENV}/api/v1/content/trend/professional/lang/${lang}`)
+                return axios.get(`${ENV}/api/v1/content/trend/professional/lang/${lang}?id_lang=${lang}`)
             default:
                 break;
         }

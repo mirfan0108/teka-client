@@ -212,7 +212,7 @@ var app = new Vue({
           var inches = mm/25.4;
           console.log('mm => '+ mm +" | inch => "+inches.toFixed(4))
          
-          return inches
+          return inches.toFixed(4)
         },
         convertToFeet: mm => {
           var feet = mm/304.8
