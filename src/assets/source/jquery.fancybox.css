@@ -19,9 +19,7 @@
 
 .fancybox-wrap {
 	position: absolute;
-	top: 30%;
-	max-height: 450px;
-	max-width: 450px;
+	top: 0;
 	left: 0;
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
@@ -31,7 +29,6 @@
 .fancybox-skin {
 	position: relative;
 	background: #f9f9f9;
-	top: 30% !important;
 	color: #444;
 	text-shadow: none;
 	-webkit-border-radius: 4px;
@@ -51,8 +48,6 @@
 
 .fancybox-outer, .fancybox-inner {
 	position: relative;
-	max-width: 420px;
-	max-height: 420px;
 }
 
 .fancybox-inner {

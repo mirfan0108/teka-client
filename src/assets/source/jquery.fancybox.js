@@ -137,7 +137,7 @@
 
 			// HTML templates
 			tpl: {
-				wrap     : '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin" style="top: 30%;"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
+				wrap     : '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
 				image    : '<img class="fancybox-image" src="{href}" alt="" />',
 				iframe   : '<iframe id="fancybox-frame{rnd}" name="fancybox-frame{rnd}" class="fancybox-iframe" frameborder="0" vspace="0" hspace="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen' + (IE ? ' allowtransparency="true"' : '') + '></iframe>',
 				error    : '<p class="fancybox-error">The requested content cannot be loaded.<br/>Please try again later.</p>',
@@ -1719,7 +1719,7 @@
 
 			parent = F.coming ? F.coming.parent : opts.parent;
 
-			this.overlay = $('<div class="fancybox-overlay" style="position: fixed; top: 35%; "></div>').appendTo( parent && parent.length ? parent : 'body' );
+			this.overlay = $('<div class="fancybox-overlay"></div>').appendTo( parent && parent.length ? parent : 'body' );
 			this.fixed   = false;
 
 			if (opts.fixed && F.defaults.fixed) {

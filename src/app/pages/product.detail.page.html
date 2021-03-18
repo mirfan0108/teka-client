@@ -371,11 +371,6 @@
                             } else {
                                 window.location.href = "/"
                             }
-                            // if (result && result.isConfirmed) {
-                            //     window.location.href = "/product"
-                            // } else {
-                            //     window.location.href = "/"
-                            // }
                         })
                     }
 
@@ -387,7 +382,7 @@
                 .finally(() => {
                     if($('.lightbox-images').length) {
                         $('.lightbox-images').fancybox({
-                            parent: ".header-top",
+                            parent: "#fancies",
                             closeBtn		: true,
                             prevEffect	: 'none',
 		                    nextEffect	: 'none',
