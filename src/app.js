@@ -163,7 +163,6 @@ const d2f = (x) => {
   y = yy;
   y = y != 0 ? y : ''
   //if( num2!=0 ) y+=" "+num2+"/"+den2;
-  console.log('n => frach => ', num2)
   if( num2!=0 ) y+=" "+getFracString(num2,den2);
   return(y);
 }
@@ -220,8 +219,8 @@ var app = new Vue({
           return inches.toFixed(6)
         },
         convertToFeet: mm => {
-          var feet = mm/304.8
-          return parseInt(feet)
+          var feet = Math.round(mm/304.8)
+          return (feet)
         },
         encrypt: str => { return btoa(str) },
         decrypt: text => { return atob(text)},

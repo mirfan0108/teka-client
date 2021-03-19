@@ -160,12 +160,12 @@
                                                     <tr>
                                                         <td>Length</td>
                                                         <td>
-                                                            <span v-for="(leng, index) in details.tb_size_lengths">
+                                                            <span v-for="(leng, index) in lengthSizes">
                                                                 {{
-                                                                    $root.lang() == 2 ? $root.convertToFeet(leng.size_length)+'' : leng.size_length
+                                                                    $root.lang() == 2 ? leng+'' : leng
                                                                 }} 
                                                                 {{
-                                                                    details.tb_size_lengths[index+1] ? ', ' : 
+                                                                    lengthSizes[index+1] ? ', ' : 
                                                                     $root.lang() == 2 ? ' ft': ' mm'
                                                                 }}
                                                             </span>
@@ -272,6 +272,7 @@
                 imagesProduct: [],
                 widthSizes: [],
                 tichnessSizes: [],
+                lengthSizes: [],
                 onDownloads: false,
             }
         },
@@ -353,6 +354,20 @@
                                     } 
                                 } else {
                                     this.tichnessSizes.push(_wd.size_thickness)
+                                }
+                            })
+                        }
+
+                        if(resp.data.tb_size_lengths && resp.data.tb_size_lengths.length > 0) {
+                            resp.data.tb_size_lengths.map(_wd => {
+                                if(this.$root.lang() == 2) {
+                                    let temp = this.$root.convertToFeet(_wd.size_length)
+                                    const find = this.lengthSizes.findIndex(_val => _val == temp)
+                                    if(find < 0) {
+                                        this.lengthSizes.push(temp)
+                                    } 
+                                } else {
+                                    this.lengthSizes.push(_wd.size_length)
                                 }
                             })
                         }
