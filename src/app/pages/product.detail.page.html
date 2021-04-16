@@ -133,13 +133,14 @@
                                                         <td>
                                                             <span v-for="(thickness, index) in tichnessSizes">
                                                                 {{
-                                                                    $root.lang() == 2 ? thickness+'"' : thickness
+                                                                    $root.lang() == 2 ? thickness+'" ' : thickness+"mm "
                                                                 }} 
                                                                 {{
-                                                                    tichnessSizes[index+1] ? ', ' : 
-                                                                    $root.lang() == 2 ? ' inch' : ' mm'
+                                                                    tichnessSizes[index+1] ? ' ; ' : ''
                                                                 }}
                                                             </span>
+
+                                                            
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -147,12 +148,11 @@
                                                         <td>
                                                             <span v-for="(wd, index) in widthSizes">
                                                                 {{
-                                                                    $root.lang() == 2 ? wd+'"' : wd
+                                                                    $root.lang() == 2 ? wd+'" ' : wd+"mm "
                                                                     
                                                                 }} 
                                                                 {{
-                                                                    widthSizes[index+1] ? ', ' :
-                                                                    $root.lang() == 2 ? ' inch': ' mm'
+                                                                    widthSizes[index+1] ? ' ; ' : ''
                                                                 }}
                                                             </span>
                                                         </td>
@@ -162,11 +162,10 @@
                                                         <td>
                                                             <span v-for="(leng, index) in lengthSizes">
                                                                 {{
-                                                                    $root.lang() == 2 ? leng+'' : leng
+                                                                    $root.lang() == 2 ? leng+'ft' : leng+' mm'
                                                                 }} 
                                                                 {{
-                                                                    lengthSizes[index+1] ? ', ' : 
-                                                                    $root.lang() == 2 ? ' ft': ' mm'
+                                                                    lengthSizes[index+1] ? ' ; ' : ''
                                                                 }}
                                                             </span>
                                                         </td>

@@ -28,8 +28,8 @@
                                 <h2>{{$root.lang() == 1? 'Sejak' : $root.lang() == 3 ? 'Schon Seit' : 'Since'}} <br> {{since}}</h2>
                             </div>
                             <div class="image-box wow fadeInRight" data-wow-delay='600ms'>
-                                <figure class="alphabet-img"><img src="/assets/images/resource/alphabet-image.png" alt=""></figure>
-                                <figure class="image"><img src="/assets/images/resource/image-1.jpg" alt=""></figure>
+                                <figure class="alphabet-img"><img :src="$root.asset(images.image_a)" alt=""></figure>
+                                <figure class="image"><img :src="$root.asset(images.image_b)" alt=""></figure>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,8 @@
                 since: '',
                 name: '',
                 whys: [],
-                partners: []
+                partners: [],
+                images: {}
 
             }
         },
@@ -127,6 +128,7 @@
                     this.whys = _content.data.tb_profile.tb_why_us
                 })
                 .then(() => {
+                    this.getImageProfile()
                     ApiFrame.getPartner().then(_partner => {
                         this.partners = _partner.data
                     }).finally(() => this.initPartner() )
@@ -168,6 +170,11 @@
                         }
                     });    		
                 }
+            },
+            getImageProfile() {
+                ApiFrame.getImageProfile().then(resp => {
+                    this.images = resp.data
+                })
             }
         }
     }

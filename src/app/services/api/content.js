@@ -22,6 +22,10 @@ class Content {
         }
     }
 
+    static getImageProfile() {
+        return axios.get(`${ENV}/api/v1/content/image-profle`)
+    }
+
     static getPrefered(page) {
         let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
         if (sessionStorage.getItem('__STARTER') == 'professional') {
