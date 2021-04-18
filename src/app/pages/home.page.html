@@ -3,7 +3,7 @@
         <!-- Bnner Section -->
         <section class="banner-section-three" v-if="sliders.length > 0">
             <div class="banner-carousel-two owl-carousel owl-theme" >
-                <div class="slide-item" style="background-image: url('/assets/images/background/16.jpg'); height: 100%;">
+                <!-- <div class="slide-item" style="background-image: url('/assets/images/background/16.jpg'); height: 100%;">
                     <div class="auto-container">
                         <div class="content-box clearfix" style="height: 335px; vertical-align: middle;">
                             <div class="inner-box" >
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="slide-item" v-for="slide in sliders" :style="`background-image: url(${$root.asset(slide.image)});  height: 100%;` ">
                     <div class="auto-container">
                         <div class="content-box clearfix" style="height: 335px; vertical-align: middle;">
@@ -66,11 +66,19 @@
                                 <div class="text">
                                     {{slide.content}}
                                 </div>
-                                <div v-if="slide.is_hyperlink" class="link-box"><a :href="slide.link">
-                                    {{
-                                        $root.lang() == 1 ? 'Lihat Detail' : $root.lang() == 3 ? 'Im Detail sehen' : 'View Detail'
-                                    }}
-                                </a></div>
+                                <div class="link-box" v-if="slide.is_hyperlink == 1">
+                                    <a :href="slide.link" class="btn" style="background-color: #ab8b40; color: white; border-radius: 20px; padding: 5px;">
+                                    {{ slide.text_button }}
+                                    </a>
+                                </div>
+                                <div class="link-box" v-if="slide.is_hyperlink == 2"> 
+                                    <a href="javascript:;" data-toggle="modal" data-target="#myModal"  class="btn" style="background-color: #ab8b40; color: white; border-radius: 20px; padding: 5px;">
+                                        {{
+                                            $root.lang() == 1 ? 'Berlangganan Sekarang' : 
+                                            $root.lang() == 3 ? 'Abonniere Jetzt' : 'Subscribe Now'
+                                        }}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
