@@ -28,8 +28,8 @@
                                 <h2>{{$root.lang() == 1? 'Sejak' : $root.lang() == 3 ? 'Schon Seit' : 'Since'}} <br> {{since}}</h2>
                             </div>
                             <div class="image-box wow fadeInRight" data-wow-delay='600ms'>
-                                <figure class="alphabet-img"><img :src="$root.asset(images.image_a)" alt=""></figure>
-                                <figure class="image"><img :src="$root.asset(images.image_b)" alt=""></figure>
+                                <figure v-if="images && images.image_a && images.image_a.length" class="alphabet-img"><img :src="$root.asset(images.image_a)" alt=""></figure>
+                                <figure v-if="images && images.image_b && images.image_b.length" class="image"><img :src="$root.asset(images.image_b)" alt=""></figure>
                             </div>
                         </div>
                     </div>

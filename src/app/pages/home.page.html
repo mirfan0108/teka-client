@@ -325,7 +325,7 @@
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column">
                             <div class="image-box">
-                                <figure class="image"><img src="/assets/images/resource/faq-img.jpg" alt=""></figure>
+                                <figure class="image"><img :src="$root.asset(imgFaq.image)" alt="Background FAQ TEKA"></figure>
                             </div>
                         </div>
                     </div>
@@ -537,12 +537,20 @@
                     content: ""
                 },
 
+                imgFaq: {},
+
                 en_ : [ '<span class="fa fa-long-arrow-left"></span> prev', 'next<span class="fa fa-long-arrow-right"></span>' ],
                 id_ : [ '<span class="fa fa-long-arrow-left"></span> Kembali', 'Selanjutnya<span class="fa fa-long-arrow-right"></span>' ],
                 deu_: [ '<span class="fa fa-long-arrow-left"></span> Bisherige', 'Nächster<span class="fa fa-long-arrow-right"></span>' ]
             }
         },
         methods: {
+            getImageFaq() {
+                ApiFrame.getImageFaq(1)
+                .then(resp => {
+                    this.imgFaq = resp.data
+                })
+            },
             sendInquiry() {
                 if(this.validateInquiry()) {
                     swal({
@@ -879,6 +887,7 @@
            
         },
         async mounted() {
+            this.getImageFaq()
             await this.initialFrame()
             if(this.preferedProduct.length > 0) {
                 this.owlPreferedInit()
