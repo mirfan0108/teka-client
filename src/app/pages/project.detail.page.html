@@ -2,7 +2,7 @@
 <template>
     <div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(/assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+    import ApiFrame from "../services/api/content.js"
     import ApiGalery from "../services/api/gallery"
     import Loader from "../mixins/preload.js"
     export default {
@@ -94,44 +95,51 @@
         props: ['id'],
         data() {
             return {
+                background: null,
+
                 Galeri: {}
             }
         },
         mounted() {
-            ApiGalery.getDetail_Gallery(this.id, this.$root.lang())
+            ApiFrame.getBackground('gallery-detail')
             .then(resp => {
-                if(resp && resp.data) {
-                    this.Galeri = resp.data
-                }
-            })
-            .then(() => {
-                if ($('.testimonial-carousel-two').length) {
-                    $('.testimonial-carousel-two').owlCarousel({
-                        loop: true,
-                        margin: 70,
-                        nav: true,
-                        smartSpeed: 700,
-                        autoplay: true,
-                        navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
-                        responsive: {
-                            0: {
-                                items: 1
-                            },
-                            600: {
-                                items: 1
-                            },
-                            768: {
-                                margin: 30,
-                                items: 2
-                            },
-                            1024: {
-                                items: 2
-                            }
-                        }
-                    });
-                }
+                this.background = resp.data
             }).finally(() => {
-                this.hidePreload()
+                ApiGalery.getDetail_Gallery(this.id, this.$root.lang())
+                .then(resp => {
+                    if(resp && resp.data) {
+                        this.Galeri = resp.data
+                    }
+                })
+                .then(() => {
+                    if ($('.testimonial-carousel-two').length) {
+                        $('.testimonial-carousel-two').owlCarousel({
+                            loop: true,
+                            margin: 70,
+                            nav: true,
+                            smartSpeed: 700,
+                            autoplay: true,
+                            navText: this.$root.lang() == 1 ? this.id_ : this.$root.lang() == 3 ? this.deu_ : this.en_,
+                            responsive: {
+                                0: {
+                                    items: 1
+                                },
+                                600: {
+                                    items: 1
+                                },
+                                768: {
+                                    margin: 30,
+                                    items: 2
+                                },
+                                1024: {
+                                    items: 2
+                                }
+                            }
+                        });
+                    }
+                }).finally(() => {
+                    this.hidePreload()
+                })
             })
         }
     }

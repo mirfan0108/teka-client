@@ -109,6 +109,13 @@ class Content {
     static getDetailProven(req) {
         return axios.get(`${ENV}/api/v1/global/proven/${req}`)
     }
+
+    static getBackground(page) {
+        let type =  sessionStorage.getItem('__STARTER') == 'professional' ? 1 : 0
+        
+        let lang = sessionStorage.getItem('_LANG') ? sessionStorage.getItem('_LANG') : 2
+        return axios.get(`${ENV}/api/v1/global/background-banner/${page}/lang/${lang}/type/${type}`)
+    }
 }
 
 export default Content

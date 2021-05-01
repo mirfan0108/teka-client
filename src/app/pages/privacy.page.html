@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -35,14 +35,21 @@
         mixins: [Loader],
         data() {
             return {
+                background: null, 
                 tnc: '',
                 onLoad: true
             }
         },
         mounted() {
-            this.getTnc()
+            ApiContent.getBackground('privacy')
+            .then(resp => {
+                this.background = resp.data
+            }).finally(() => {
+                this.getTnc()
+            })
         },  
         methods: {
+            
             getTnc() {
                 ApiContent.getPP(this.$root.lang())
                 .then(resp => {

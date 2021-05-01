@@ -4,7 +4,7 @@
         <div class="preloader"></div>
 
         <!-- Coming Soon -->
-        <section class="coming-soon" style="background-image:url(/assets/images/background/3.jpg)">
+        <section v-if="backgeround" class="coming-soon" :style="`background-image:url(${$root.asset(backgeround.image)})`">
             <div class="auto-container">
                 <div class="content">
                     <div class="content-inner">
@@ -45,6 +45,11 @@
     import axios from 'axios'
     import Loader from "../mixins/preload.js"
     export default {
+        data() {
+            return {
+                backgeround: null
+            }
+        },
         mixins: [Loader],
         methods: {
             setStarter(setter) {
@@ -54,24 +59,31 @@
         },
         mounted() {
             const ENV = process.env.BASE_API
-            axios.get("http://ip-api.com/json")
-            .then(resp => {
-                let form = {
-                    client_ip: resp.data.query,
-                    country: resp.data.country,
-                    mon: new Date().getMonth(),
-                    year: new Date().getFullYear(),
-                    city: resp.data.city
-                }
-                axios.post(`${ENV}/api/v1/visitors`, form)
-                .then(res => console.log(res))
-                if(resp.data && resp.data.countryCode == 'ID') {
-                    sessionStorage.setItem('_LANG', 1)
-                }
-                sessionStorage.setItem('_CC', resp.data.countryCode)
+            axios.get(`${ENV}/api/v1/global/background-banner/starter/lang/1/type/1`)
+            .then(_resp => {
+                this.backgeround = _resp.data
             }).finally(() => {
-                this.hidePreload()
+                axios.get("http://ip-api.com/json")
+                .then(resp => {
+                    let form = {
+                        client_ip: resp.data.query,
+                        country: resp.data.country,
+                        mon: new Date().getMonth(),
+                        year: new Date().getFullYear(),
+                        city: resp.data.city
+                    }
+                    axios.post(`${ENV}/api/v1/visitors`, form)
+                    .then(res => console.log(res))
+                    if(resp.data && resp.data.countryCode == 'ID') {
+                        sessionStorage.setItem('_LANG', 1)
+                    }
+                    sessionStorage.setItem('_CC', resp.data.countryCode)
+                }).finally(() => {
+                    this.hidePreload()
+                })
             })
+
+            
         }
     }
 </script>

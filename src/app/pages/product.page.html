@@ -1,7 +1,7 @@
 <template>
     <div >
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -225,6 +225,7 @@
 </template>
 
 <script>
+    import ApiFrame from "../services/api/content.js"
     import ApiProduct from "../services/api/product.js"
     import Loader from "../mixins/preload.js"
     export default {
@@ -232,6 +233,8 @@
         data() {
             let _construc = this.$root.$router.history.current.query.construction ? this.$root.$router.history.current.query.construction : 0
             return {
+                background: null,
+
                 products: [],
                 contructions: [],
                 species: [],
@@ -290,22 +293,30 @@
             })
         },
         mounted() {
+            let pg 
             switch (this.constructionSelected) {
                 case 'prefered':
+                    pg = 'product-prefered'
                     this.titleText = this.$root.lang() == 1 ? 'Produk yang disukai' : this.$root.lang() == 2 ? 'Highlighted Product' : 'Bevorzugt Produkt'
                     break;
                 case 'trends':
+                    pg = "product-trend"
                     this.titleText = this.$root.lang() == 1 ? 'Tren Produk' : this.$root.lang() == 2 ? 'Trends Color' : 'TrendProdukt'
                     break;
                 default:
+                    pg = 'product-list'
                     this.titleText = this.$root.lang() == 1 ? 'Produk' : this.$root.lang() == 2 ? 'Products' : 'Produkt'
                     break;
             }
-            
-            this.fetchProduct()
-            this.fetchSpecies()
-            this.fetchConstruction()
-            this.initSlider()
+            ApiFrame.getBackground(pg)
+            .then(resp => {
+                this.background = resp.data
+            }).finally(() => {
+                this.fetchProduct()
+                this.fetchSpecies()
+                this.fetchConstruction()
+                this.initSlider()
+            })
         },
         watch: {
             currentPage: function(newVal, oldVal) {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -58,12 +58,15 @@
 </template>
 
 <script>
+    import ApiFrame from "../services/api/content.js"
     import Gallery from "../services/api/gallery.js"
     import Loader from "../mixins/preload.js"
     export default {
         mixins: [Loader],
         data() {
             return {
+                background: null,
+
                 galleries: [],
                 currentPage: 1,
                 totalPage: 1,
@@ -71,7 +74,12 @@
             }
         },
         mounted() {
-            this.initGallery()
+            ApiFrame.getBackground('gallery-list')
+            .then(resp => {
+                this.background = resp.data
+            }).finally(() => {
+                this.initGallery()
+            })
         },
         methods: {
             initGallery() {

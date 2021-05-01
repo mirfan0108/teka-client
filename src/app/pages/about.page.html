@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(assets/images/background/4.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -114,33 +114,39 @@
                 name: '',
                 whys: [],
                 partners: [],
-                images: {}
+                images: {},
 
+                background: null,
             }
         },
         mounted() {
-            
-            ApiFrame.getFrame('home')
-                .then(_content => {
-                    this.name = _content.data.tb_profile.name
-                    this.about = _content.data.tb_profile.about
-                    this.since = _content.data.tb_profile.since
-                    this.whys = _content.data.tb_profile.tb_why_us
-                })
-                .then(() => {
-                    this.getImageProfile()
-                    ApiFrame.getPartner().then(_partner => {
-                        this.partners = _partner.data
-                    }).finally(() => this.initPartner() )
-                })
-                .then(() => {
-                    ApiFrame.getCert()
-                    .then(_resp => {
-                        this.certificates = _resp.data
+            ApiFrame.getBackground('about-teka')
+            .then(resp => {
+                this.background = resp.data
+            }).finally(() => {
+                ApiFrame.getFrame('home')
+                    .then(_content => {
+                        this.name = _content.data.tb_profile.name
+                        this.about = _content.data.tb_profile.about
+                        this.since = _content.data.tb_profile.since
+                        this.whys = _content.data.tb_profile.tb_why_us
                     })
-                }).finally(() => {
-                    this.hidePreload()
-                })
+                    .then(() => {
+                        this.getImageProfile()
+                        ApiFrame.getPartner().then(_partner => {
+                            this.partners = _partner.data
+                        }).finally(() => this.initPartner() )
+                    })
+                    .then(() => {
+                        ApiFrame.getCert()
+                        .then(_resp => {
+                            this.certificates = _resp.data
+                        })
+                    }).finally(() => {
+                        this.hidePreload()
+                    })
+
+            })
         },
         methods: {
             initPartner() {

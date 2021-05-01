@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -142,6 +142,8 @@
         mixins: [Loader],
         data() {
             return {
+                background: null,
+
                 addresses: {},
 
                 sliders: [],
@@ -492,7 +494,12 @@
         beforeMount() {
         },
         async mounted() {
-            await this.initialFrame()
+            ApiFrame.getBackground('contact')
+            .then(resp => {
+                this.background = resp.data
+            }).finally(async () => {
+                await this.initialFrame()
+            })
             if(this.preferedProduct.length > 0) {
                 this.owlPreferedInit()
             }

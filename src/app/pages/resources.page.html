@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(/assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -40,13 +40,19 @@
         props: ['id'],
         data() {
             return {
+                background: null,
                 resouce_content: '',
                 resouce_title: '',
                 onLoad: true
             }
         },
         mounted() {
-            this.fetchResource()
+            ApiContent.getBackground('resource')
+            .then(resp => {
+                this.background = resp.data
+            }).finally(() => {
+                this.fetchResource()
+            })
         },  
         methods: {
             fetchResource() {

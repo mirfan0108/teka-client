@@ -2,7 +2,7 @@
     <div >
         <div style="background-color: white; height: 1000px; width: 100%;" v-if="notFound">1</div>
         <!--Page Title-->
-        <section class="page-title" style="background-image:url(/assets/images/background/10.jpg);">
+        <section v-if="background" class="page-title" :style="`background-image:url(${$root.asset(background.image)})`">
             <div class="auto-container">
                 <div class="inner-container clearfix">
                     <div class="title-box">
@@ -257,6 +257,7 @@
 </template>
 
 <script>
+    import ApiFrame from "../services/api/content.js"
     import ApiProduct from "../services/api/product.js"
     import Loader from "../mixins/preload.js"
     import mixLang from "../mixins/lang.js"
@@ -265,6 +266,7 @@
         props: ['id'],
         data() {
             return {
+                background: null,
                 products: [],
                 details: {},
                 notFound: false,
@@ -276,8 +278,13 @@
             }
         },
         mounted() {
-            this.fetchProduct()
-            this.fetchDetail()
+            ApiFrame.getBackground('gallery-list')
+            .then(resp => {
+                this.background = resp.data
+            }).finally(() => {
+                this.fetchProduct()
+                this.fetchDetail()
+            })
             
         },
         methods: {
